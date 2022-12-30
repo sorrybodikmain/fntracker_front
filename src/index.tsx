@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import './i18n';
 import App from "./App";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
@@ -13,4 +13,3 @@ root.render(
     </BrowserRouter>
 );
 
-serviceWorkerRegistration.register();
