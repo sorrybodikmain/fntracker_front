@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "cracos build",
+    "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"
   },
