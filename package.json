@@ -21,10 +21,10 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "cracos build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^7.0.0",
     "@headlessui/react": "^1.7.7",
     "@reduxjs/toolkit": "^1.9.1",
     "@typescript-eslint/eslint-plugin": "^5.47.1",

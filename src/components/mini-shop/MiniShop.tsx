@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import useSWR from 'swr'
 import MiniItem from "./MiniItem";
 import { ShopToday } from '@/api/types/shop.type'
-import { fetcher } from '@/libs/apiFetcher'
+import { fetcher } from '../../libs/apiFetcher'
 import i18next from 'i18next'
 
 const MiniShop: FC = () => {

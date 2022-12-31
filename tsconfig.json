@@ -18,22 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": "./src/",
-    "paths": {
-      "@/api/*": [
-        "api/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/hooks/*": [
-        "hooks/*"
-      ],
-      "@/libs/*": [
-        "libs/*"
-      ]
-    }
+    "jsx": "react-jsx"
   },
   "include": [
     "./src", "**/*.ts", "**/*.tsx"
@@ -42,5 +27,6 @@
     "node_modules",
     ".vscode",
     ".idea"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json"
 }
