@@ -13,7 +13,6 @@ const Post: FC<PropsWithChildren<{ data: OnePost }>> = ({ data }) => {
 					/>
 				</div>
 			</div>
-
 			<div className='w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto'>
 				<h5 className='text-lg mb-2'>{data.title}</h5>
 				<p className='text-gray-300'>{data.body}</p>
