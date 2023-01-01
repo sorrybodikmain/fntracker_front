@@ -52,7 +52,7 @@ const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemDetail }>> = ({ data }
 									className='text-white'> {t('card_bp') +
 									data.item.battlepass.displayText.chapterSeason.toLowerCase()}.
 								</h4> : <h4 className='text-white text-lg'>
-									{t('card_sold') + data?.item.price} V-bucks.
+									{t('card_sold')+' ' + data?.item.price} V-bucks.
 								</h4>
 						}
 					</div>

@@ -4,7 +4,7 @@ import { ItemShop } from '@/api/types/shop.type'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	return (
-		<Link to={'locker/' + data.mainId}>
+		<Link to={'/locker/' + data.mainId}>
 			<div className='relative overflow-hidden rounded-lg hover:scale-95 transition'>
 				<div className='relative w-96 h-96 object-center'>
 					<img
