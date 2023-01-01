@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import ShopPage from './pages/shop/ShopPage'
 import HomePage from './pages/home/HomePage'
 import ItemDetailPage from './pages/shop/ItemDetailPage'
+import StatsPage from './pages/stats/StatsPage'
 
 function App() {
 	return (
 		<>
-			<Routes>
-				<Route path={'/'} element={<HomePage />} />
-				<Route path={'shop/item/:id'} element={<ItemDetailPage />} />
-				<Route path={'shop/'} element={<ShopPage />} />
-			</Routes>
+			<Suspense fallback={'loading'}>
+				<Routes>
+					<Route path={'/'} element={<HomePage />} />
+					<Route path={'locker/:id'} element={<ItemDetailPage />} />
+					<Route path={'stats/:nickname'} element={<StatsPage />} />
+					<Route path={'shop/'} element={<ShopPage />} />
+				</Routes>
+			</Suspense>
 		</>
 
 	)

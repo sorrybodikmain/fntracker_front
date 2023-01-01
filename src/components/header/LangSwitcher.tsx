@@ -1,12 +1,13 @@
 import { FC, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-import i18next from '../../i18n'
+import i18next from 'i18next'
+
 
 const LangSwitcher: FC = () => {
 	const [cookies, setCookie] = useCookies(['fntracker-locale'])
 	const [locale, setLocale] = useState()
 	const allLocales = ['ru', 'de', 'es', 'fr', 'it', 'pl', 'en']
-	console.log(i18next.languages)
+	console.log(i18next.resolvedLanguage)
 	const loc = [i18next.language, ...allLocales.filter(item => item !== i18next.language)]
 	const handleLocale = (e: any) => {
 		setCookie('fntracker-locale', e.target.value, {

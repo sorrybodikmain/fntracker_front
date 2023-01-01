@@ -2,8 +2,10 @@ import { FC, useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import {fetcher} from '@/libs/apiFetcher';
 import { AccountIdStr } from '@/api/types/user-stats.type'
+import { useTranslation } from 'react-i18next'
 
 const Search: FC = () => {
+	const {t} = useTranslation('home')
 	const [nickname, setNickname] = useState('')
 	const [data, setData] = useState<AccountIdStr>()
 	const [temp, setTemp] = useState<AccountIdStr>()
@@ -41,7 +43,7 @@ const Search: FC = () => {
 						onChange={e => {
 							setNickname(e.target.value)
 						}}
-						placeholder={'Your nickname'}
+						placeholder={t('seach_input')!}
 						className='w-full md:w-96 h-9 bg-gray-800 rounded-lg p-2 hover:scale-[1.01]'
 					/>
 				</form>
