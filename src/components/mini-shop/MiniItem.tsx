@@ -6,7 +6,7 @@ const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	return (
 		<>
 			<div className='relative overflow-hidden rounded-lg hover:scale-105 transition'>
-				<Link to={'/shop/item/' + data.mainId}>
+				<Link to={'locker/' + data.mainId}>
 					<div className='relative w-full h-40 sm:h-44 md:h-52 lg:h-36 object-cover'>
 						<img
 							src={data.displayAssets[0].background || '/images/preloader.gif'}

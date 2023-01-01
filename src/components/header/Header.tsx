@@ -3,19 +3,21 @@ import {Link} from 'react-router-dom'
 import LangSwitcher from './LangSwitcher'
 import MobNav from './MobNav'
 import Profile from './Profile'
+import { useTranslation } from 'react-i18next'
 
 const Header: FC = () => {
+    const { t } = useTranslation('header')
     const routes = [
         {
-            name: 'Home',
+            name: t('home_link'),
             href: '/'
         },
         {
-            name: 'Shop',
+            name: t('shop_link'),
             href: '/shop'
         },
         {
-            name: 'Contact',
+            name: t('contact_link'),
             href: '/contact'
         }
     ]

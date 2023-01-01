@@ -4,7 +4,7 @@ import { ItemShop } from '@/api/types/shop.type'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	return (
-		<Link to={'item/' + data.mainId}>
+		<Link to={'locker/' + data.mainId}>
 			<div className='relative overflow-hidden rounded-lg hover:scale-95 transition'>
 				<div className='relative w-96 h-96 object-center'>
 					<img
@@ -15,8 +15,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				</div>
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
 					<h1 className='text-center text-gray-100'>{data.displayName}</h1>
-					<p className=' text-gray-400 flex justify-center'>
-						{data.price.finalPrice}
+					<p className=' text-gray-400 flex justify-center'>{data.price.finalPrice}
 						<img
 							src={'/images/v-bucks.png'}
 							className='h-5'

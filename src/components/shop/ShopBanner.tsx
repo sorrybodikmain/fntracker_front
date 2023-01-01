@@ -1,22 +1,18 @@
 import {FC} from 'react'
+import { useTranslation } from 'react-i18next'
 
 const ShopBanner: FC = () => {
     const value = new Date()
-
+    const {t} = useTranslation('shop')
     return (
         <div className='container mx-auto text-white p-3'>
             <div className='bg-gray-700 p-4 rounded'>
-                <h2 className='text-lg'> Fortnite Daily Shop</h2>
+                <h2 className='text-lg'> {t('banner_title')}</h2>
                 <p className='text-sm'>
-                    The Fortnite Item Shop is updated daily. In this section, you can
-                    subscribe to a specific product and receive a notification when it
-                    comes out in the store. To do this, you only need to click on the like
-                    and allow receiving notifications from the browser, you also need an
-                    account to save your likes. When the store is updated, the site is
-                    automatically updated.
+                    {t('banner_body')}
                 </p>
                 <h3 className='text-center text-md font-bold pt-2'>
-                    Auto update via {`${23 - value.getUTCHours()} h.`}
+                    {t('banner_update')} {`${23 - value.getUTCHours()} h.`}
                 </h3>
             </div>
         </div>
