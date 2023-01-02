@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react'
-import ShopItem from "./ShopItem";
+import ShopItem from './ShopItem'
 import { ShopToday } from '@/api/types/shop.type'
 
 const ShopSection: FC<

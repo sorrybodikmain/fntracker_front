@@ -21,7 +21,7 @@ const ItemDataTable: FC<PropsWithChildren<{ data: ShopItemDetail }>> = ({ data }
 					</tr>
 					</thead>
 					<tbody>
-					{data?.item.shopHistory.map((item, index) => (
+					{data?.item.shopHistory.reverse().map((item, index) => (
 						<tr key={index} className='text-white'>
 							<td className='py-4 px-6'>{item}</td>
 							<td className='py-4 px-6'>{data?.item.price}</td>

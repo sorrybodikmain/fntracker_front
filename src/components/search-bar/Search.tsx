@@ -44,7 +44,7 @@ const Search: FC = () => {
 							setNickname(e.target.value)
 						}}
 						placeholder={t('seach_input')!}
-						className='w-full md:w-96 h-9 bg-gray-800 rounded-lg p-2 hover:scale-[1.01]'
+						className='w-full sm:w-80 h-9 bg-gray-800 rounded-lg p-2 hover:scale-105 transition'
 					/>
 				</form>
 				<div className='absolute z-50 w-80 md:w-96 bg-gray-800 rounded-lg mt-1 max-h-72 text-sm overflow-y-auto'>

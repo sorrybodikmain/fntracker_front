@@ -61,7 +61,6 @@
     "react-cookie": "^4.1.1",
     "react-i18next": "^12.1.1",
     "react-icons": "^4.7.1",
-    "react-loading-skeleton": "^3.1.0",
     "react-redux": "^8.0.5",
     "redux": "^4.2.0",
     "swr": "^2.0.0",
