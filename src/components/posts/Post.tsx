@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
-import { OnePost } from '@/api/types/posts.type'
+import { IOnePost } from '@/api/types/posts.type'
 
-const Post: FC<PropsWithChildren<{ data: OnePost }>> = ({ data }) => {
+const Post: FC<PropsWithChildren<{ data: IOnePost }>> = ({ data }) => {
 	return (
 		<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 			<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>

@@ -1,4 +1,4 @@
-export type OnePost = {
+export interface IOnePost {
 	id: string
 	title: string
 	tabTitle: string
@@ -9,10 +9,11 @@ export type OnePost = {
 	live: boolean
 	video: any
 }
-export type Posts = {
+
+export interface IPostsResponse {
 	result: boolean
 	type: string
 	lang: string
 	show: number
-	news: OnePost[]
+	news: IOnePost[]
 }

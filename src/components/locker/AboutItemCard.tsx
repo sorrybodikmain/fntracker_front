@@ -1,15 +1,13 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import { ShopItemDetail } from '@/api/types/shop.type'
-import { toast } from 'react-toastify'
+import {  ShopItemResponse } from '@/api/types/shop.type'
 import { useTranslation } from 'react-i18next'
 
-const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemDetail }>> = ({ data }) => {
+const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data }) => {
 	const { t } = useTranslation('locker')
 	const [like, setLike] = useState<boolean>(true)
 	const handleLike = () => {
-		const message = like ? 'Liked successfully!' : 'Successfully removed from likes!'
-		toast.success(message)
+		// const message = like ? 'Liked successfully!' : 'Successfully removed from likes!'
 		setLike(!like)
 	}
 	return (<div>
@@ -42,18 +40,21 @@ const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemDetail }>> = ({ data }
 						{Math.floor(100 * data!.item.interest) + t('card_interested')}
 					</p>
 					<div className='items-end bottom-0 relative lg:absolute mt-2'>
-						{
-							data?.item.releaseDate ?
-								<p>{t('card_appeared') + data?.item.releaseDate}</p> : null
-						}
+
 						{
 							data?.item.battlepass ?
 								<h4
 									className='text-white'> {t('card_bp') +
 									data.item.battlepass.displayText.chapterSeason.toLowerCase()}.
-								</h4> : <h4 className='text-white text-lg'>
-									{t('card_sold')+' ' + data?.item.price} V-bucks.
-								</h4>
+								</h4> : <>
+									<p>{t('card_appeared') + ' ' +
+										new Date(data?.item.releaseDate).toLocaleDateString()}
+									</p>
+									<h4 className='text-white text-lg'>
+										{t('card_sold') + ' ' + data?.item.price} V-bucks.
+									</h4>
+								</>
+
 						}
 					</div>
 				</div>
