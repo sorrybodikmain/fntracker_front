@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react'
-import { ShopItemDetail } from '@/api/types/shop.type'
+import { ShopItemResponse } from '@/api/types/shop.type'
 import { useTranslation } from 'react-i18next'
 
-const ItemDataTable: FC<PropsWithChildren<{ data: ShopItemDetail }>> = ({ data }) => {
+const ItemDataTable: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data }) => {
 	const { t } = useTranslation('locker')
 	return (<div className='mb-4'>
 			<h2 className='border-l-4 border-primary pl-2 my-4'>

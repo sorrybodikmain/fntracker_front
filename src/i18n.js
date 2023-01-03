@@ -16,6 +16,7 @@ i18next
 			lookupCookie: 'fntracker-locale',
 			caches: ['cookie'],
 			cookieOptions: {
+				path:'/',
 				maxAge: 24 * 60 * 60 * 365
 			}
 		},

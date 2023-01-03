@@ -1,4 +1,20 @@
-export type AccountId = {
+export type PrResponse = {
+	status: 200
+	data: PrStats
+}
+export type PrStats = {
+	region: string
+	name: string
+	platform: string
+	points: number
+	cashPrize: number
+	events: number
+	rank: number
+	percentile: number
+	countryCode: string
+}
+
+export type AccountIdResponse = {
 	result: boolean
 	account_id: string
 }
@@ -12,7 +28,7 @@ type All_matches = {
 	sortPosition: number
 }
 
-export type AccountIdStr = AccountId & {
+export type AccountIdStr = AccountIdResponse & {
 	all_matches: All_matches[]
 }
 type AccountLevelHistory = {
@@ -20,7 +36,7 @@ type AccountLevelHistory = {
 	level: number
 	process_pct: number
 }
-type BaseStats = {
+export type BaseStats = {
 	placetop1: number
 	kd: number
 	winrate: number
@@ -37,15 +53,15 @@ type BaseStats = {
 	playersoutlived: number
 	lastmodified: number
 }
-export type AccountStats = {
+export type AccountStatsResponse = {
 	result: boolean
 	name: string
 	accountLevelHistory: AccountLevelHistory[]
-	global_stats: [
-		solo: BaseStats,
-		duo: BaseStats,
-		trio: BaseStats,
+	global_stats: {
+		solo: BaseStats
+		duo: BaseStats
+		trio: BaseStats
 		squad: BaseStats
-	]
+	}
 	seasons_available: [number]
 }

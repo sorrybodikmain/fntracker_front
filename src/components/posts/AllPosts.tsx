@@ -2,16 +2,16 @@ import { FC } from 'react'
 import Post from './Post'
 import useSWR from 'swr'
 import i18next from 'i18next'
-import { OnePost, Posts } from '@/api/types/posts.type'
+import { IOnePost, IPostsResponse } from '@/api/types/posts.type'
 import { fetcher } from '@/libs/apiFetcher'
 import { useTranslation } from 'react-i18next'
 import SkeletonPosts from '@/components/posts/SkeletonPosts'
 
-const AllPosts: FC = () => {
+const AllPostsResponse: FC = () => {
 	const { t } = useTranslation('home')
 	const filterDate = new Date()
 	filterDate.setDate(filterDate.getDate() - 20)
-	const { data } = useSWR<Posts>(
+	const { data } = useSWR<IPostsResponse>(
 		`https://fortniteapi.io/v1/news?lang=${i18next.language}&type=br`,
 		fetcher
 	)
@@ -27,7 +27,7 @@ const AllPosts: FC = () => {
 
 							data?.news
 								.filter(item => new Date(item.date) > filterDate)
-								.map((post: OnePost, index: number) => (
+								.map((post: IOnePost, index: number) => (
 									<Post key={index} data={post} />
 								))
 							:
@@ -41,4 +41,4 @@ const AllPosts: FC = () => {
 	)
 }
 
-export default AllPosts
+export default AllPostsResponse

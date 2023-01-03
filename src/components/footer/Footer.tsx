@@ -10,15 +10,15 @@ const Footer: FC = () => {
 				<div className='w-full p-10'>
 					<ul className='flex items-center justify-center text-center text-gray-500'>
 						<li>
-							<Link to={'/terms'} className='hover:text-gray-100'>
+							<Link to={'/terms'} className='hover:text-gray-100 text-xs'>
 								{t('terms_link')}
 							</Link>
 						</li>
-						<li className='px-4 text-gray-100'>
+						<li className='px-4 text-gray-100 text-xs'>
 							{t('footer_body')}
 						</li>
 						<li>
-							<Link to={'/policy'} className='hover:text-gray-100'>
+							<Link to={'/policy'} className='hover:text-gray-100 text-xs'>
 								{t('policy_link')}
 							</Link>
 						</li>

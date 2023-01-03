@@ -36,7 +36,7 @@ type SectionImages = {
 	background: string
 	full_background: string
 }
-export type ShopItemDetail = {
+export type ShopItemResponse = {
 	result: boolean
 	item: {
 		id: string
@@ -101,7 +101,7 @@ export type ItemShop = {
 	storeName: string
 	tileSize: string
 }
-export type ShopToday = {
+export type ShopTodayResponse = {
 	result: boolean
 	fullShop: boolean
 	currentRotation: any

@@ -1,9 +1,9 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import { ShopItemDetail } from '@/api/types/shop.type'
+import {  ShopItemResponse } from '@/api/types/shop.type'
 import { useTranslation } from 'react-i18next'
 
-const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemDetail }>> = ({ data }) => {
+const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data }) => {
 	const { t } = useTranslation('locker')
 	const [like, setLike] = useState<boolean>(true)
 	const handleLike = () => {
