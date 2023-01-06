@@ -5,6 +5,15 @@
       "@/api/*": [
         "api/*"
       ],
+      "@/models/*": [
+        "api/*"
+      ],
+      "@/http/*": [
+        "http/*"
+      ],
+      "@/data/*": [
+        "data/*"
+      ],
       "@/components/*": [
         "components/*"
       ],

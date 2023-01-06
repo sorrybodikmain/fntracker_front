@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, Suspense } from 'react'
 import Header from './header/Header'
 import Footer from './footer/Footer'
+import CookieBanner from '@/components/CookieBanner'
 
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
@@ -12,6 +13,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 					{children}
 				</Suspense>
 				<Footer />
+				<CookieBanner />
 			</main>
 		</>
 	)

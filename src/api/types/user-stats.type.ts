@@ -1,3 +1,22 @@
+export  type ProfileResponse =
+	{
+		'createdAt': string
+		'updatedAt': string
+		'id': number
+		'egsId': string
+		'viewsCount': number
+		'country': string | null
+		'avatar': string | null
+		'fullName': string | null
+		'socialNetworks': {
+			twitch: string | null
+			youtube: string | null
+			instagram: string | null
+			twitter: string | null
+			telegram: string | null
+		} | null
+	}
+
 export type PrResponse = {
 	status: 200
 	data: PrStats

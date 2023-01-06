@@ -1,10 +1,16 @@
 import { FC, PropsWithChildren } from 'react'
-import { AccountStatsResponse } from '@/api/types/user-stats.type'
+import { AccountStatsResponse, ProfileResponse } from '@/api/types/user-stats.type'
 import { BsFillEyeFill, BsInstagram, BsTwitch, BsTwitter, BsYoutube } from 'react-icons/bs'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
-const ProfileCard: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ data }) => {
+const ProfileCard: FC<PropsWithChildren<{ data: AccountStatsResponse, profile: ProfileResponse }>> = ({
+																																																				data,
+																																																				profile
+																																																			}) => {
 	const { t } = useTranslation('stats')
+	const { nickname } = useParams()
+
 	return (
 		<div className='container text-white mx-auto p-3'>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>
@@ -14,12 +20,12 @@ const ProfileCard: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ da
 				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className='relative bg-cover'>
 						<img
-							src={'/images/flags/ua.svg'}
+							src={`/images/flags/${profile?.country || 'ua'}.svg`}
 							alt={'country-image'}
 							className='rounded w-10 absolute bottom-0 left-0'
 						/>
 						<img
-							src={'https://media.fortniteapi.io/images/cosmetics/a4ae8f546570a63acd3d87f50d37bdfc/v2/MI_CID_703_M_Cyclone/background.png' || '/images/preloader.gif'}
+							src={profile?.avatar || '/images/preloader.gif'}
 							alt={'icon-image'}
 							className='object-cover rounded-full w-32'
 						/>
@@ -29,7 +35,7 @@ const ProfileCard: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ da
 				<div className='relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
 					<h2 className='text-2xl mb-1 text-white flex gap-x-2'>
 						{data?.name}
-						<p className='text-sm mt-3'></p>
+						<p className='text-sm mt-3'>{profile?.fullName}</p>
 					</h2>
 					<ul className='flex text-white gap-x-2'>
 						<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-red-500'>
@@ -53,9 +59,10 @@ const ProfileCard: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ da
 							</a>
 						</li>
 					</ul>
+
 					<div className='relative md:absolute bottom-0'>
 						<p className='flex gap-x-2'>
-							<BsFillEyeFill className='mt-1' /> 555,789 {t('profile_card_views')}</p>
+							<BsFillEyeFill className='mt-1' /> {profile?.viewsCount || 1} {t('profile_card_views')}</p>
 					</div>
 				</div>
 			</div>

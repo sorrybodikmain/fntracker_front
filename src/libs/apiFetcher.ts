@@ -11,3 +11,7 @@ export const pr_fetcher = async (url: string) =>
 		.get(url)
 		.then(res => res.data)
 		.catch(res => console.log(res))
+
+export const patch_fetcher = async (url: string) =>
+	await axios
+		.patch(url)

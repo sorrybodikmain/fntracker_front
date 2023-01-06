@@ -1,12 +1,20 @@
-import { LinkedAccounts } from '@/api/types/linked-accounts.type'
 import { Subscription } from '@/api/types/subscription.type'
 import { BaseType } from '@/api/types/base.type'
 
 
-export type User = {
-	email: string,
-	egsName: string | null,
-	linkedAccounts: LinkedAccounts | null,
-	subscriptions: Subscription[]| null,
-	isLoggedIn: boolean
-} & BaseType
+export interface IUser extends BaseType {
+	'email': string,
+	'isVerified': boolean,
+	'hashedRt': string
+	'profile': null,
+	'subscriptions': Subscription[] | null,
+}
+
+export type LoginResponse = {
+	'user': IUser,
+	'accessToken': string
+}
+
+export interface IRefreshResponse {
+	'accessToken': string
+}

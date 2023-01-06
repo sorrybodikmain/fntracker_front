@@ -4,7 +4,11 @@ import ShopPage from './pages/shop/ShopPage'
 import HomePage from './pages/home/HomePage'
 import AboutItemPage from './pages/shop/AboutItemPage'
 import StatsPage from './pages/stats/StatsPage'
-import Profile from './pages/user/profile/Profile'
+import ProfilePage from './pages/user/ProfilePage'
+import ActivatePage from './pages/user/ActivatePage'
+import RegisterPage from './pages/user/RegisterPage'
+import LoginPage from './pages/user/LoginPage'
+import RecoveryPage from './pages/user/RecoveryPage'
 
 function App() {
 	return (
@@ -14,7 +18,12 @@ function App() {
 					<Route path={'locker/:id'} element={<AboutItemPage />} />
 					<Route path={'stats/:nickname'} element={<StatsPage />} />
 					<Route path={'shop/'} element={<ShopPage />} />
-					<Route path={'/user/profile'} element={<Profile />} />
+
+					<Route path={'/user/profile'} element={<ProfilePage />} />
+					<Route path={'/user/activate'} element={<ActivatePage />} />
+					<Route path={'/user/register'} element={<RegisterPage />} />
+					<Route path={'/user/login'} element={<LoginPage />} />
+					<Route path={'/user/recovery'} element={<RecoveryPage />} />
 				</Routes>
 		</>
 
