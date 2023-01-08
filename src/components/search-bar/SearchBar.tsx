@@ -9,7 +9,7 @@ const SearchBar: FC = () => {
 			<section id='search' className='bg-gray-900'>
 				<div className='relative h-80'>
 					<img
-						src='/images/search-bg.jpg'
+						src='/images/search-bg.webp'
 						alt='search-bg-image'
 						decoding={'async'}
 						className='blur-sm brightness-50 object-cover h-full w-full transition'

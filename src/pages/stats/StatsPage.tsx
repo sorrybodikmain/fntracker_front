@@ -1,47 +1,66 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import useSWR from 'swr'
 import { AccountStatsResponse, PrResponse } from '@/api/types/user-stats.type'
-import { fetcher, pr_fetcher } from '@/libs/apiFetcher'
+import { defaultFetcher, fetcher, patchFetcher } from '@/libs/apiFetcher'
 import Layout from '@/components/Layout'
 import ProfileCard from '@/components/stats/ProfileCard'
 import ModesStats from '@/components/stats/ModesStats'
 import EventsStats from '@/components/stats/EventsStats'
 import SeasonStats from '@/components/stats/SeasonStats'
 import NotFountError from '@/components/stats/NotFountError'
+import useSWR from 'swr'
+import { ProfileResponse } from '@/api/types/profile.type'
+import SkeletonCard from '@/components/stats/SkeletonCard'
 
 const StatsPage: FC = () => {
 	const { nickname } = useParams()
+
+
 	const { data } = useSWR<AccountStatsResponse>(
 		'https://fortniteapi.io/v1/stats?username=' + nickname,
 		fetcher
 	)
 	const pr = useSWR<PrResponse>(
 		'https://api.fntracker.pp.ua/pr?platform=PC&region=EU&egsName=' + nickname,
-		pr_fetcher
+		defaultFetcher
 	)
+	const profileData = useSWR<ProfileResponse>(
+		`https://api.fntracker.pp.ua/profile/${nickname}`,
+		defaultFetcher
+	)
+
+	useEffect(() => {
+		(async () => {
+			await patchFetcher(`https://api.fntracker.pp.ua/profile/${nickname}/increment`)
+		})()
+	}, [])
+
 	return (
 		<>
 			<Layout>
 				{
-					data?.result === false ?
+					data?.result === false && data ?
 						<NotFountError /> :
 						<>
-							<ProfileCard data={data!} />
+							{profileData.data && data ?
+								<ProfileCard profileData={profileData.data.profile} nickname={nickname!}
+														 views={profileData.data.viewsCount} />
+								: <SkeletonCard />
+							}
 							{
 								pr?.data ?
 									<EventsStats data={pr.data?.data} />
-									: null
+									: <SkeletonCard />
 							}
 
 							{
 								data?.accountLevelHistory ?
 									<SeasonStats data={data!} />
-									: null
+									: <SkeletonCard />
 							}
 							{data?.global_stats ?
 								<ModesStats data={data!} />
-								: null
+								: <SkeletonCard />
 							}
 						</>
 				}

@@ -16,13 +16,13 @@ const ShopPage: FC = () => {
 	useEffect(() => {
 		if (data)
 			setSections(Object.keys(data.currentRotation))
-	}, [data])
+	}, [data?.shop])
 
 	return (
 		<>
 			<Layout>
 				<ShopBanner />
-				<div className='container mx-auto text-white p-3'>
+				<div className='container mx-auto text-white p-3 min-h-[81.1vh]'>
 					{sections?.map(item => (
 						<ShopSection key={item} data={data!} sectionId={item} />
 					))}

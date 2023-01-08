@@ -19,7 +19,7 @@ const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 						<p className=' text-gray-400 flex justify-center'>
 							{data.price.finalPrice}
 							<img
-								src={'/images/v-bucks.png'}
+								src={'/images/v-bucks.webp'}
 								className='h-5'
 								alt='v-bucks icon'
 							/>

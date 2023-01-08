@@ -1,21 +1,14 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import { VscAccount } from 'react-icons/vsc'
 import { Popover } from '@headlessui/react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Context } from '../../index'
 
 const Profile: FC = () => {
+	const { store } = useContext(Context)
 	const { t } = useTranslation('header')
-	const user = {
-		email: 'string',
-		egsName: 'string',
-		linkedAccounts: null,
-		subscriptions: null,
-		isLoggedIn: true
-	}
-	const handleLogout = async (e: any) => {
-		e.preventDefault()
-	}
+	const handleLogout = async () => await store.logout()
 	return (
 		<>
 			<Popover>
@@ -24,17 +17,16 @@ const Profile: FC = () => {
 				</Popover.Button>
 				<Popover.Panel className='fixed z-50 bg-gray-800 px-2 py-2 rounded-lg -mx-20'>
 					<div className='grid grid-col text-xs'>
-						{user?.isLoggedIn === true ? (
+						{store.isAuth ? (
 							<>
-								<Link to={'/favorite'} className='border-b-2 border-gray-500'>{t('favorite_link')}</Link>
-								<Link to={'/search/' + user.egsName} className='border-b-2 border-gray-500'>{t('track_link')}</Link>
+								<Link to={'/user/favorite'} className='border-b-2 border-gray-500'>{t('favorite_link')}</Link>
 								<Link to={'/user/profile'} className='border-b-2 border-gray-500'>{t('profile_link')}</Link>
-								<Link to={'/api/user/logout'} onClick={handleLogout}>{t('exit_link')}</Link>
+								<Link to={'/user/login'} onClick={handleLogout}>{t('exit_link')}</Link>
 							</>
 						) : (
 							<>
-								<Link to='/auth/login' className='border-b-2 border-gray-500'>{t('signin_link')}{t('exit_link')}</Link>
-								<Link to='/auth/register'>{t('favorite_link')}{t('signup_link')}</Link>
+								<Link to='/user/login' className='border-b-2 border-gray-500'>{t('signin_link')}</Link>
+								<Link to='/user/register'>{t('signup_link')}</Link>
 							</>
 						)}
 					</div>

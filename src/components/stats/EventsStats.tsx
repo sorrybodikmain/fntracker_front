@@ -18,7 +18,7 @@ const EventsStats: FC<PropsWithChildren<{ data: PrStats }>> = ({ data }) => {
 						</p>
 						<p className='inline-flex flex-col'>
 							{t('events_earnings')}
-							<span className='font-bold text-gray-300'>${data.cashPrize || 0}</span>
+							<span className='font-bold text-lg text-gray-300 -mt-2'>${data.cashPrize || 0}</span>
 						</p>
 						<p className='inline-flex flex-col'>
 							{t('events_total')}

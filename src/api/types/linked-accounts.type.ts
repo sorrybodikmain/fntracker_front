@@ -6,5 +6,5 @@ export type LinkedAccounts = {
 	twitch: string | null
 	instagram: string | null
 	twitter: string | null
-	userId: number
+	telegram: string | null
 } & BaseType
