@@ -36,7 +36,7 @@ const SubsItem: FC<PropsWithChildren<{
 				<div className='relative w-full h-44 sm:h-48 md:h-56 object-cover'>
 					<Link to={'/locker/' + data?.item.id}>
 						<img
-							src={data?.item.displayAssets[0].background || '/images/preloader.gif'}
+							src={data?.item.displayAssets[0].background || data?.item.images.background || '/images/preloader.gif'}
 							alt={data?.item.id}
 						/>
 					</Link>

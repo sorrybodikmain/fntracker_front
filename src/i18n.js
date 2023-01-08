@@ -3,8 +3,8 @@ import HttpBackend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
-const apiKey = 'jundBoxlgHInslZrJ_YM4A'
-const loadPath = `https://api.i18nexus.com/project_resources/translations/{{lng}}/{{ns}}.json?api_key=${apiKey}`
+// const apiKey = 'jundBoxlgHInslZrJ_YM4A'
+// const loadPath = `https://api.i18nexus.com/project_resources/translations/{{lng}}/{{ns}}.json?api_key=${apiKey}`
 
 
 i18next
@@ -25,8 +25,7 @@ i18next
 		defaultNS: 'home',
 		supportedLngs: ['de', 'es', 'fr', 'it', 'pl', 'en', 'ru'],
 		backend: {
-			loadPath: loadPath
-				// '/translations/{{lng}}/{{ns}}.json'
+			loadPath: '/translations/{{lng}}/{{ns}}.json'
 		}
 	})
 export default i18next
