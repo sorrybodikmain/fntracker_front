@@ -1,6 +1,9 @@
 import { IUser } from '@/api/types/user.type'
 import { makeAutoObservable } from 'mobx'
 import AuthService from '../services/AuthService'
+import UserService from '../services/UserService'
+import { Subscription } from '@/api/types/subscription.type'
+import { LinkedAccounts } from '@/api/types/linked-accounts.type'
 
 export default class Store {
 	user = {} as IUser
@@ -18,6 +21,14 @@ export default class Store {
 		this.user = user
 	}
 
+	setSubs(subs: Subscription[]) {
+		this.user.subscriptions = subs
+	}
+
+	setSocialNetworks(socNetworks: LinkedAccounts) {
+		this.user.profile!.socialNetworks = socNetworks
+	}
+
 	async login(email: string, password: string) {
 		try {
 			const res = await AuthService.login(email, password)
@@ -25,7 +36,7 @@ export default class Store {
 			this.setAuth(true)
 			this.setUser(res.data.user)
 		} catch (e: any) {
-			console.log(e.data.message)
+			console.log(e)
 		}
 	}
 
@@ -36,7 +47,7 @@ export default class Store {
 			this.setAuth(true)
 			this.setUser(res.data.user)
 		} catch (e: any) {
-			console.log(e.data.message)
+			console.log(e)
 		}
 	}
 
@@ -46,9 +57,54 @@ export default class Store {
 			localStorage.setItem('token', res.data.accessToken)
 			this.setAuth(true)
 		} catch (e: any) {
-			console.log(e.data.message)
+			console.log(e)
 		}
+	}
 
+	async updateSubscriptions() {
+		try {
+			const res = await UserService.getAllSubscriptions()
+			this.setSubs(res.data)
+		} catch (e: any) {
+			console.log(e)
+		}
+	}
+
+
+	async updateSocialNetworks(
+		youtube: string,
+		twitch: string,
+		instagram: string,
+		twitter: string,
+		telegram: string) {
+		try {
+			await UserService.updateSocialsNetworks(
+				youtube,
+				twitch,
+				instagram,
+				twitter,
+				telegram)
+		} catch (e: any) {
+			console.log(e)
+		}
+	}
+
+	async subscribe(itemId: string) {
+		try {
+			await UserService.subscribe(itemId)
+			await this.updateSubscriptions()
+		} catch (e: any) {
+			console.log(e)
+		}
+	}
+
+	async unsubscribe(itemId: string) {
+		try {
+			await UserService.unsubscribe(itemId)
+			await this.updateSubscriptions()
+		} catch (e: any) {
+			console.log(e)
+		}
 	}
 
 	async logout() {

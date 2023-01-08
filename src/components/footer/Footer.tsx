@@ -11,7 +11,7 @@ const Footer: FC = () => {
 					<ul className='flex items-center justify-center text-center text-gray-500'>
 						<li>
 							<Link to={'/terms'} className='hover:text-gray-100 text-xs'>
-								{t('terms_link')}
+								{t('contact_link')}
 							</Link>
 						</li>
 						<li className='px-4 text-gray-100 text-xs'>

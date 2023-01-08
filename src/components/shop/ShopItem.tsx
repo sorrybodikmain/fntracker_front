@@ -1,13 +1,39 @@
-import { FC, PropsWithChildren, useState } from 'react'
+import { FC, PropsWithChildren, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ItemShop } from '@/api/types/shop.type'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import { Context } from '../../index'
+import { useLocation, useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
-	const [like, setLike] = useState<boolean>(true)
+	const { store } = useContext(Context)
+	const [like, setLike] = useState<boolean>(
+		store.user.subscriptions?.some(i => i.shopItemId === data.mainId)
+		|| false
+	)
+	const location = useLocation()
+	const navigate = useNavigate()
 	const handleLike = () => {
-		// const message = like ? 'Liked successfully!' : 'Successfully removed from likes!'
-		setLike(!like)
+		if (store.isAuth) {
+			if (like) {
+				store.unsubscribe(data.mainId).then(() => {
+					setLike(false)
+					toast.success('Successfully removed from likes!')
+				})
+			} else {
+				store.subscribe(data.mainId).then(() => {
+					setLike(true)
+					toast.success('Liked successfully!')
+				})
+			}
+		} else {
+			toast.error('You are not logged in!')
+			setTimeout(() => {
+				navigate(`/user/login?redirectTo=${location.pathname}`)
+			}, 4000)
+		}
+
 	}
 	return (
 		<div>
@@ -21,14 +47,14 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 						/>
 					</div>
 				</Link>
-				<div className='absolute top-0 right-0 text-4xl p-2' onClick={handleLike}>
+				<div className={`absolute top-0 right-0 text-4xl p-2 ${like ? 'text-red-500' : ''}`} onClick={handleLike}>
 					{like ? <AiFillHeart /> : <AiOutlineHeart />}
 				</div>
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
 					<h1 className='text-center text-gray-100'>{data.displayName}</h1>
 					<p className=' text-gray-400 flex justify-center'>{data.price.finalPrice}
 						<img
-							src={'/images/v-bucks.png'}
+							src={'/images/v-bucks.webp'}
 							className='h-5'
 							alt='v-bucks icon'
 						/>

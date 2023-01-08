@@ -6,7 +6,9 @@ const RegisterPage: FC = () => {
 
 	return (
 		<Layout>
-			<RegisterForm />
+			<div className={'min-h-screen'}>
+				<RegisterForm />
+			</div>
 		</Layout>
 	)
 }

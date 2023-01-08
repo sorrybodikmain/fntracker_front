@@ -1,4 +1,4 @@
-import httpClient, { API_URL } from '../http'
+import httpClient from '../http'
 import { AxiosResponse } from 'axios'
 import { IRefreshResponse, LoginResponse } from '@/api/types/user.type'
 

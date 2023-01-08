@@ -1,57 +1,69 @@
 import { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { AccountStatsResponse, ProfileResponse, PrResponse } from '@/api/types/user-stats.type'
-import { fetcher, patch_fetcher, pr_fetcher } from '@/libs/apiFetcher'
+import { AccountStatsResponse, PrResponse } from '@/api/types/user-stats.type'
+import { defaultFetcher, fetcher, patchFetcher } from '@/libs/apiFetcher'
 import Layout from '@/components/Layout'
 import ProfileCard from '@/components/stats/ProfileCard'
 import ModesStats from '@/components/stats/ModesStats'
 import EventsStats from '@/components/stats/EventsStats'
 import SeasonStats from '@/components/stats/SeasonStats'
 import NotFountError from '@/components/stats/NotFountError'
+import useSWR from 'swr'
+import { ProfileResponse } from '@/api/types/profile.type'
+import SkeletonCard from '@/components/stats/SkeletonCard'
 
 const StatsPage: FC = () => {
 	const { nickname } = useParams()
 
-	// const res = Promise.all<AccountStatsResponse, PrResponse, ProfileResponse>([
-	// 	fetcher('https://fortniteapi.io/v1/stats?username=' + nickname)
-	// 		.then(res => res),
-	// 	pr_fetcher('https://api.fntracker.pp.ua/pr?platform=PC&region=EU&egsName=' + nickname)
-	// 		.then(res => res),
-	// 	pr_fetcher('https://api.fntracker.pp.ua/profile/' + nickname)
-	// 		.then(res => res)
-	// ])
-	// console.log(res)
 
+	const { data } = useSWR<AccountStatsResponse>(
+		'https://fortniteapi.io/v1/stats?username=' + nickname,
+		fetcher
+	)
+	const pr = useSWR<PrResponse>(
+		'https://api.fntracker.pp.ua/pr?platform=PC&region=EU&egsName=' + nickname,
+		defaultFetcher
+	)
+	const profileData = useSWR<ProfileResponse>(
+		`https://api.fntracker.pp.ua/profile/${nickname}`,
+		defaultFetcher
+	)
 
 	useEffect(() => {
-		patch_fetcher(`https://api.fntracker.pp.ua/profile/${nickname}/increment`).then()
+		(async () => {
+			await patchFetcher(`https://api.fntracker.pp.ua/profile/${nickname}/increment`)
+		})()
 	}, [])
 
 	return (
 		<>
 			<Layout>
-				{/*{*/}
-				{/*	data?.result === false ?*/}
-				{/*		<NotFountError /> :*/}
-				{/*		<>*/}
-				{/*			<ProfileCard data={data!} profile={profile.data!} />*/}
-				{/*			{*/}
-				{/*				pr?.data ?*/}
-				{/*					<EventsStats data={pr.data?.data} />*/}
-				{/*					: null*/}
-				{/*			}*/}
+				{
+					data?.result === false && data ?
+						<NotFountError /> :
+						<>
+							{profileData.data && data ?
+								<ProfileCard profileData={profileData.data.profile} nickname={nickname!}
+														 views={profileData.data.viewsCount} />
+								: <SkeletonCard />
+							}
+							{
+								pr?.data ?
+									<EventsStats data={pr.data?.data} />
+									: <SkeletonCard />
+							}
 
-				{/*			{*/}
-				{/*				data?.accountLevelHistory ?*/}
-				{/*					<SeasonStats data={data!} />*/}
-				{/*					: null*/}
-				{/*			}*/}
-				{/*			{data?.global_stats ?*/}
-				{/*				<ModesStats data={data!} />*/}
-				{/*				: null*/}
-				{/*			}*/}
-				{/*		</>*/}
-				{/*}*/}
+							{
+								data?.accountLevelHistory ?
+									<SeasonStats data={data!} />
+									: <SkeletonCard />
+							}
+							{data?.global_stats ?
+								<ModesStats data={data!} />
+								: <SkeletonCard />
+							}
+						</>
+				}
 
 			</Layout>
 		</>

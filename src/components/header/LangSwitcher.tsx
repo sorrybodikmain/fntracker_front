@@ -1,4 +1,4 @@
-import { FC,  useState } from 'react'
+import { FC, useState } from 'react'
 import i18next from 'i18next'
 import { useNavigate, useLocation } from 'react-router'
 

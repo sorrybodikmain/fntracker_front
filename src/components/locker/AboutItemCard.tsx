@@ -1,14 +1,40 @@
-import { FC, PropsWithChildren, useState } from 'react'
+import { FC, PropsWithChildren, useContext, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import {  ShopItemResponse } from '@/api/types/shop.type'
+import { ShopItemResponse } from '@/api/types/shop.type'
 import { useTranslation } from 'react-i18next'
+import { Context } from '../../index'
+import { toast } from 'react-toastify'
+import { useLocation, useNavigate } from 'react-router'
 
 const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data }) => {
 	const { t } = useTranslation('locker')
-	const [like, setLike] = useState<boolean>(true)
+	const location = useLocation()
+	const { store } = useContext(Context)
+	const [like, setLike] = useState<boolean>(
+		store.user.subscriptions?.some(i => i.shopItemId === data.item.id)
+		|| false
+	)
+	const navigate = useNavigate()
 	const handleLike = () => {
-		// const message = like ? 'Liked successfully!' : 'Successfully removed from likes!'
-		setLike(!like)
+		if (store.isAuth) {
+			if (like) {
+				store.unsubscribe(data.item.id).then(() => {
+					setLike(false)
+					toast.success('Successfully removed from likes!')
+				})
+			} else {
+				store.subscribe(data.item.id).then(() => {
+					setLike(true)
+					toast.success('Liked successfully!')
+				})
+			}
+		} else {
+			toast.error('You are not logged in!')
+			setTimeout(() => {
+				navigate(`/user/login?redirectTo=${location.pathname}`)
+			}, 4000)
+		}
+
 	}
 	return (<div>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>

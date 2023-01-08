@@ -5,7 +5,9 @@ const ActivatePage: FC = () => {
 
 	return (
 		<Layout>
-			ActivationPage
+			<div className={'min-h-screen'}>
+
+			</div>
 		</Layout>
 	)
 }

@@ -14,6 +14,9 @@
       "@/data/*": [
         "data/*"
       ],
+      "@/services/*": [
+        "services/*"
+      ],
       "@/components/*": [
         "components/*"
       ],

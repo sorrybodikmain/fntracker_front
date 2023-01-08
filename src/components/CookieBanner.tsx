@@ -5,17 +5,18 @@ import { useTranslation } from 'react-i18next'
 
 const CookieBanner: FC = () => {
 	const [showBanner, setShowBanner] = useState(false)
-	const [cookies, setCookie] = useCookies(['fntracker-cookie'])
+	const [cookies, setCookie] = useCookies()
 	const { t } = useTranslation('cookie-banner')
 	const handleClick = (e: any) => {
 		e.preventDefault()
 		setShowBanner(!showBanner)
-		setCookie('fntracker-cookie', true, {
-			maxAge: 24 * 60 * 60 * 365
+		setCookie('fntracker-allow-cookie', true, {
+			maxAge: 24 * 60 * 60 * 365,
+			path: '/'
 		})
 	}
 	useEffect(() => {
-		if (!cookies['fntracker-cookie'])
+		if (!cookies['fntracker-allow-cookie'])
 			setShowBanner(true)
 	}, [])
 
@@ -31,8 +32,10 @@ const CookieBanner: FC = () => {
 								{t('banner_body')}
 							</div>
 							<div className='flex ml-3 gap-x-2 text-xs'>
-								<a href='https://www.google.com/' className='hover:bg-indigo-400 p-1 rounded border-[1px]'>{t('banner_decline')}</a>
-								<button onClick={handleClick} className='bg-primary hover:bg-indigo-400 p-1 rounded'>{t('banner_accept')}</button>
+								<a href='https://www.google.com/'
+									 className='hover:bg-indigo-400 p-1 rounded border-[1px]'>{t('banner_decline')}</a>
+								<button onClick={handleClick}
+												className='bg-primary hover:bg-indigo-400 p-1 rounded'>{t('banner_accept')}</button>
 							</div>
 						</div>
 					</div>

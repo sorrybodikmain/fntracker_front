@@ -19,9 +19,9 @@ const Profile: FC = () => {
 					<div className='grid grid-col text-xs'>
 						{store.isAuth ? (
 							<>
-								<Link to={'/favorite'} className='border-b-2 border-gray-500'>{t('favorite_link')}</Link>
+								<Link to={'/user/favorite'} className='border-b-2 border-gray-500'>{t('favorite_link')}</Link>
 								<Link to={'/user/profile'} className='border-b-2 border-gray-500'>{t('profile_link')}</Link>
-								<button onClick={handleLogout}>{t('exit_link')}</button>
+								<Link to={'/user/login'} onClick={handleLogout}>{t('exit_link')}</Link>
 							</>
 						) : (
 							<>

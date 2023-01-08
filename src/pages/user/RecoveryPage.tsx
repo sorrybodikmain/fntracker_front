@@ -1,12 +1,14 @@
 import { FC } from 'react'
 import Layout from '@/components/Layout'
-import RecoveryForm from '@/components/user/recovery/RecoveryForm'
+import RecoveryForms from '@/components/user/recovery/RecoveryForms'
 
 const RecoveryPage: FC = () => {
 
 	return (
 		<Layout>
-			<RecoveryForm />
+			<div className={'min-h-screen'}>
+				<RecoveryForms />
+			</div>
 		</Layout>
 	)
 }

@@ -9,6 +9,7 @@ import ActivatePage from './pages/user/ActivatePage'
 import RegisterPage from './pages/user/RegisterPage'
 import LoginPage from './pages/user/LoginPage'
 import RecoveryPage from './pages/user/RecoveryPage'
+import SubscriptionPage from './pages/user/SubscriptionPage'
 
 function App() {
 	return (
@@ -20,6 +21,7 @@ function App() {
 					<Route path={'shop/'} element={<ShopPage />} />
 
 					<Route path={'/user/profile'} element={<ProfilePage />} />
+					<Route path={'/user/favorite'} element={<SubscriptionPage />} />
 					<Route path={'/user/activate'} element={<ActivatePage />} />
 					<Route path={'/user/register'} element={<RegisterPage />} />
 					<Route path={'/user/login'} element={<LoginPage />} />

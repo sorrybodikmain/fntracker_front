@@ -19,7 +19,7 @@ const AboutItemPage: FC = () => {
 
 	return (
 		<Layout>
-			<div className='container text-white mx-auto p-3'>
+			<div className='container text-white mx-auto p-3 min-h-[81.1vh]'>
 				{data ?
 					<>
 						<AboutItemCard data={data!} />
