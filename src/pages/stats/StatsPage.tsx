@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { AccountStatsResponse, PrResponse } from '@/api/types/user-stats.type'
+import { AccountIdStr, AccountStatsResponse, PrResponse } from '@/api/types/user-stats.type'
 import { defaultFetcher, fetcher, patchFetcher } from '@/libs/apiFetcher'
 import Layout from '@/components/Layout'
 import ProfileCard from '@/components/stats/ProfileCard'
@@ -15,6 +15,10 @@ import SkeletonCard from '@/components/stats/SkeletonCard'
 const StatsPage: FC = () => {
 	const { nickname } = useParams()
 
+	const { data: idCheck } = useSWR<AccountIdStr>(
+		'https://fortniteapi.io/v1/stats?username=' + nickname,
+		fetcher
+	)
 
 	const { data } = useSWR<AccountStatsResponse>(
 		'https://fortniteapi.io/v1/stats?username=' + nickname,
@@ -25,13 +29,13 @@ const StatsPage: FC = () => {
 		defaultFetcher
 	)
 	const profileData = useSWR<ProfileResponse>(
-		`https://api.fntracker.pp.ua/profile/${nickname}`,
+		`https://api.fntracker.pp.ua/profile/${idCheck?.account_id}`,
 		defaultFetcher
 	)
 
 	useEffect(() => {
 		(async () => {
-			await patchFetcher(`https://api.fntracker.pp.ua/profile/${nickname}/increment`)
+			await patchFetcher(`https://api.fntracker.pp.ua/profile/${idCheck?.account_id}/increment`)
 		})()
 	}, [])
 

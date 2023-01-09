@@ -7,7 +7,7 @@ import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
 import AboutItemCard from '@/components/locker/AboutItemCard'
 import ItemDataTable from '@/components/locker/ItemDataTable'
-import SkeletonPosts from '@/components/posts/SkeletonPosts'
+import SkeletonCard from '@/components/stats/SkeletonCard'
 
 const AboutItemPage: FC = () => {
 	const { id } = useParams()
@@ -28,7 +28,11 @@ const AboutItemPage: FC = () => {
 							: null}
 					</>
 					:
-					<SkeletonPosts />
+					<>
+						<SkeletonCard />
+						<SkeletonCard />
+						<SkeletonCard />
+					</>
 				}
 			</div>
 		</Layout>

@@ -16,7 +16,7 @@ const ShopPage: FC = () => {
 	useEffect(() => {
 		if (data)
 			setSections(Object.keys(data.currentRotation))
-	}, [data?.shop])
+	}, [data?.shop[0].displayName])
 
 	return (
 		<>
