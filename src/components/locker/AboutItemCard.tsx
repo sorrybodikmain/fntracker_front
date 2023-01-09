@@ -14,6 +14,7 @@ const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data
 		store.user.subscriptions?.some(i => i.shopItemId === data.item.id)
 		|| false
 	)
+	console.log(data)
 	const navigate = useNavigate()
 	const handleLike = () => {
 		if (store.isAuth) {
@@ -63,7 +64,7 @@ const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data
 					</p>
 					<p className='text-md'>{data?.item.description}</p>
 					<p className='text-sm'>
-						{Math.floor(100 * data!.item.interest) + t('card_interested')}
+						{Math.floor(10000 * data!.item.interest) + t('card_interested')}
 					</p>
 					<div className='items-end bottom-0 relative lg:absolute mt-2'>
 

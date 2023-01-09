@@ -15,6 +15,11 @@ export default class UserService {
 		return httpClient.get<Subscription[]>(`/subscription/all`)
 	}
 
+	static async activateAccount(searchParams: string
+	): Promise<AxiosResponse<string>> {
+		return httpClient.get(`/user/activate${searchParams}`)
+	}
+
 	static async updateSocialsNetworks(
 		youtube: string,
 		twitch: string,
@@ -25,8 +30,8 @@ export default class UserService {
 		return httpClient.patch<string>('/profile/sn', {
 			youtube: youtube,
 			twitch: twitch,
-			twitter: instagram,
-			instagram: twitter,
+			twitter: twitter,
+			instagram: instagram,
 			telegram: telegram
 		})
 	}
