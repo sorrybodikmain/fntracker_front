@@ -1,1 +1,20 @@
-{"auth_body":"Crear una cuenta le dará muchas opciones, que incluyen: - Realizar un seguimiento de los artículos de la tienda; - personalización del perfil; - comprobación rápida de sus estadísticas; ¡Y mucho más!","dont_have_acc_link":"¿Aún no tienes una cuenta?","egsId_placeholder":"Tu apodo en EGS","email_placeholder":"Tu correo electrónico","forgot_pass_link":"¿Olvidaste tu contraseña?","have_acc_link":"¿Ya tienes una cuenta?","login":"Entrada","login_form_body":"¡Bienvenido de nuevo!","login_form_title":"¡Hola de nuevo!","pass_placeholder":"Tu contraseña","registration":"Registro","registration_form_body":"¡Es muy fácil!","registration_form_title":"¡Regístrate ahora!"}
+{
+  "auth_body": "Crear una cuenta le dará muchas opciones, que incluyen: - Realizar un seguimiento de los artículos de la tienda; - personalización del perfil; - comprobación rápida de sus estadísticas; ¡Y mucho más!",
+  "dont_have_acc_link": "¿Aún no tienes una cuenta?",
+  "egsId_placeholder": "Tu apodo en EGS",
+  "egs_not_found": "Apodo EGS no encontrado",
+  "email_placeholder": "Tu correo electrónico",
+  "err_register": "¡Error de registro!",
+  "err_wrong": "¡Algo salió mal!",
+  "forgot_pass_link": "¿Olvidaste tu contraseña?",
+  "have_acc_link": "¿Ya tienes una cuenta?",
+  "login": "Entrada",
+  "login_form_body": "¡Bienvenido de nuevo!",
+  "login_form_title": "¡Hola de nuevo!",
+  "pass_placeholder": "Tu contraseña",
+  "registration": "Registro",
+  "registration_form_body": "¡Es muy fácil!",
+  "registration_form_title": "¡Regístrate ahora!",
+  "succ_login": "Inicio de sesión correcto, redirección...",
+  "succ_register": "Registro exitoso, active su cuenta, ¡ya se envió el correo electrónico!"
+}

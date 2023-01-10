@@ -1,1 +1,13 @@
-{"card_appeared":"First appeared on","card_bp":"It was available in the battle pass","card_interested":"% of users are interested in it","card_sold":"Sold for","card_title":"Product overview","table_date":"Date","table_price":"Price","table_title":"Last time in the store"}
+{
+  "card_appeared": "First appeared on",
+  "card_bp": "It was available in the battle pass",
+  "card_interested": "% of users are interested in it",
+  "card_sold": "Sold for",
+  "card_title": "Product overview",
+  "table_date": "Date",
+  "table_price": "Price",
+  "table_title": "Last time in the store",
+  "not_logged": "You are not authorized!",
+  "like_item": "Liked successfully!",
+  "unlike_item": "Removed from likes!"
+}

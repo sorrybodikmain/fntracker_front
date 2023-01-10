@@ -6,9 +6,7 @@ const LoginPage: FC = () => {
 
 	return (
 		<Layout>
-			<div className={'min-h-screen'}>
 				<LoginForm />
-			</div>
 		</Layout>
 	)
 }

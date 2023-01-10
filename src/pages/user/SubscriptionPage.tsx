@@ -1,14 +1,12 @@
 import { FC } from 'react'
 import Layout from '@/components/Layout'
-import SubsItemList from '@/components/user/subscriptions/SubsItemList'
+import FavoriteList from '@/components/user/subscriptions/FavoriteList'
 
 const SubscriptionPage: FC = () => {
 
 	return (
 		<Layout>
-			<div className={'min-h-screen'}>
-				<SubsItemList />
-			</div>
+				<FavoriteList />
 		</Layout>
 	)
 }

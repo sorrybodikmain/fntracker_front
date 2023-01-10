@@ -35,4 +35,17 @@ export default class UserService {
 			telegram: telegram
 		})
 	}
+
+	static async updateProfile(
+		country: string,
+		avatar: string,
+		fullName: string
+	): Promise<AxiosResponse<string>> {
+		return httpClient.patch('/profile', {
+			country: country,
+			gradient: 'from-purple-800 to-cyan-700',
+			avatar: avatar,
+			fullName: fullName
+		})
+	}
 }

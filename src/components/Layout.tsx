@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, Suspense } from 'react'
 import Header from './header/Header'
 import Footer from './footer/Footer'
 import CookieBanner from '@/components/CookieBanner'
-// import { ToastContainer } from 'react-toastify'
+import ScrollButton from '@/components/ScrollButton'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
@@ -14,17 +14,11 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 				<Suspense fallback={'loading'}>
 					{children}
 				</Suspense>
+
+				<ScrollButton />
 				<Footer />
 				<CookieBanner />
 			</main>
-			{/*<ToastContainer*/}
-			{/*	position='top-right'*/}
-			{/*	closeOnClick*/}
-			{/*	pauseOnFocusLoss*/}
-			{/*	draggable*/}
-			{/*	pauseOnHover*/}
-			{/*	theme='colored'*/}
-			{/*/>*/}
 		</>
 	)
 }

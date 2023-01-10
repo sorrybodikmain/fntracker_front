@@ -5,12 +5,10 @@ import { ProfileType } from '@/api/types/profile.type'
 
 const ProfileCard: FC<PropsWithChildren<{
 	profileData: ProfileType,
-	title?: string,
 	nickname?: string,
 	views?: number
 }>> = ({
 				 profileData,
-				 title,
 				 nickname,
 				 views
 			 }) => {
@@ -19,7 +17,7 @@ const ProfileCard: FC<PropsWithChildren<{
 	return (
 		<div className='container text-white mx-auto p-3'>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>
-				{title || t('profile_card_title').toUpperCase()}
+				{ t('profile_card_title').toUpperCase()}
 			</h2>
 			<div
 				className={`flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gradient-to-r from-purple-900 to-cyan-900`}>
@@ -40,8 +38,8 @@ const ProfileCard: FC<PropsWithChildren<{
 
 				<div className='relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
 					<h2 className='text-2xl mb-1 text-white gap-x-2 flex'>
-						{profileData?.egsId || nickname}
-						<p className='text-sm mt-3'>({profileData?.fullName || 'real name'})</p>
+						{nickname || 'Your nickname'}
+						<p className='text-sm mt-3'>{profileData?.fullName || ''}</p>
 					</h2>
 
 					{
@@ -80,7 +78,7 @@ const ProfileCard: FC<PropsWithChildren<{
 									: null
 								}
 								{profileData.socialNetworks.telegram ?
-									<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-yellow-500'>
+									<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-blue-500'>
 										<a href={profileData.socialNetworks.telegram}>
 											<BsTelegram />
 										</a>

@@ -1,1 +1,9 @@
-{"banner_body":"La tienda de artículos de Fortnite se actualiza a diario. En esta sección, puede suscribirse a un producto específico y recibir una notificación cuando aparezca en la tienda. Para hacer esto, solo necesita hacer clic en Me gusta y permitir recibir notificaciones del navegador, también necesita una cuenta para guardar Me gusta. Cuando se actualiza la tienda, el sitio se actualiza automáticamente.","banner_title":"La tienda de Fortnite de hoy","banner_update":"Actualización automática a través de","title":"Comercio"}
+{
+  "banner_body": "La tienda de artículos de Fortnite se actualiza a diario. En esta sección, puede suscribirse a un producto específico y recibir una notificación cuando aparezca en la tienda. Para hacer esto, solo necesita hacer clic en Me gusta y permitir recibir notificaciones del navegador, también necesita una cuenta para guardar Me gusta. Cuando se actualiza la tienda, el sitio se actualiza automáticamente.",
+  "banner_title": "La tienda de Fortnite de hoy",
+  "banner_update": "Actualización automática a través de",
+  "title": "Comercio",
+  "not_logged": "¡Usted no está autorizado!",
+  "like_item": "Me gustó con éxito!",
+  "unlike_item": "Eliminado de me gusta!"
+}

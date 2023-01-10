@@ -1,0 +1,14 @@
+{
+  "avatar_link": "Paste a link to your avatar",
+  "err_updated": "Update error!",
+  "favorite_title": "My favorite",
+  "full_name": "Your full name",
+  "profile_update_title": "Update your profile",
+  "save_button": "Save",
+  "soc_network_link": "Your link to {{network}}",
+  "soc_networks_title": "Update your social networks",
+  "succ_updated": "Successfully updated!",
+  "not_logged": "You are not authorized!",
+  "like_item": "Liked successfully!",
+  "unlike_item": "Removed from likes!"
+}

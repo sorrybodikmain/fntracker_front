@@ -6,9 +6,7 @@ const RecoveryPage: FC = () => {
 
 	return (
 		<Layout>
-			<div className={'min-h-screen'}>
 				<RecoveryForms />
-			</div>
 		</Layout>
 	)
 }

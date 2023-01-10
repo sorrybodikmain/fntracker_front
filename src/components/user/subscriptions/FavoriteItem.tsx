@@ -8,21 +8,23 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import i18next from 'i18next'
 import useSWR from 'swr'
+import { useTranslation } from 'react-i18next'
 
-const SubsItem: FC<PropsWithChildren<{
+const FavoriteItem: FC<PropsWithChildren<{
 	subscription: Subscription,
 	deleteItem: any
 }>> = ({
 				 subscription,
 				 deleteItem
 			 }) => {
-
+	const { t } = useTranslation('user-profile')
 	const { store } = useContext(Context)
 	const handleLike = () => {
 		store.unsubscribe(subscription.shopItemId).then(() => {
 			deleteItem(subscription.shopItemId)
-			toast.success('Successfully removed from likes!')
+			toast.success(t('unlike_item'))
 		})
+
 	}
 
 
@@ -64,4 +66,4 @@ const SubsItem: FC<PropsWithChildren<{
 	)
 }
 
-export default SubsItem
+export default FavoriteItem
