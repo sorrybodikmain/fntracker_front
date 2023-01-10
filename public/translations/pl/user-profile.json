@@ -1,0 +1,14 @@
+{
+  "avatar_link": "Wklej link do swojego awatara",
+  "err_updated": "Błąd aktualizacji!",
+  "favorite_title": "mój ulubiony",
+  "full_name": "Twoje pełne imię",
+  "profile_update_title": "Zaktualizuj swój profil",
+  "save_button": "Ratować",
+  "soc_network_link": "Twój link do {{network}}",
+  "soc_networks_title": "Zaktualizuj swoje sieci społecznościowe",
+  "succ_updated": "Pomyślnie zaktualizowano!",
+  "like_item": "Podobało się pomyślnie!",
+  "not_logged": "Nie jesteś upoważniony!",
+  "unlike_item": "Usunięto z polubień!"
+}

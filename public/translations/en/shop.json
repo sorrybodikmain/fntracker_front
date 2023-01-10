@@ -1,1 +1,9 @@
-{"banner_body":"The Fortnite Item Shop is updated daily. In this section, you can subscribe to a specific product and receive a notification when it comes out in the store. To do this, you only need to click on the like and allow receiving notifications from the browser, you also need an account to save your likes. When the store is updated, the site is automatically updated.","banner_title":"Fortnite Daily Shop","banner_update":"Auto update via","title":"Shop"}
+{
+  "banner_body": "The Fortnite Item Shop is updated daily. In this section, you can subscribe to a specific product and receive a notification when it comes out in the store. To do this, you only need to click on the like and allow receiving notifications from the browser, you also need an account to save your likes. When the store is updated, the site is automatically updated.",
+  "banner_title": "Fortnite Daily Shop",
+  "banner_update": "Auto update via",
+  "title": "Shop",
+  "not_logged": "You are not authorized!",
+  "like_item": "Liked successfully!",
+  "unlike_item": "Removed from likes!"
+}

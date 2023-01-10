@@ -5,8 +5,10 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { Context } from '../../index'
 import { useLocation, useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
+	const { t } = useTranslation('shop')
 	const { store } = useContext(Context)
 	const [like, setLike] = useState<boolean>(
 		store.user.subscriptions?.some(i => i.shopItemId === data.mainId)
@@ -19,16 +21,16 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 			if (like) {
 				store.unsubscribe(data.mainId).then(() => {
 					setLike(false)
-					toast.success('Successfully removed from likes!')
+					toast.success(t('unlike_item'))
 				})
 			} else {
 				store.subscribe(data.mainId).then(() => {
 					setLike(true)
-					toast.success('Liked successfully!')
+					toast.success(t('like_item'))
 				})
 			}
 		} else {
-			toast.error('You are not logged in!')
+			toast.error(t('not_logged'))
 			setTimeout(() => {
 				navigate(`/user/login?redirectTo=${location.pathname}`)
 			}, 4000)

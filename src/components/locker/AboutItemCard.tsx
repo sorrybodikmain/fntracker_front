@@ -14,28 +14,26 @@ const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data
 		store.user.subscriptions?.some(i => i.shopItemId === data.item.id)
 		|| false
 	)
-	console.log(data)
 	const navigate = useNavigate()
 	const handleLike = () => {
 		if (store.isAuth) {
 			if (like) {
 				store.unsubscribe(data.item.id).then(() => {
 					setLike(false)
-					toast.success('Successfully removed from likes!')
+					toast.success(t('unlike_item'))
 				})
 			} else {
 				store.subscribe(data.item.id).then(() => {
 					setLike(true)
-					toast.success('Liked successfully!')
+					toast.success(t('like_item'))
 				})
 			}
 		} else {
-			toast.error('You are not logged in!')
+			toast.error(t('not_logged'))
 			setTimeout(() => {
 				navigate(`/user/login?redirectTo=${location.pathname}`)
 			}, 4000)
 		}
-
 	}
 	return (<div>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>

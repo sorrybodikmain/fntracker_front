@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import Layout from '@/components/Layout'
 import ShopBanner from '@/components/shop/ShopBanner'
 import ShopSection from '@/components/shop/ShopSection'
@@ -8,15 +8,19 @@ import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
 
 const ShopPage: FC = () => {
-	const [sections, setSections] = useState<string[]>()
-	const { data } = useSWR<ShopTodayResponse>(
+	const { data, isLoading } = useSWR<ShopTodayResponse>(
 		`https://fortniteapi.io/v2/shop?lang=${i18next.language}`,
 		fetcher
 	)
-	useEffect(() => {
-		if (data)
-			setSections(Object.keys(data.currentRotation))
-	}, [data?.shop[0].displayName])
+	if (isLoading)
+		return <Layout>
+			<ShopBanner />
+			<div className='flex justify-center items-center p-3 min-h-[61.1vh]'>
+				<span className="h-10 w-10 animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-90"></span>
+			</div>
+		</Layout>
+
+	const sections = Object.keys(data?.currentRotation)
 
 	return (
 		<>

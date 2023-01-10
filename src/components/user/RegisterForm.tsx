@@ -27,18 +27,13 @@ const RegisterForm: FC = () => {
 				store.registration(email, password, res.account_id, country.toLowerCase())
 					.then(() => {
 						setDisableButton(true)
-						setMessage('Successful registration, please activate you account, email already send!')
+						setMessage(t('succ_register')!)
 					})
-					.catch((res: any) => {
-						setError(
-							res?.data ||
-							'Error registration'
-						)
+					.catch(() => {
+						setError(t('err_register')!)
 					})
 			})
-			.catch(() => setError('EGS NickName Not Found'))
-
-
+			.catch(() => setError(t('egs_not_found')!))
 	}
 	const { store } = useContext(Context)
 	return (

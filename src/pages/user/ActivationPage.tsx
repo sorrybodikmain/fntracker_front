@@ -8,7 +8,7 @@ const ActivationPage: FC = () => {
 	const navigate = useNavigate()
 	useEffect(() => {
 		UserService.activateAccount(location.search)
-			.then(() => toast.success('Successfully activated!'))
+			.then(() => toast.success('Successfully activated! Please login!'))
 			.catch(() => toast.error('Fail activated'))
 		navigate('/user/login')
 	}, [])

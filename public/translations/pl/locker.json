@@ -1,1 +1,13 @@
-{"card_appeared":"Po raz pierwszy pojawił się na","card_bp":"Był dostępny w przepustce bojowej","card_interested":"% użytkowników jest nim zainteresowany","card_sold":"Sprzedany za","card_title":"Przegląd produktów","table_date":"Data","table_price":"Cena","table_title":"Ostatni raz w sklepie"}
+{
+  "card_appeared":"Po raz pierwszy pojawił się na",
+  "card_bp":"Był dostępny w przepustce bojowej",
+  "card_interested":"% użytkowników jest nim zainteresowany",
+  "card_sold":"Sprzedany za",
+  "card_title":"Przegląd produktów",
+  "table_date":"Data",
+  "table_price":"Cena",
+  "table_title":"Ostatni raz w sklepie",
+  "like_item": "Podobało się pomyślnie!",
+  "not_logged": "Nie jesteś upoważniony!",
+  "unlike_item": "Usunięto z polubień!"
+}

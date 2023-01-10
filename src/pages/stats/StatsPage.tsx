@@ -16,12 +16,12 @@ const StatsPage: FC = () => {
 	const { nickname } = useParams()
 
 	const { data: idCheck } = useSWR<AccountIdStr>(
-		'https://fortniteapi.io/v1/stats?username=' + nickname,
+		'https://fortniteapi.io/v1/lookup?username=' + nickname,
 		fetcher
 	)
 
 	const { data } = useSWR<AccountStatsResponse>(
-		'https://fortniteapi.io/v1/stats?username=' + nickname,
+		'https://fortniteapi.io/v1/stats?account=' + idCheck?.account_id,
 		fetcher
 	)
 	const pr = useSWR<PrResponse>(
@@ -32,7 +32,6 @@ const StatsPage: FC = () => {
 		`https://api.fntracker.pp.ua/profile/${idCheck?.account_id}`,
 		defaultFetcher
 	)
-
 	useEffect(() => {
 		(async () => {
 			await patchFetcher(`https://api.fntracker.pp.ua/profile/${idCheck?.account_id}/increment`)
@@ -43,7 +42,7 @@ const StatsPage: FC = () => {
 		<>
 			<Layout>
 				{
-					data?.result === false && data ?
+					idCheck?.result === false && data ?
 						<NotFountError /> :
 						<>
 							{profileData.data && data ?

@@ -1,0 +1,14 @@
+{
+  "avatar_link": "Вставьте ссылку на свой аватар",
+  "err_updated": "Ошибка обновления!",
+  "favorite_title": "Мое любимое",
+  "full_name": "Ваше полное имя",
+  "profile_update_title": "Обновите ваш профиль",
+  "save_button": "Сохранить",
+  "soc_network_link": "Твоя ссилка на {{network}}",
+  "soc_networks_title": "Обновите свои социальные сети",
+  "succ_updated": "Успешно обновлено!",
+  "not_logged": "Вы не авторизованы!",
+  "like_item": "Лайкнуто успешно!",
+  "unlike_item": "Удален из лайков!"
+}

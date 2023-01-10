@@ -105,6 +105,7 @@ export type ShopTodayResponse = {
 	result: boolean
 	fullShop: boolean
 	currentRotation: any
+	nextRotation: any
 	lastUpdate: ShopLastUpdate
 	shop: ItemShop[]
 }

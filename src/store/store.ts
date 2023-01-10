@@ -4,6 +4,7 @@ import AuthService from '../services/AuthService'
 import UserService from '../services/UserService'
 import { Subscription } from '@/api/types/subscription.type'
 import { LinkedAccounts } from '@/api/types/linked-accounts.type'
+import { ProfileType } from '@/api/types/profile.type'
 
 export default class Store {
 	user = {} as IUser
@@ -29,6 +30,10 @@ export default class Store {
 		this.user.profile!.socialNetworks = socNetworks
 	}
 
+	setProfile(profileData: ProfileType) {
+		this.user.profile = profileData
+	}
+
 	async login(email: string, password: string) {
 		try {
 			const res = await AuthService.login(email, password)
@@ -42,10 +47,7 @@ export default class Store {
 
 	async registration(email: string, password: string, egsId: string, country: string) {
 		try {
-			const res = await AuthService.registration(email, password, egsId, country)
-			localStorage.setItem('token', res.data.accessToken)
-			this.setAuth(true)
-			this.setUser(res.data.user)
+			await AuthService.registration(email, password, egsId, country)
 		} catch (e: any) {
 			console.log(e)
 		}
@@ -78,12 +80,35 @@ export default class Store {
 		twitter: string,
 		telegram: string) {
 		try {
+			this.setSocialNetworks({
+				telegram: telegram,
+				twitch: twitch,
+				twitter: twitter,
+				instagram: instagram
+			} as LinkedAccounts)
 			await UserService.updateSocialsNetworks(
 				youtube,
 				twitch,
 				instagram,
 				twitter,
 				telegram)
+		} catch (e: any) {
+			console.log(e)
+		}
+	}
+
+	async updateProfile(
+		country: string,
+		avatar: string,
+		fullName: string
+	) {
+		try {
+			this.setProfile({
+				country: country,
+				avatar: avatar,
+				fullName: fullName
+			} as ProfileType)
+			await UserService.updateProfile(country, avatar, fullName)
 		} catch (e: any) {
 			console.log(e)
 		}

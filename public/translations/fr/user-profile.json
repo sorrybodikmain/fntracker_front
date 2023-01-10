@@ -1,0 +1,14 @@
+{
+  "avatar_link": "Collez un lien vers votre avatar",
+  "err_updated": "Erreur de mise à jour!",
+  "favorite_title": "mon préféré",
+  "full_name": "Ton nom complet",
+  "profile_update_title": "Mettre à jour votre profil",
+  "save_button": "Sauver",
+  "soc_network_link": "Votre lien avec le {{network}}",
+  "soc_networks_title": "Mettez à jour vos réseaux sociaux",
+  "succ_updated": "Mise à jour réussie!",
+  "not_logged": "Vous n'êtes pas autorisé!",
+  "like_item": "Aimé avec succès!",
+  "unlike_item": "Supprimé des j'aime !"
+}

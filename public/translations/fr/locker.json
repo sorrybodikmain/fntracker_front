@@ -1,1 +1,13 @@
-{"card_appeared":"Apparu pour la première fois le","card_bp":"Il était disponible dans le Battle Pass","card_interested":"% des utilisateurs s'y intéressent","card_sold":"Vendu pour","card_title":"Présentation du produit","table_date":"Date","table_price":"Prix","table_title":"La dernière fois en magasin"}
+{
+  "card_appeared": "Apparu pour la première fois le",
+  "card_bp": "Il était disponible dans le Battle Pass",
+  "card_interested": "% des utilisateurs s'y intéressent",
+  "card_sold": "Vendu pour",
+  "card_title": "Présentation du produit",
+  "table_date": "Date",
+  "table_price": "Prix",
+  "table_title": "La dernière fois en magasin",
+  "not_logged": "Vous n'êtes pas autorisé!",
+  "like_item": "Aimé avec succès!",
+  "unlike_item": "Supprimé des j'aime !"
+}

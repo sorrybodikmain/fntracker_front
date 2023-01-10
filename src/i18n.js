@@ -21,7 +21,7 @@ i18next
 				maxAge: 24 * 60 * 60 * 365
 			}
 		},
-		ns: ['home', 'shop', 'header', 'footer', 'locker', 'stats', 'cookie-banner', 'user-auth', 'user-recovery'],
+		ns: ['home', 'shop', 'header', 'footer', 'locker', 'stats', 'cookie-banner', 'user-auth', 'user-recovery', 'user-profile'],
 		defaultNS: 'home',
 		supportedLngs: ['de', 'es', 'fr', 'it', 'pl', 'en', 'ru'],
 		backend: {

@@ -1,1 +1,9 @@
-{"banner_body":"Der Item-Shop von Fortnite wird täglich aktualisiert. In diesem Abschnitt können Sie ein bestimmtes Produkt abonnieren und erhalten eine Benachrichtigung, wenn es im Store erscheint. Dazu müssen Sie nur auf das Like klicken und den Empfang von Benachrichtigungen vom Browser zulassen. Außerdem benötigen Sie ein Konto, um Likes zu speichern. Wenn der Shop aktualisiert wird, wird die Website automatisch aktualisiert.","banner_title":"Der heutige Fortnite Store","banner_update":"Automatisches Update über","title":"Einkaufen"}
+{
+  "banner_body": "Der Item-Shop von Fortnite wird täglich aktualisiert. In diesem Abschnitt können Sie ein bestimmtes Produkt abonnieren und erhalten eine Benachrichtigung, wenn es im Store erscheint. Dazu müssen Sie nur auf das Like klicken und den Empfang von Benachrichtigungen vom Browser zulassen. Außerdem benötigen Sie ein Konto, um Likes zu speichern. Wenn der Shop aktualisiert wird, wird die Website automatisch aktualisiert.",
+  "banner_title": "Der heutige Fortnite Store",
+  "banner_update": "Automatisches Update über",
+  "title": "Einkaufen",
+  "not_logged": "Sie sind nicht berechtigt!",
+  "succ_updated": "Erfolgreich aktualisiert!",
+  "unlike_item": "Von Likes entfernt!"
+}
