@@ -5,11 +5,14 @@
       "@/api/*": [
         "api/*"
       ],
-      "@/models/*": [
-        "api/*"
+      "@/types/*": [
+        "types/*"
       ],
-      "@/http/*": [
-        "http/*"
+      "@/store/*": [
+        "store/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
       ],
       "@/data/*": [
         "data/*"

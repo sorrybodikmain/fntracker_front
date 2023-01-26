@@ -1,13 +1,13 @@
-import { FC, useContext, useState } from 'react'
-import { Context } from '../../index'
+import { FC, useState } from 'react'
 import { FaAt, FaFlag, FaLock } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { SiEpicgames } from 'react-icons/si'
 import countries from '@/data/countries.json'
 import { useTranslation } from 'react-i18next'
 import { fetcher } from '@/libs/apiFetcher'
-import { AccountIdStr } from '@/api/types/user-stats.type'
 import RecoveryMessage from '@/components/user/recovery/RecoveryMessage'
+import { AccountIdResponse } from '@/types/user-stats.type'
+import { useActions } from '@/hooks/useActions'
 
 const RegisterForm: FC = () => {
 	const { t } = useTranslation('user-auth')
@@ -17,25 +17,22 @@ const RegisterForm: FC = () => {
 	const [password, setPassword] = useState<string>('')
 	const [message, setMessage] = useState<string>('')
 	const [error, setError] = useState<string>('')
-	const [disableButton, setDisableButton] = useState<boolean>()
-	const registration = (e: any) => {
+	const { register } = useActions()
+	const registration = async (e: any) => {
 		e.preventDefault()
 		setMessage('')
 		setError('')
-		fetcher('https://fortniteapi.io/v1/lookup?username=' + nickName)
-			.then((res: AccountIdStr) => {
-				store.registration(email, password, res.account_id, country.toLowerCase())
-					.then(() => {
-						setDisableButton(true)
-						setMessage(t('succ_register')!)
-					})
-					.catch(() => {
-						setError(t('err_register')!)
-					})
+		await fetcher('https://fortniteapi.io/v1/lookup?username=' + nickName)
+			.then((res: AccountIdResponse) => {
+				register({
+					email,
+					password,
+					egsId: res.account_id,
+					country: country.toLowerCase()
+				})
 			})
 			.catch(() => setError(t('egs_not_found')!))
 	}
-	const { store } = useContext(Context)
 	return (
 		<>
 			<div className='min-h-[81.1vh] flex max-w-[1920px] mx-auto'>
@@ -82,10 +79,10 @@ const RegisterForm: FC = () => {
 											 autoComplete='new-password'
 								/>
 							</div>
-							{message ? <RecoveryMessage message={message} color={'bg-green-500'} /> : null}
-							{error ? <RecoveryMessage message={error} color={'bg-red-500'} /> : null}
-							<button type='submit' onClick={registration} disabled={disableButton}
-											className={`block w-full ${disableButton ? 'bg-gray-400' : 'bg-primary  hover:bg-indigo-700 hover:-translate-y-1'} mt-5 py-2 rounded-2xl transition-all duration-500 text-white mb-2`}>
+							{message && <RecoveryMessage message={message} color={'bg-green-500'} />}
+							{error && <RecoveryMessage message={error} color={'bg-red-500'} />}
+							<button type='submit' onClick={registration}
+											className={`block w-full bg-primary hover:bg-indigo-700 hover:-translate-y-1 mt-5 py-2 rounded-2xl transition-all duration-500 text-white mb-2`}>
 								{t('registration')}
 							</button>
 							<div className='flex justify-between mt-4 text-gray-300'>

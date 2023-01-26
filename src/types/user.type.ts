@@ -1,6 +1,6 @@
-import { Subscription } from '@/api/types/subscription.type'
-import { BaseType } from '@/api/types/base.type'
-import { ProfileType } from '@/api/types/profile.type'
+import { Subscription } from './subscription.type'
+import { BaseType } from './base.type'
+import { ProfileType } from './profile.type'
 
 
 export interface IUser extends BaseType {
@@ -11,10 +11,6 @@ export interface IUser extends BaseType {
 	'subscriptions': Subscription[] | null,
 }
 
-export type LoginResponse = {
-	'user': IUser,
-	'accessToken': string
-}
 
 export interface IRefreshResponse {
 	'accessToken': string

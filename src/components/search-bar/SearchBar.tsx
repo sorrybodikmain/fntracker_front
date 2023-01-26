@@ -11,8 +11,7 @@ const SearchBar: FC = () => {
 					<img
 						src='/images/search-bg.webp'
 						alt='search-bg-image'
-						decoding={'async'}
-						loading={'lazy'}
+						decoding='async'
 						className='blur-sm brightness-50 object-cover h-full w-full transition'
 					/>
 					<div className='absolute left-0 right-0 top-0 py-20 text-white text-center'>

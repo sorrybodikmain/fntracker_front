@@ -1,10 +1,10 @@
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 import RecoveryMessage from '@/components/user/recovery/RecoveryMessage'
-import httpClient from '@/http/index'
 import { useSearchParams } from 'react-router-dom'
 import PassResetForm from '@/components/user/recovery/steps/PassResetForm'
 import { useTranslation } from 'react-i18next'
 import EmptyStep from '@/components/user/recovery/steps/EmptyStep'
+import { $http } from '@/api/http'
 
 const CheckRecoveryLink: FC<PropsWithChildren<{ hide: boolean }>> = ({ hide }) => {
 	const { t } = useTranslation('user-recovery')
@@ -16,7 +16,7 @@ const CheckRecoveryLink: FC<PropsWithChildren<{ hide: boolean }>> = ({ hide }) =
 	useEffect(() => {
 		setMessage(t('succ_load')!)
 		if (searchParams.get('recid'))
-			httpClient.post('/otp/verify', {
+			$http.post('/otp/verify', {
 				'otpId': searchParams.get('recid'),
 				'userId': searchParams.get('uid'),
 				'otp': searchParams.get('otp')

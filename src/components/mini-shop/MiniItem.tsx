@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
-import { ItemShop } from '@/api/types/shop.type'
+import { ItemShop } from '@/types/shop.type'
 
 const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	return (

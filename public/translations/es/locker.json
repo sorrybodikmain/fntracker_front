@@ -1,13 +1,1 @@
-{
-  "card_appeared": "Apareció por primera vez en",
-  "card_bp": "Estaba disponible en el pase de batalla.",
-  "card_interested": "% de usuarios están interesados en él",
-  "card_sold": "Vendido para",
-  "card_title": "Descripción del producto",
-  "table_date": "la fecha",
-  "table_price": "Precio",
-  "table_title": "Ultima vez en la tienda",
-  "not_logged": "¡Usted no está autorizado!",
-  "like_item": "Me gustó con éxito!",
-  "unlike_item": "Eliminado de me gusta!"
-}
+{"card_appeared":"Apareció por primera vez","card_bp":"Estaba disponible en el pase de batalla.","card_interested":"% de usuarios están interesados en él","card_sold":"Vendido para","card_title":"Descripción del producto","item_available":"PD Probablemente estará en la tienda desde el {{minDate}} de este mes hasta el {{maxDate}} del próximo","like_item":"Me gustó con éxito!","not_logged":"¡Usted no está autorizado!","table_date":"fecha de","table_price":"Precio","table_title":"última vez en la tienda","unlike_item":"Eliminado de me gusta!"}

@@ -1,42 +1,54 @@
-import { FC, PropsWithChildren, useContext, useState } from 'react'
+import { FC, PropsWithChildren, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ItemShop } from '@/api/types/shop.type'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import { Context } from '../../index'
-import { useLocation, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '@/hooks/useAuth'
+import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
+import { ItemShop } from '@/types/shop.type'
+import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
+import { useAppDispatch } from '@/hooks/useTypedSelector'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { t } = useTranslation('shop')
-	const { store } = useContext(Context)
+	const { user } = useAuth()
 	const [like, setLike] = useState<boolean>(
-		store.user.subscriptions?.some(i => i.shopItemId === data.mainId)
-		|| false
-	)
-	const location = useLocation()
+		user?.subscriptions?.some(p => p.shopItemId === data.mainId)
+		|| false)
+
 	const navigate = useNavigate()
-	const handleLike = () => {
-		if (store.isAuth) {
-			if (like) {
-				store.unsubscribe(data.mainId).then(() => {
-					setLike(false)
-					toast.success(t('unlike_item'))
-				})
-			} else {
-				store.subscribe(data.mainId).then(() => {
-					setLike(true)
-					toast.success(t('like_item'))
-				})
-			}
+	const [subscribe] = useItemSubscribeMutation()
+	const [unSubscribe] = useItemUnsubscribeMutation()
+	const dispatch = useAppDispatch()
+	const handleLike = async () => {
+		if (user) {
+			if (user.isVerified) {
+				if (like) {
+					await unSubscribe(data.mainId).then(() => {
+						dispatch(unSubscribeItem(data.mainId))
+						setLike(false)
+						toast.error(t('unlike_item'))
+					})
+				} else {
+					await subscribe(data.mainId)
+						.then(() => {
+							dispatch(subscribeItem(data.mainId))
+							setLike(true)
+							toast.success(t('like_item'))
+						})
+				}
+			} else
+				toast.error('Activate your account!')
 		} else {
 			toast.error(t('not_logged'))
 			setTimeout(() => {
 				navigate(`/user/login?redirectTo=${location.pathname}`)
-			}, 4000)
+			}, 1000)
 		}
-
 	}
+
+
 	return (
 		<div>
 			<div className='relative overflow-hidden rounded-lg hover:scale-[0.98] transition'>

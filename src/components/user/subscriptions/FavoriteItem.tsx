@@ -1,29 +1,37 @@
-import { FC, PropsWithChildren, useContext } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { AiFillHeart } from 'react-icons/ai'
-import { Subscription } from '@/api/types/subscription.type'
-import { ShopItemResponse } from '@/api/types/shop.type'
 import { fetcher } from '@/libs/apiFetcher'
-import { Context } from '../../../index'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { Subscription } from '@/types/subscription.type'
+import { ShopItemResponse } from '@/types/shop.type'
+import { useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
 import { toast } from 'react-toastify'
 import i18next from 'i18next'
 import useSWR from 'swr'
-import { useTranslation } from 'react-i18next'
 
-const FavoriteItem: FC<PropsWithChildren<{
+interface IFavoriteItemProps {
 	subscription: Subscription,
-	deleteItem: any
-}>> = ({
-				 subscription,
-				 deleteItem
-			 }) => {
+	deleteItem: (id:string) => void
+}
+
+const FavoriteItem: FC<PropsWithChildren<
+	IFavoriteItemProps
+>> = ({
+				subscription,
+				deleteItem
+			}) => {
+
+
 	const { t } = useTranslation('user-profile')
-	const { store } = useContext(Context)
-	const handleLike = () => {
-		store.unsubscribe(subscription.shopItemId).then(() => {
+	const [unSubscribe, { isSuccess }] = useItemUnsubscribeMutation()
+
+	const handleLike = async () => {
+		await unSubscribe(subscription.shopItemId)
+		if (isSuccess) {
 			deleteItem(subscription.shopItemId)
 			toast.success(t('unlike_item'))
-		})
+		}
 
 	}
 

@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react'
-import { IOnePost } from '@/api/types/posts.type'
+import { IOnePost } from '@/types/posts.type'
 
 const Post: FC<PropsWithChildren<{ data: IOnePost }>> = ({ data }) => {
 	return (

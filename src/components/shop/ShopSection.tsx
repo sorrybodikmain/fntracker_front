@@ -1,9 +1,13 @@
 import { FC, PropsWithChildren } from 'react'
 import ShopItem from './ShopItem'
-import { ShopTodayResponse } from '@/api/types/shop.type'
+import { ShopTodayResponse } from '@/types/shop.type'
 
+interface IShopSectionProps {
+	data: ShopTodayResponse;
+	sectionId: string
+}
 const ShopSection: FC<
-	PropsWithChildren<{ data: ShopTodayResponse; sectionId: string }>
+	PropsWithChildren<IShopSectionProps>
 > = ({ data, sectionId }) => {
 	return (
 		<>

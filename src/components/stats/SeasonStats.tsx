@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
-import { AccountStatsResponse } from '@/api/types/user-stats.type'
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { useTranslation } from 'react-i18next'
+import { AccountStatsResponse } from '@/types/user-stats.type'
 
 const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ data }) => {
 	const { t } = useTranslation('stats')

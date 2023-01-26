@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
-import { BaseStats } from '@/api/types/user-stats.type'
 import { useTranslation } from 'react-i18next'
+import { BaseStats } from '@/types/user-stats.type'
 
 const ModeItem: FC<PropsWithChildren<{ data: BaseStats, mode: string }>> = ({ data, mode }) => {
 const {t} = useTranslation('stats')

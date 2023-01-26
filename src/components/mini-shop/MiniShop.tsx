@@ -2,11 +2,11 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import useSWR from 'swr'
 import MiniItem from './MiniItem'
-import { ShopTodayResponse } from '@/api/types/shop.type'
 import { fetcher } from '@/libs/apiFetcher'
 import i18next from 'i18next'
 import { useTranslation } from 'react-i18next'
 import SkeletonMiniShop from '@/components/mini-shop/SkeletonMiniShop'
+import { ShopTodayResponse } from '@/types/shop.type'
 
 const MiniShop: FC = () => {
 	const { t } = useTranslation('home')

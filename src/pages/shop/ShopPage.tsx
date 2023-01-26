@@ -3,9 +3,9 @@ import Layout from '@/components/Layout'
 import ShopBanner from '@/components/shop/ShopBanner'
 import ShopSection from '@/components/shop/ShopSection'
 import useSWR from 'swr'
-import { ShopTodayResponse } from '@/api/types/shop.type'
 import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
+import { ShopTodayResponse } from '@/types/shop.type'
 
 const ShopPage: FC = () => {
 	const { data, isLoading } = useSWR<ShopTodayResponse>(

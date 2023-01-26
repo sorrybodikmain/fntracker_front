@@ -2,10 +2,10 @@ import { FC } from 'react'
 import Post from './Post'
 import useSWR from 'swr'
 import i18next from 'i18next'
-import { IOnePost, IPostsResponse } from '@/api/types/posts.type'
 import { fetcher } from '@/libs/apiFetcher'
 import { useTranslation } from 'react-i18next'
 import SkeletonPosts from '@/components/posts/SkeletonPosts'
+import { IOnePost, IPostsResponse } from '@/types/posts.type'
 
 const AllPostsResponse: FC = () => {
 	const { t } = useTranslation('home')
