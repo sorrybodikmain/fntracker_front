@@ -26,7 +26,9 @@ export const authSlice = createSlice({
 			state.user!.subscriptions = state.user!.subscriptions!.filter(i => i.shopItemId !== action.payload)
 		},
 		updateProfileData: (state, action: PayloadAction<ProfileType>) => {
-			state.user!.profile = action.payload
+			state.user!.profile!.avatar = action.payload.avatar
+			state.user!.profile!.fullName = action.payload.fullName
+			state.user!.profile!.country = action.payload.country
 		},
 		updateSNData: (state, action: PayloadAction<LinkedAccounts>) => {
 			state.user!.profile!.socialNetworks = action.payload
