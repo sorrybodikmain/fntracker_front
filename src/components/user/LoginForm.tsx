@@ -1,35 +1,32 @@
-import { FC, useContext, useState } from 'react'
-import { Context } from '../../index'
+import { FC, useState } from 'react'
 import { FaAt, FaLock } from 'react-icons/fa'
 import { Link, useSearchParams } from 'react-router-dom'
-import { useNavigate } from 'react-router'
-import RecoveryMessage from '@/components/user/recovery/RecoveryMessage'
 import { useTranslation } from 'react-i18next'
+import { useActions } from '@/hooks/useActions'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router'
 
 const LoginForm: FC = () => {
 	const { t } = useTranslation('user-auth')
+
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
-	const [error, setError] = useState<string>('')
-	const [message, setMessage] = useState<string>('')
+
 	const [searchParams] = useSearchParams(window.location.pathname)
 	const navigate = useNavigate()
-	const handleLogin = (e: any) => {
+
+	const { login } = useActions()
+
+	const handleLogin = async (e: any) => {
 		e.preventDefault()
-		store.login(email, password)
-			.then(() => {
-				setError('')
-				setMessage(t('succ_login')!)
-				setTimeout(() => {
-						navigate(searchParams.get('redirectTo') || '/user/profile')
-					},
-					3000)
-			}).catch(() => {
-			setMessage('')
-			setError(t('err_wrong')!)
-		})
+		try {
+			await login({ email, password })
+			toast.success(t('succ_login'))
+			navigate(searchParams.get('redirectTo') || '/user/profile')
+		} catch (e) {
+			toast.error(t('err_wrong'))
+		}
 	}
-	const { store } = useContext(Context)
 
 	return (
 		<>
@@ -53,7 +50,9 @@ const LoginForm: FC = () => {
 								<input
 									className=' pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600'
 									type='email'
-									placeholder={t('email_placeholder')!} value={email} onChange={e => setEmail(e.target.value)}
+									placeholder={t('email_placeholder')!}
+									value={email}
+									onChange={e => setEmail(e.target.value)}
 									autoComplete='on'
 									required />
 							</div>
@@ -62,17 +61,18 @@ const LoginForm: FC = () => {
 								<input
 									className='pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600'
 									type='password'
-									placeholder={t('pass_placeholder')!} value={password} onChange={e => setPassword(e.target.value)}
+									placeholder={t('pass_placeholder')!}
+									value={password}
+									onChange={e => setPassword(e.target.value)}
 									autoComplete='on'
 									required />
 							</div>
-							{message ? <RecoveryMessage message={message} color={'bg-green-500'} /> : null}
-							{error ? <RecoveryMessage message={error} color={'bg-red-500'} /> : null}
 							<button type='submit' onClick={handleLogin}
 											className='block w-full bg-primary mt-5 py-2 rounded-2xl hover:bg-indigo-700 hover:-translate-y-1 transition-all duration-500 text-white mb-2'>
 								{t('login')}
 							</button>
 							<div className='flex justify-between mt-4 text-gray-300'>
+
 								<Link to='/user/recovery'
 											className='text-sm ml-2 hover:text-primary hover:-translate-y-1 transition-all'>
 									{t('forgot_pass_link')}
@@ -82,6 +82,7 @@ const LoginForm: FC = () => {
 											className='text-sm ml-2 hover:text-primary hover:-translate-y-1 transition-all'>
 									{t('dont_have_acc_link')}
 								</Link>
+
 							</div>
 
 						</form>

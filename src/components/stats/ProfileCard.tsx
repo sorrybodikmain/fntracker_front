@@ -1,26 +1,32 @@
 import { FC, PropsWithChildren } from 'react'
 import { BsFillEyeFill, BsInstagram, BsTelegram, BsTwitch, BsTwitter, BsYoutube } from 'react-icons/bs'
 import { useTranslation } from 'react-i18next'
-import { ProfileType } from '@/api/types/profile.type'
+import { ProfileType } from '@/types/profile.type'
 
-const ProfileCard: FC<PropsWithChildren<{
+
+interface IProfileCardProps {
 	profileData: ProfileType,
 	nickname?: string,
 	views?: number
-}>> = ({
-				 profileData,
-				 nickname,
-				 views
-			 }) => {
+}
+
+const ProfileCard: FC<
+	PropsWithChildren<IProfileCardProps>
+> = ({
+			 profileData,
+			 nickname,
+			 views
+		 }) => {
 
 	const { t } = useTranslation('stats')
+
 	return (
 		<div className='container text-white mx-auto p-3'>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>
-				{ t('profile_card_title').toUpperCase()}
+				{t('profile_card_title').toUpperCase()}
 			</h2>
 			<div
-				className={`flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gradient-to-r from-purple-900 to-cyan-900`}>
+				className='flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gradient-to-r from-purple-900 to-cyan-900'>
 				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className='relative bg-cover'>
 						<img

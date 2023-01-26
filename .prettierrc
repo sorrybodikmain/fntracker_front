@@ -10,6 +10,7 @@
     "<THIRD_PARTY_MODULES>",
     "^@/components/(.*)$",
     "^@/libs/(.*)$",
+    "^@/models/(.*)$",
     "^@/providers/(.*)$",
     "^@/services/(.*)$",
     "^@/assets/(.*)$",

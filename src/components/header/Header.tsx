@@ -20,7 +20,7 @@ const Header: FC = () => {
 	return (
 		<>
 			<section id='header'>
-				<div className=' bg-gray-900 shadow-lg py-5 px-7 sticky z-50 top-0'>
+				<div className='bg-gray-900 shadow-lg py-5 px-7 sticky top-0 z-50'>
 					<div className='container mx-auto'>
 						<nav className='flex justify-between'>
 							<div className='flex items-center space-x-3 lg:pr-16 pr-6'>

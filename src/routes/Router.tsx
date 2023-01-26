@@ -11,7 +11,7 @@ import RegisterPage from '../pages/user/RegisterPage'
 import LoginPage from '../pages/user/LoginPage'
 import RecoveryPage from '../pages/user/RecoveryPage'
 
-const PublicRoutes: FC = () => {
+const Router: FC = () => {
 
 	return (
 		<Routes>
@@ -19,15 +19,16 @@ const PublicRoutes: FC = () => {
 			<Route path={'locker/:id'} element={<AboutItemPage />} />
 			<Route path={'stats/:nickname'} element={<StatsPage />} />
 			<Route path={'shop/'} element={<ShopPage />} />
-
-			<Route path={'/user/profile'} element={<ProfilePage />} />
-			<Route path={'/user/favorite'} element={<SubscriptionPage />} />
 			<Route path={'/user/activate'} element={<ActivationPage />} />
 			<Route path={'/user/register'} element={<RegisterPage />} />
 			<Route path={'/user/login'} element={<LoginPage />} />
 			<Route path={'/user/recovery'} element={<RecoveryPage />} />
+
+
+			<Route path={'/user/profile'} element={<ProfilePage />} />
+			<Route path={'/user/favorite'} element={<SubscriptionPage />} />
 		</Routes>
 	)
 }
 
-export default PublicRoutes
+export default Router

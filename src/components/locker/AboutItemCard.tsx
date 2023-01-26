@@ -1,40 +1,61 @@
-import { FC, PropsWithChildren, useContext, useState } from 'react'
+import { FC, PropsWithChildren, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import { ShopItemResponse } from '@/api/types/shop.type'
 import { useTranslation } from 'react-i18next'
-import { Context } from '../../index'
-import { toast } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router'
+import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
+import { toast } from 'react-toastify'
+import { useAuth } from '@/hooks/useAuth'
+import { ShopItemResponse } from '@/types/shop.type'
+import { useAppDispatch } from '@/hooks/useTypedSelector'
+import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
 
-const AboutItemCard: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({ data }) => {
+interface IAboutItemCardProps {
+	data: ShopItemResponse
+}
+
+const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => {
+
 	const { t } = useTranslation('locker')
-	const location = useLocation()
-	const { store } = useContext(Context)
+	const { user } = useAuth()
 	const [like, setLike] = useState<boolean>(
-		store.user.subscriptions?.some(i => i.shopItemId === data.item.id)
+		user?.subscriptions?.some(p => p.shopItemId === data.item.id)
 		|| false
 	)
+
+	const location = useLocation()
 	const navigate = useNavigate()
-	const handleLike = () => {
-		if (store.isAuth) {
-			if (like) {
-				store.unsubscribe(data.item.id).then(() => {
-					setLike(false)
-					toast.success(t('unlike_item'))
-				})
-			} else {
-				store.subscribe(data.item.id).then(() => {
-					setLike(true)
-					toast.success(t('like_item'))
-				})
-			}
+
+	const [subscribe] = useItemSubscribeMutation()
+	const [unSubscribe] = useItemUnsubscribeMutation()
+	const dispatch = useAppDispatch()
+
+	const handleLike = async () => {
+		if (user) {
+			if (user.isVerified) {
+				if (like) {
+					await unSubscribe(data.item.id).then(() => {
+						dispatch(unSubscribeItem(data.item.id))
+						setLike(false)
+						toast.error(t('unlike_item'))
+					})
+				} else {
+					await subscribe(data.item.id)
+						.then(() => {
+							dispatch(subscribeItem(data.item.id))
+							setLike(true)
+							toast.success(t('like_item'))
+						})
+				}
+			} else
+				toast.error('Activate your account!')
 		} else {
 			toast.error(t('not_logged'))
 			setTimeout(() => {
 				navigate(`/user/login?redirectTo=${location.pathname}`)
-			}, 4000)
+			}, 1000)
 		}
 	}
+
 	return (<div>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>
 				{t('card_title').toUpperCase()}

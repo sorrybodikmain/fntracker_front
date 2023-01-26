@@ -1,11 +1,11 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
-import PublicRoutes from './routes/PublicRoutes'
+import Router from './routes/Router'
 
 function App() {
 	return (
 		<>
-			<PublicRoutes />
+			<Router />
 			<ToastContainer
 				position='top-right'
 				closeOnClick

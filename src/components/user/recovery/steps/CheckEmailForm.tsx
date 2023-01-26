@@ -1,9 +1,9 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { FaAt } from 'react-icons/fa'
 import RecoveryMessage from '@/components/user/recovery/RecoveryMessage'
-import httpClient from '@/http/index'
 import { useTranslation } from 'react-i18next'
 import EmptyStep from '@/components/user/recovery/steps/EmptyStep'
+import { $http } from '@/api/http'
 
 const CheckEmailForm: FC<PropsWithChildren<{ hide: boolean }>> = ({ hide }) => {
 	const { t } = useTranslation('user-recovery')
@@ -14,7 +14,7 @@ const CheckEmailForm: FC<PropsWithChildren<{ hide: boolean }>> = ({ hide }) => {
 	const sendEmail = async (e: any) => {
 		setMessage(t('succ_load')!)
 		e.preventDefault()
-		await httpClient.get('/mail/sd/recovery?email=' + email)
+		await $http.get('/mail/sd/recovery?email=' + email)
 			.then(() => {
 				setMessage(t('succ_send_mail')!)
 				setShowButton(false)

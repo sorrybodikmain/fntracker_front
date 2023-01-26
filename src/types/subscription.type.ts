@@ -1,4 +1,4 @@
-import { BaseType } from '@/api/types/base.type'
+import { BaseType } from './base.type'
 
 
 export type Subscription = {

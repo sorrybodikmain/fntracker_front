@@ -1,6 +1,5 @@
 import { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { AccountIdStr, AccountStatsResponse, PrResponse } from '@/api/types/user-stats.type'
 import { defaultFetcher, fetcher, patchFetcher } from '@/libs/apiFetcher'
 import Layout from '@/components/Layout'
 import ProfileCard from '@/components/stats/ProfileCard'
@@ -9,8 +8,9 @@ import EventsStats from '@/components/stats/EventsStats'
 import SeasonStats from '@/components/stats/SeasonStats'
 import NotFountError from '@/components/stats/NotFountError'
 import useSWR from 'swr'
-import { ProfileResponse } from '@/api/types/profile.type'
 import SkeletonCard from '@/components/stats/SkeletonCard'
+import { ProfileResponse } from '@/types/profile.type'
+import { AccountIdStr, AccountStatsResponse, PrResponse } from '@/types/user-stats.type'
 
 const StatsPage: FC = () => {
 	const { nickname } = useParams()
@@ -19,13 +19,12 @@ const StatsPage: FC = () => {
 		'https://fortniteapi.io/v1/lookup?username=' + nickname,
 		fetcher
 	)
-
 	const { data } = useSWR<AccountStatsResponse>(
 		'https://fortniteapi.io/v1/stats?account=' + idCheck?.account_id,
 		fetcher
 	)
 	const pr = useSWR<PrResponse>(
-		'https://api.fntracker.pp.ua/pr?platform=PC&region=EU&egsName=' + nickname,
+		`https://api.fntracker.pp.ua/pr?platform=PC&region=EU&egsName=${nickname}`,
 		defaultFetcher
 	)
 	const profileData = useSWR<ProfileResponse>(
@@ -46,15 +45,11 @@ const StatsPage: FC = () => {
 						<NotFountError /> :
 						<>
 							{profileData.data && data ?
-								<ProfileCard profileData={profileData.data.profile} nickname={nickname!}
+								<ProfileCard profileData={profileData.data.profile!} nickname={nickname!}
 														 views={profileData.data.viewsCount} />
 								: <SkeletonCard />
 							}
-							{
-								pr?.data ?
-									<EventsStats data={pr.data?.data} />
-									: <SkeletonCard />
-							}
+							{data ? <EventsStats data={pr?.data?.data} /> : <SkeletonCard />}
 
 							{
 								data?.accountLevelHistory ?

@@ -1,27 +1,42 @@
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { FaFlag, FaRegAddressBook, FaUserCircle } from 'react-icons/fa'
+import { useUserUpdateProfileMutation } from '@/store/api/user.api'
 import countries from '@/data/countries.json'
 import { useTranslation } from 'react-i18next'
+import { ProfileType } from '@/types/profile.type'
 import { toast } from 'react-toastify'
-import { Context } from '../../../index'
+import { useAppDispatch, useTypedSelector } from '@/hooks/useTypedSelector'
+import { updateProfileData } from '@/store/auth/auth.slice'
 
 const ProfileEditForm: FC = () => {
-	const { store } = useContext(Context)
 	const { t } = useTranslation('user-profile')
 	const [country, setCountry] = useState<string>('UA')
-	const [realName, setRealName] = useState<string>('')
+	const [fullName, setFullName] = useState<string>('')
 	const [avatar, setAvatar] = useState<string>('')
+
+	const { user } = useTypedSelector(state => state.auth)
+	const [updateProfile] = useUserUpdateProfileMutation()
+	const dispatch = useAppDispatch()
 
 	const saveProfile = async (e: any) => {
 		e.preventDefault()
-		await store.updateProfile(country.toLowerCase(), avatar, realName)
-			.then(() => toast.success(t('succ_updated')))
+		await updateProfile({
+			avatar, country: country.toLowerCase(), fullName
+		} as ProfileType)
+			.then(() => {
+				toast.success(t('succ_updated'))
+				dispatch(updateProfileData({
+					avatar, country: country.toLowerCase(), fullName
+				} as ProfileType))
+			})
 			.catch(() => toast.success(t('err_updated')))
+
 	}
+
 	useEffect(() => {
-		setAvatar(store.user.profile?.avatar || '')
-		setRealName(store.user.profile?.fullName || '')
-		setCountry(store.user.profile?.country.toUpperCase() || '')
+		setAvatar(user?.profile?.avatar || '')
+		setFullName(user?.profile?.fullName || '')
+		setCountry(user?.profile?.country.toUpperCase() || '')
 	}, [])
 
 	return (
@@ -53,7 +68,7 @@ const ProfileEditForm: FC = () => {
 						<FaRegAddressBook className='h-4 w-4 text-gray-400' />
 						<input className='pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600' type='text'
 									 placeholder={'Your full name'}
-									 value={realName} onChange={e => setRealName(e.target.value)}
+									 value={fullName} onChange={e => setFullName(e.target.value)}
 						/>
 					</div>
 					<button type='submit'

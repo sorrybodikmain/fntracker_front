@@ -2,12 +2,12 @@ import { FC } from 'react'
 import Layout from '@/components/Layout'
 import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
-import { ShopItemResponse } from '@/api/types/shop.type'
 import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
 import AboutItemCard from '@/components/locker/AboutItemCard'
 import ItemDataTable from '@/components/locker/ItemDataTable'
 import SkeletonCard from '@/components/stats/SkeletonCard'
+import { ShopItemResponse } from '@/types/shop.type'
 
 const AboutItemPage: FC = () => {
 	const { id } = useParams()

@@ -1,5 +1,5 @@
-import { BaseType } from '@/api/types/base.type'
-import { LinkedAccounts } from '@/api/types/linked-accounts.type'
+import { BaseType } from './base.type'
+import { LinkedAccounts } from './linked-accounts.type'
 
 export type ProfileType = {
 	egsId: string
@@ -11,5 +11,5 @@ export type ProfileType = {
 } & BaseType
 export type ProfileResponse = {
 	viewsCount: number
-	profile: ProfileType
+	profile: ProfileType | null
 }

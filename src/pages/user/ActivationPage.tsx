@@ -1,16 +1,21 @@
 import { FC, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import UserService from '@/services/UserService'
+import { useUserActivateQuery } from '@/store/api/user.api'
 import { toast } from 'react-toastify'
 
 const ActivationPage: FC = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
+	const { isSuccess, isError } = useUserActivateQuery(location.search)
 	useEffect(() => {
-		UserService.activateAccount(location.search)
-			.then(() => toast.success('Successfully activated! Please login!'))
-			.catch(() => toast.error('Fail activated'))
-		navigate('/user/login')
+		if (isSuccess) {
+			toast.success('Successfully activated! Please login!')
+			navigate('/user/profile')
+		} else if (isError) {
+			toast.error('Fail activated')
+			navigate('/user/profile')
+		}
+
 	}, [])
 	return (<></>)
 }

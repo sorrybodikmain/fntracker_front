@@ -1,11 +1,11 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { FaLock } from 'react-icons/fa'
 import RecoveryMessage from '@/components/user/recovery/RecoveryMessage'
-import httpClient from '@/http/index'
 import { useSearchParams } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import EmptyStep from '@/components/user/recovery/steps/EmptyStep'
 import { useTranslation } from 'react-i18next'
+import { $http } from '@/api/http'
 
 const PassResetForm: FC<PropsWithChildren<{ hide: boolean }>> = ({ hide }) => {
 	const { t } = useTranslation('user-recovery')
@@ -24,7 +24,7 @@ const PassResetForm: FC<PropsWithChildren<{ hide: boolean }>> = ({ hide }) => {
 		} else {
 			setMessage(t('succ_load')!)
 			setError('')
-			await httpClient.post('/auth/recovery', {
+			await $http.post('/auth/recovery', {
 				'uid': searchParams.get('uid'),
 				'otp': searchParams.get('otp'),
 				'password': password,

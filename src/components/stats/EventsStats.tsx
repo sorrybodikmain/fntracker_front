@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from 'react'
-import { PrStats } from '@/api/types/user-stats.type'
 import { useTranslation } from 'react-i18next'
+import { PrStats } from '@/types/user-stats.type'
 
-const EventsStats: FC<PropsWithChildren<{ data: PrStats }>> = ({ data }) => {
+const EventsStats: FC<PropsWithChildren<{ data?: PrStats }>> = ({ data }) => {
 	const { t } = useTranslation('stats')
 	return (
 		<div className='container text-white mx-auto p-3'>
@@ -14,19 +14,19 @@ const EventsStats: FC<PropsWithChildren<{ data: PrStats }>> = ({ data }) => {
 					<div className='grid grid-cols-2 gap-2'>
 						<p className='inline-flex flex-col'>
 							{t('events_current_pr')}
-							<span className='font-bold text-lg text-gray-300 -mt-2'>{data.points || 0}</span>
+							<span className='font-bold text-lg text-gray-300 -mt-2'>{data?.points || 0}</span>
 						</p>
 						<p className='inline-flex flex-col'>
 							{t('events_earnings')}
-							<span className='font-bold text-lg text-gray-300 -mt-2'>${data.cashPrize || 0}</span>
+							<span className='font-bold text-lg text-gray-300 -mt-2'>${data?.cashPrize || 0}</span>
 						</p>
 						<p className='inline-flex flex-col'>
 							{t('events_total')}
-							<span className='text-gray-300'>{data.events || 0}</span>
+							<span className='text-gray-300'>{data?.events || 0}</span>
 						</p>
 						<p className='inline-flex flex-col'>
 							{t('events_rank')}
-							<span className='text-gray-300'>#{data.rank || 0}</span>
+							<span className='text-gray-300'>#{data?.rank || 0}</span>
 						</p>
 					</div>
 
