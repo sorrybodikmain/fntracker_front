@@ -1,14 +1,1 @@
-{
-  "avatar_link": "Pega un enlace a tu avatar",
-  "err_updated": "¡Error de actualización!",
-  "favorite_title": "mi favorito",
-  "full_name": "Tu nombre completo",
-  "profile_update_title": "Actualiza tu perfil",
-  "save_button": "Salvar",
-  "soc_network_link": "Tu enlace a {{network}}",
-  "soc_networks_title": "Actualiza tus redes sociales",
-  "succ_updated": "¡Actualizado exitosamente!",
-  "not_logged": "¡Usted no está autorizado!",
-  "like_item": "Me gustó con éxito!",
-  "unlike_item": "Eliminado de me gusta!"
-}
+{"avatar_link":"Pega un enlace a tu avatar","err_updated":"¡Error de actualización!","favorite_title":"Mi favorito","full_name":"Tu nombre completo","like_item":"Me gustó con éxito!","not_logged":"¡Usted no está autorizado!","profile_update_title":"Actualiza tu perfil","save_button":"Salvar","soc_network_link":"Tu enlace a {{network}}","soc_networks_title":"Actualiza tus redes sociales","succ_updated":"¡Actualizado exitosamente!","title":"Perfil","unlike_item":"Eliminado de me gusta!"}

@@ -9,11 +9,11 @@ const ActivationPage: FC = () => {
 	const { isSuccess, isError } = useUserActivateQuery(location.search)
 	useEffect(() => {
 		if (isSuccess) {
-			toast.success('Successfully activated! Please login!')
+			toast.success('Successfully activated!')
 			navigate('/user/profile')
 		} else if (isError) {
 			toast.error('Fail activated')
-			navigate('/user/profile')
+			navigate('/user/login')
 		}
 
 	}, [])

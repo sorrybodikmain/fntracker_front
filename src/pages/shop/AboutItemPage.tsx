@@ -8,7 +8,7 @@ import AboutItemCard from '@/components/locker/AboutItemCard'
 import ItemDataTable from '@/components/locker/ItemDataTable'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ShopItemResponse } from '@/types/shop.type'
-
+import { Helmet } from 'react-helmet-async';
 const AboutItemPage: FC = () => {
 	const { id } = useParams()
 	const { data } = useSWR<ShopItemResponse>(
@@ -18,25 +18,29 @@ const AboutItemPage: FC = () => {
 	scroll(0, 0)
 
 	return (
-		<Layout>
-			<div className='container text-white mx-auto p-3 min-h-[81.1vh]'>
-				{data ?
-					<>
-						<AboutItemCard data={data!} />
-						{data?.item.shopHistory ?
-							<ItemDataTable data={data} />
-							: null}
-					</>
-					:
-					<>
-						<SkeletonCard />
-						<SkeletonCard />
-						<SkeletonCard />
-					</>
-				}
-			</div>
-		</Layout>
-
+		<>
+			<Helmet>
+				<title>{data?.item.name || "Locker"} | FNTracker</title>
+				<meta name="description" content={data?.item.description || "Desc"}/>
+			</Helmet>
+			<Layout>
+				<div className='container text-white mx-auto p-3 min-h-[81.1vh]'>
+					{data ?
+						<>
+							<AboutItemCard data={data!} />
+							{data?.item.shopHistory &&
+								<ItemDataTable data={data} />}
+						</>
+						:
+						<>
+							<SkeletonCard />
+							<SkeletonCard />
+							<SkeletonCard />
+						</>
+					}
+				</div>
+			</Layout>
+		</>
 	)
 }
 

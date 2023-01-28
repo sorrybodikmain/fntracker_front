@@ -23,12 +23,15 @@ const SNEditForm: FC = () => {
 
 	const handleUpdateSN = async (e: any) => {
 		e.preventDefault()
-		await updateSN(accounts)
-			.then(() => {
-				toast.success(t('succ_updated'))
-				dispatch(updateSNData(accounts))
-			})
-			.catch(() => toast.success(t('err_updated')))
+		if (user?.isVerified)
+			await updateSN(accounts)
+				.then(() => {
+					toast.success(t('succ_updated'))
+					dispatch(updateSNData(accounts))
+				})
+				.catch(() => toast.success(t('err_updated')))
+		else
+			toast.error('Activate your account!')
 	}
 
 	return (
