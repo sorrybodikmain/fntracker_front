@@ -20,17 +20,19 @@ const ProfileEditForm: FC = () => {
 
 	const saveProfile = async (e: any) => {
 		e.preventDefault()
-		await updateProfile({
-			avatar, country: country.toLowerCase(), fullName
-		} as ProfileType)
-			.then(() => {
-				toast.success(t('succ_updated'))
-				dispatch(updateProfileData({
-					avatar, country: country.toLowerCase(), fullName
-				} as ProfileType))
-			})
-			.catch(() => toast.success(t('err_updated')))
-
+		if (user?.isVerified)
+			await updateProfile({
+				avatar, country: country.toLowerCase(), fullName
+			} as ProfileType)
+				.then(() => {
+					toast.success(t('succ_updated'))
+					dispatch(updateProfileData({
+						avatar, country: country.toLowerCase(), fullName
+					} as ProfileType))
+				})
+				.catch(() => toast.error(t('err_updated')))
+		else
+			toast.error('Activate your account!')
 	}
 
 	useEffect(() => {

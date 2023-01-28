@@ -20,8 +20,7 @@ const Search: FC = () => {
 	}
 
 	useEffect(() => {
-		console.log(debounced)
-		if (debounced.length > 3) {
+		if (debounced.length > 2) {
 			fetcher(
 				`https://fortniteapi.io/v1/lookup?strict=false&limit=10&username=${nickname}`
 			).then(res => {
@@ -30,7 +29,7 @@ const Search: FC = () => {
 				}
 			)
 		} else {
-			setData(undefined)
+			setIsShow(false)
 		}
 	}, [debounced])
 

@@ -11,10 +11,12 @@ import useSWR from 'swr'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ProfileResponse } from '@/types/profile.type'
 import { AccountIdStr, AccountStatsResponse, PrResponse } from '@/types/user-stats.type'
+import { Helmet } from 'react-helmet-async'
+import { useTranslation } from 'react-i18next'
 
 const StatsPage: FC = () => {
 	const { nickname } = useParams()
-
+	const { t } = useTranslation('stats')
 	const { data: idCheck } = useSWR<AccountIdStr>(
 		'https://fortniteapi.io/v1/lookup?username=' + nickname,
 		fetcher
@@ -35,10 +37,13 @@ const StatsPage: FC = () => {
 		(async () => {
 			await patchFetcher(`https://api.fntracker.pp.ua/profile/${idCheck?.account_id}/increment`)
 		})()
-	}, [])
+	}, [idCheck])
 
 	return (
 		<>
+			<Helmet>
+				<title>{t('title', { nickname }) || 'Stats'} | FNTracker</title>
+			</Helmet>
 			<Layout>
 				{
 					idCheck?.result === false && data ?

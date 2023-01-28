@@ -1,1 +1,14 @@
-{"events_current_pr":"Текущий PR","events_earnings":"Зароботок","events_rank":"Ранг","events_title":"События","events_total":"Всего событий","modes_matches_played":"матчей сыграно","modes_title":"Статистика по режимах","profile_card_title":"Профиль","profile_card_views":"Просмотров","profile_error":"404 Не Найдено. Мы не можем найти ваш профиль","seasons_title":"Статистика по сезонам"}
+{
+  "events_current_pr": "Текущий PR",
+  "events_earnings": "Зароботок",
+  "events_rank": "Ранг",
+  "events_title": "События",
+  "events_total": "Всего событий",
+  "modes_matches_played": "матчей сыграно",
+  "modes_title": "Статистика по режимах",
+  "profile_card_title": "Профиль",
+  "profile_card_views": "Просмотров",
+  "profile_error": "404 Не Найдено. Мы не можем найти ваш профиль",
+  "seasons_title": "Статистика по сезонам",
+  "title": "Статистика {{nickname}}"
+}
