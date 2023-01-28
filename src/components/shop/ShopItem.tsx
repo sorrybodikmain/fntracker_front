@@ -39,7 +39,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 						})
 				}
 			} else
-				toast.error('Activate your account!')
+				toast.error(t('err_activate'))
 		} else {
 			toast.error(t('not_logged'))
 			setTimeout(() => {

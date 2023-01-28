@@ -1,9 +1,1 @@
-{
-  "banner_body": "La boutique d'objets Fortnite est mise à jour quotidiennement. Dans cette section, vous pouvez vous abonner à un produit spécifique et recevoir une notification lorsqu'il apparaît dans la boutique. Pour ce faire, il vous suffit de cliquer sur J'aime et d'autoriser la réception de notifications du navigateur, vous avez également besoin d'un compte pour enregistrer les goûts. Lorsque la boutique est mise à jour, le site est automatiquement mis à jour.",
-  "banner_title": "Le magasin Fortnite d'aujourd'hui",
-  "banner_update": "Mise à jour automatique via",
-  "title": "Magasin",
-  "not_logged": "Vous n'êtes pas autorisé!",
-  "like_item": "Aimé avec succès!",
-  "unlike_item": "Supprimé des j'aime !"
-}
+{"banner_body":"La boutique d'objets Fortnite est mise à jour quotidiennement. Dans cette section, vous pouvez aimer le produit (pour enregistrer des likes, vous avez besoin d'un compte FNTracker).","banner_title":"Le magasin Fortnite d'aujourd'hui","banner_update":"Mise à jour automatique via","err_activate":"Activez votre profil !","like_item":"Aimé avec succès!","not_logged":"Vous n'êtes pas autorisé!","title":"Magasin","unlike_item":"Supprimé des j'aime !"}

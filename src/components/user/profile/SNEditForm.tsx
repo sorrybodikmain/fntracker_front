@@ -31,7 +31,7 @@ const SNEditForm: FC = () => {
 				})
 				.catch(() => toast.success(t('err_updated')))
 		else
-			toast.error('Activate your account!')
+			toast.error(t('err_updated'))
 	}
 
 	return (

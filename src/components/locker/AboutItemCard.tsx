@@ -47,7 +47,7 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => 
 						})
 				}
 			} else
-				toast.error('Activate your account!')
+				toast.error(t('err_activate'))
 		} else {
 			toast.error(t('not_logged'))
 			setTimeout(() => {
