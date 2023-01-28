@@ -32,7 +32,7 @@ const ProfileEditForm: FC = () => {
 				})
 				.catch(() => toast.error(t('err_updated')))
 		else
-			toast.error('Activate your account!')
+			toast.error(t('err_activate'))
 	}
 
 	useEffect(() => {

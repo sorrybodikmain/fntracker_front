@@ -19,7 +19,7 @@ i18next
 		},
 		ns: ['home', 'shop', 'header', 'footer', 'locker',
 			'stats', 'cookie-banner', 'user-auth', 'user-recovery',
-			'user-profile'],
+			'user-profile', 'user-activate'],
 		defaultNS: 'home',
 		supportedLngs: ['de', 'es', 'fr', 'it', 'pl', 'en', 'ru'],
 		backend: {

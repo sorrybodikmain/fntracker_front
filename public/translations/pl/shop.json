@@ -1,9 +1,1 @@
-{
-  "banner_body": "Sklep z przedmiotami Fortnite jest codziennie aktualizowany. W tej sekcji możesz zasubskrybować konkretny produkt i otrzymać powiadomienie, gdy pojawi się on w sklepie. Aby to zrobić wystarczy kliknąć polubienie i zezwolić na otrzymywanie powiadomień z przeglądarki, potrzebne jest również konto do zapisywania polubień. Gdy sklep jest aktualizowany, witryna jest aktualizowana automatycznie.",
-  "banner_title": "Dzisiejszy sklep Fortnite",
-  "banner_update": "Automatyczna aktualizacja przez",
-  "title": "Sklep",
-  "like_item": "Podobało się pomyślnie!",
-  "not_logged": "Nie jesteś upoważniony!",
-  "unlike_item": "Usunięto z polubień!"
-}
+{"banner_body":"Sklep z przedmiotami Fortnite jest codziennie aktualizowany. W tej sekcji możesz polubić produkt (aby zapisać polubienia, potrzebujesz konta FNTracker).","banner_title":"Dzisiejszy sklep Fortnite","banner_update":"Automatyczna aktualizacja przez","err_activate":"Aktywuj swój profil!","like_item":"Podobało się pomyślnie!","not_logged":"Nie jesteś upoważniony!","title":"Sklep","unlike_item":"Usunięto z polubień!"}
