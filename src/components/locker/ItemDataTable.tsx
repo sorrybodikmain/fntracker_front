@@ -16,7 +16,7 @@ const ItemDataTable: FC<PropsWithChildren<IItemDataTableProps>> = ({ data }) => 
 				{t('table_title').toUpperCase()}
 			</h2>
 			<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
-				{maxDate && minDate &&
+				{maxDate && minDate && data.item.shopHistory.length > 10 &&
 					<span className='px-4 py-3'>
 					{t('item_available', { maxDate, minDate })}
 				</span>
@@ -35,17 +35,12 @@ const ItemDataTable: FC<PropsWithChildren<IItemDataTableProps>> = ({ data }) => 
 					<tbody>
 					{data?.item.shopHistory
 						.reverse()
-						.slice(0, 15)
 						.map((item, index) => (
 							<tr key={index} className='text-white'>
 								<td className='py-4 px-6'>{item}</td>
 								<td className='py-4 px-6'>{data?.item.price}</td>
 							</tr>
 						))}
-					<tr key={11} className='text-white'>
-						<td className='py-4 px-6'>...</td>
-						<td className='py-4 px-6'>...</td>
-					</tr>
 					</tbody>
 				</table>
 			</div>

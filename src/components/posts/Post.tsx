@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 import { IOnePost } from '@/types/posts.type'
+import { fixImageWidth } from '@/utils/api.utils'
 
 const Post: FC<PropsWithChildren<{ data: IOnePost }>> = ({ data }) => {
 	return (
@@ -7,7 +8,7 @@ const Post: FC<PropsWithChildren<{ data: IOnePost }>> = ({ data }) => {
 			<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 				<div className='relative bg-cover shadow-lg'>
 					<img
-						src={data.image}
+						src={fixImageWidth(data.image, 360)}
 						alt={'post-image'}
 						className='object-cover w-full rounded-lg'
 					/>
