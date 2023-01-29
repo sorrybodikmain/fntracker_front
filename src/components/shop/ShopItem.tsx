@@ -58,6 +58,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 							src={data.displayAssets[0].background || '/images/preloader.gif'}
 							alt={data.mainId}
 							className='mx-auto block'
+							loading={'lazy'}
 						/>
 					</div>
 				</Link>
