@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
 import { Link } from 'react-router-dom'
 import { ItemShop } from '@/types/shop.type'
+import { fixImageWidth } from '@/utils/api.utils'
 
 const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	return (
@@ -9,7 +10,10 @@ const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				<Link to={'locker/' + data.mainId}>
 					<div className='relative w-full h-40 sm:h-44 md:h-52 lg:h-36 object-cover'>
 						<img
-							src={data.displayAssets[0].background || '/images/preloader.gif'}
+							src={
+								fixImageWidth(data.displayAssets[0].background, 200)
+								|| '/images/preloader.gif'
+							}
 							alt={data.mainId}
 						/>
 					</div>

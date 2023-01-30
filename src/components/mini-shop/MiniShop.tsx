@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
 import useSWR from 'swr'
 import MiniItem from './MiniItem'
 import { fetcher } from '@/libs/apiFetcher'
@@ -7,13 +6,17 @@ import i18next from 'i18next'
 import { useTranslation } from 'react-i18next'
 import SkeletonMiniShop from '@/components/mini-shop/SkeletonMiniShop'
 import { ShopTodayResponse } from '@/types/shop.type'
+import { useNavigate } from 'react-router'
 
 const MiniShop: FC = () => {
 	const { t } = useTranslation('home')
+	const navigate = useNavigate()
 	const { data } = useSWR<ShopTodayResponse>(
 		`https://fortniteapi.io/v2/shop?lang=${i18next.language}`,
 		fetcher
 	)
+	const handleShop = () => navigate('/shop')
+
 	return (
 		<section id='mini-shop'>
 			<div className='p-6 text-white w-full lg:w-96'>
@@ -29,10 +32,12 @@ const MiniShop: FC = () => {
 						: <SkeletonMiniShop />
 					}
 				</div>
-				<div className='text-center mt-4 rounded-lg p-1 bg-gray-600 hover:scale-[1.03]'>
-					<Link to={'shop/'} className='text-md w-full'>
+				<div className='text-center mt-4 rounded-lg p-1 bg-gray-600 hover:scale-[1.03]'
+						 onClick={handleShop}
+				>
+					<span className='text-md w-full cursor-pointer'>
 						{t('shop_link')}
-					</Link>
+					</span>
 				</div>
 			</div>
 		</section>

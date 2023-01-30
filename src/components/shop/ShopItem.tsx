@@ -9,6 +9,7 @@ import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/ap
 import { ItemShop } from '@/types/shop.type'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
+import { fixImageWidth } from '@/utils/api.utils'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { t } = useTranslation('shop')
@@ -51,11 +52,14 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 
 	return (
 		<div>
-			<div className='relative overflow-hidden rounded-lg hover:scale-[0.98] transition'>
+			<div className='relative overflow-hidden rounded-lg hover:scale-[1.02] transition'>
 				<Link to={'/locker/' + data.mainId}>
-					<div className='relative w-96 h-96 object-center'>
+					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'>
 						<img
-							src={data.displayAssets[0].background || '/images/preloader.gif'}
+							src={
+								fixImageWidth(data.displayAssets[0].background)
+								|| '/images/preloader.gif'
+							}
 							alt={data.mainId}
 							className='mx-auto block'
 							loading={'lazy'}
