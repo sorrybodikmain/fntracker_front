@@ -9,7 +9,6 @@ import { useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
 import { toast } from 'react-toastify'
 import i18next from 'i18next'
 import useSWR from 'swr'
-import { fixImageWidth } from '@/utils/api.utils'
 
 interface IFavoriteItemProps {
 	subscription: Subscription,
@@ -35,8 +34,6 @@ const FavoriteItem: FC<PropsWithChildren<
 		}
 
 	}
-
-
 	const { data } = useSWR<ShopItemResponse>(
 		`https://fortniteapi.io/v2/items/get?id=${subscription.shopItemId}&lang=${i18next.language}`,
 		fetcher)
@@ -46,10 +43,7 @@ const FavoriteItem: FC<PropsWithChildren<
 				<div className='relative w-full h-44 sm:h-48 md:h-56 object-cover'>
 					<Link to={'/locker/' + data?.item.id}>
 						<img
-							src={
-							fixImageWidth(data!.item.images.background, 360)
-								|| '/images/preloader.gif'
-						}
+							src={data?.item.images.background || '/images/preloader.gif'}
 							alt={data?.item.id}
 						/>
 					</Link>
