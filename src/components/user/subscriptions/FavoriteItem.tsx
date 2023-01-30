@@ -9,6 +9,7 @@ import { useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
 import { toast } from 'react-toastify'
 import i18next from 'i18next'
 import useSWR from 'swr'
+import { fixImageWidth } from '@/utils/api.utils'
 
 interface IFavoriteItemProps {
 	subscription: Subscription,
@@ -42,11 +43,13 @@ const FavoriteItem: FC<PropsWithChildren<
 	return (
 		<>
 			<div className='relative overflow-hidden rounded-lg hover:scale-105 transition'>
-
 				<div className='relative w-full h-44 sm:h-48 md:h-56 object-cover'>
 					<Link to={'/locker/' + data?.item.id}>
 						<img
-							src={data?.item.images.background || '/images/preloader.gif'}
+							src={
+							fixImageWidth(data!.item.images.background, 360)
+								|| '/images/preloader.gif'
+						}
 							alt={data?.item.id}
 						/>
 					</Link>

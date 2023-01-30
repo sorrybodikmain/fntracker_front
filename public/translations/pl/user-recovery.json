@@ -1,1 +1,18 @@
-{"butt_change_pass":"Zmień hasło","butt_next_step":"Następny krok","butt_send_mail":"wysłać list","err_email_not_found":"Email nie znaleziony!","err_link_invalid":"Link jest nieprawidłowy!","err_pass_not_match":"Hasła nie pasują do siebie!","err_wrong":"Coś poszło nie tak!","step":"Krok","step1_body":"Wpisz swój adres e-mail","step2_body":"Sprawdzam link odzyskiwania","step3_body":"Wpisz swoje nowe hasło","succ_link_valid":"Link jest ważny!","succ_load":"Ładowanie...","succ_pass_changed":"Hasło zostało zmienione pomyślnie! Przekierowanie w 5 sekund.","succ_send_mail":"E-mail wysłany pomyślnie! Sprawdź swój email!","title":"Odzyskiwanie hasła"}
+{
+  "butt_change_pass": "Zmień hasło",
+  "butt_next_step": "Następny krok",
+  "butt_send_mail": "Wysłać list",
+  "err_email_not_found": "Email nie znaleziony!",
+  "err_link_invalid": "Link jest nieprawidłowy!",
+  "err_pass_not_match": "Hasła nie pasują do siebie!",
+  "err_wrong": "Coś poszło nie tak!",
+  "step": "Krok",
+  "step1_body": "Wpisz swój adres e-mail",
+  "step2_body": "Sprawdzam link odzyskiwania",
+  "step3_body": "Wpisz swoje nowe hasło",
+  "succ_link_valid": "Link jest ważny!",
+  "succ_load": "Ładowanie...",
+  "succ_pass_changed": "Hasło zostało zmienione pomyślnie! Przekierowanie w 5 sekund.",
+  "succ_send_mail": "E-mail wysłany pomyślnie! Sprawdź swój email!",
+  "title": "Odzyskiwanie hasła"
+}

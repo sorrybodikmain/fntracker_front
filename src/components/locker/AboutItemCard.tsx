@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { ShopItemResponse } from '@/types/shop.type'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
+import { fixImageWidth } from '@/utils/api.utils'
 
 interface IAboutItemCardProps {
 	data: ShopItemResponse
@@ -64,7 +65,7 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => 
 				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className='relative bg-cover shadow-lg'>
 						<img
-							src={data?.item.images.background || '/images/preloader.gif'}
+							src={fixImageWidth(data?.item.images.background, 500) || '/images/preloader.gif'}
 							alt={'shop-item-image'}
 							className='object-cover w-full rounded-lg'
 						/>

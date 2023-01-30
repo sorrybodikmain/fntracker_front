@@ -1,1 +1,18 @@
-{"butt_change_pass":"Cambia la password","butt_next_step":"Il prossimo passo","butt_send_mail":"inviare una lettera","err_email_not_found":"Email non trovata!","err_link_invalid":"Il collegamento non è valido!","err_pass_not_match":"Le passwords non corrispondono!","err_wrong":"Qualcosa è andato storto!","step":"Fare un passo","step1_body":"Inserisci il tuo indirizzo email","step2_body":"Controllo del link di recupero","step3_body":"Inserisci la tua nuova password","succ_link_valid":"Il link è valido!","succ_load":"Caricamento in corso...","succ_pass_changed":"Password cambiata con successo! Inoltro in 5 secondi.","succ_send_mail":"Email inviata correttamente! Controlla la tua posta!","title":"Recupero della password"}
+{
+  "butt_change_pass": "Cambia la password",
+  "butt_next_step": "Il prossimo passo",
+  "butt_send_mail": "Inviare una lettera",
+  "err_email_not_found": "Email non trovata!",
+  "err_link_invalid": "Il collegamento non è valido!",
+  "err_pass_not_match": "Le passwords non corrispondono!",
+  "err_wrong": "Qualcosa è andato storto!",
+  "step": "Fare un passo",
+  "step1_body": "Inserisci il tuo indirizzo email",
+  "step2_body": "Controllo del link di recupero",
+  "step3_body": "Inserisci la tua nuova password",
+  "succ_link_valid": "Il link è valido!",
+  "succ_load": "Caricamento in corso...",
+  "succ_pass_changed": "Password cambiata con successo! Inoltro in 5 secondi.",
+  "succ_send_mail": "Email inviata correttamente! Controlla la tua posta!",
+  "title": "Recupero della password"
+}

@@ -1,1 +1,18 @@
-{"butt_change_pass":"Passwort ändern","butt_next_step":"Der nächste Schritt","butt_send_mail":"einen Brief schicken","err_email_not_found":"Email wurde nicht gefunden!","err_link_invalid":"Link ist ungültig!","err_pass_not_match":"Passwörter stimmen nicht überein!","err_wrong":"Etwas ist schief gelaufen!","step":"Schritt","step1_body":"Geben sie ihre E-Mailadresse ein","step2_body":"Überprüfung Ihres Wiederherstellungslinks","step3_body":"Gib dein neues Passwort ein","succ_link_valid":"Der Link ist gültig!","succ_load":"Wird geladen...","succ_pass_changed":"Das Passwort wurde erfolgreich geändert! Weiterleitung in 5 Sekunden.","succ_send_mail":"Email wurde erfolgreich Versendet! Check deine E-Mails!","title":"Passwort Wiederherstellung"}
+{
+  "butt_change_pass": "Passwort ändern",
+  "butt_next_step": "Der nächste Schritt",
+  "butt_send_mail": "Einen Brief schicken",
+  "err_email_not_found": "Email wurde nicht gefunden!",
+  "err_link_invalid": "Link ist ungültig!",
+  "err_pass_not_match": "Passwörter stimmen nicht überein!",
+  "err_wrong": "Etwas ist schief gelaufen!",
+  "step": "Schritt",
+  "step1_body": "Geben sie ihre E-Mailadresse ein",
+  "step2_body": "Überprüfung Ihres Wiederherstellungslinks",
+  "step3_body": "Gib dein neues Passwort ein",
+  "succ_link_valid": "Der Link ist gültig!",
+  "succ_load": "Wird geladen...",
+  "succ_pass_changed": "Das Passwort wurde erfolgreich geändert! Weiterleitung in 5 Sekunden.",
+  "succ_send_mail": "Email wurde erfolgreich Versendet! Check deine E-Mails!",
+  "title": "Passwort Wiederherstellung"
+}

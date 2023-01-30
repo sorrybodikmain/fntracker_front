@@ -1,1 +1,18 @@
-{"butt_change_pass":"Change password","butt_next_step":"The next step","butt_send_mail":"to send a letter","err_email_not_found":"Email not found!","err_link_invalid":"Link is invalid!","err_pass_not_match":"Passwords do not match!","err_wrong":"Something went wrong!","step":"Step","step1_body":"Enter your email address","step2_body":"Checking Your Recovery Link","step3_body":"Enter your new password","succ_link_valid":"The link is valid!","succ_load":"Loading...","succ_pass_changed":"Password changed successfully! Forwarding in 5 seconds.","succ_send_mail":"Email sent successfully! Check your email!","title":"Password recovery"}
+{
+  "butt_change_pass": "Change password",
+  "butt_next_step": "The next step",
+  "butt_send_mail": "Send email",
+  "err_email_not_found": "Email not found!",
+  "err_link_invalid": "Link is invalid!",
+  "err_pass_not_match": "Passwords do not match!",
+  "err_wrong": "Something went wrong!",
+  "step": "Step",
+  "step1_body": "Enter your email address",
+  "step2_body": "Checking Your Recovery Link",
+  "step3_body": "Enter your new password",
+  "succ_link_valid": "The link is valid!",
+  "succ_load": "Loading...",
+  "succ_pass_changed": "Password changed successfully! Forwarding in 5 seconds.",
+  "succ_send_mail": "Email sent successfully! Check your email!",
+  "title": "Password recovery"
+}
