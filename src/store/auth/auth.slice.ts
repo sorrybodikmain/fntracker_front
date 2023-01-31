@@ -19,6 +19,9 @@ export const authSlice = createSlice({
 		updateToken: (state, { payload }) => {
 			state.accessToken = payload.accessToken
 		},
+		activateProfile: (state) => {
+			state!.user!.isVerified = true
+		},
 		subscribeItem: (state, action: PayloadAction<string>) => {
 			state?.user?.subscriptions?.push({ shopItemId: action.payload } as Subscription)
 		},
@@ -83,7 +86,7 @@ export const authSlice = createSlice({
 })
 
 export const {
-	updateToken, logOut,
+	updateToken, logOut, activateProfile,
 	subscribeItem, unSubscribeItem,
 	updateSNData, updateProfileData
 } = authSlice.actions

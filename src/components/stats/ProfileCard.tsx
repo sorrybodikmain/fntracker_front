@@ -37,7 +37,7 @@ const ProfileCard: FC<
 						<img
 							src={profileData?.avatar || '/images/default-avatar.webp'}
 							alt={'avatar-image'}
-							className='object-cover rounded-full w-32'
+							className='object-cover rounded-full w-32 h-32'
 						/>
 					</div>
 				</div>
@@ -49,49 +49,54 @@ const ProfileCard: FC<
 					</h2>
 
 					{
-						profileData?.socialNetworks ?
-							<ul className='flex text-white gap-x-2'>
-								{profileData.socialNetworks.youtube ?
-									<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-red-500'>
-										<a href={`https://www.youtube.com/${profileData.socialNetworks.youtube}`}>
-											<BsYoutube />
-										</a>
-									</li>
-									: null
-								}
-								{profileData.socialNetworks.twitch ?
-									<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-purple-500'>
-										<a href={profileData.socialNetworks.twitch}>
-											<BsTwitch />
-										</a>
-									</li>
-									: null
-								}
-								{profileData.socialNetworks.twitter ?
-									<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-blue-500'>
-										<a href={profileData.socialNetworks.twitter}>
-											<BsTwitter />
-										</a>
-									</li>
-									: null
-								}
-								{profileData.socialNetworks.instagram ?
-									<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-yellow-500'>
-										<a href={profileData.socialNetworks.instagram}>
-											<BsInstagram />
-										</a>
-									</li>
-									: null
-								}
-								{profileData.socialNetworks.telegram ?
-									<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-blue-500'>
-										<a href={profileData.socialNetworks.telegram}>
-											<BsTelegram />
-										</a>
-									</li>
-									: null
-								}
-							</ul> : null
+						profileData?.socialNetworks &&
+						<ul className='flex text-white gap-x-2'>
+							{profileData.socialNetworks.youtube &&
+								<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-red-500'>
+									<a href={`https://www.youtube.com/${profileData.socialNetworks.youtube}`}
+										 target={'_blank'} rel='noreferrer'
+									>
+										<BsYoutube />
+									</a>
+								</li>
+							}
+							{profileData.socialNetworks.twitch &&
+								<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-purple-500'>
+									<a href={profileData.socialNetworks.twitch}
+										 target={'_blank'} rel='noreferrer'
+									>
+										<BsTwitch />
+									</a>
+								</li>
+							}
+							{profileData.socialNetworks.twitter &&
+								<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-blue-500'>
+									<a href={profileData.socialNetworks.twitter}
+										 target={'_blank'} rel='noreferrer'
+									>
+										<BsTwitter />
+									</a>
+								</li>
+							}
+							{profileData.socialNetworks.instagram &&
+								<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-yellow-500'>
+									<a href={profileData.socialNetworks.instagram}
+										 target={'_blank'} rel='noreferrer'
+									>
+										<BsInstagram />
+									</a>
+								</li>
+							}
+							{profileData.socialNetworks.telegram &&
+								<li className='bg-gray-700 rounded-full mb-1 w-8 h-8 p-2 hover:bg-blue-500'>
+									<a href={profileData.socialNetworks.telegram}
+										 target={'_blank'} rel='noreferrer'
+									>
+										<BsTelegram />
+									</a>
+								</li>
+							}
+						</ul>
 					}
 					<div className='relative md:absolute bottom-0'>
 						<p className='flex flex gap-x-2'>

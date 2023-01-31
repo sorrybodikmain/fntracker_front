@@ -46,28 +46,31 @@ const SNEditForm: FC = () => {
 						<input className=' pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600' type='text'
 									 placeholder={t('soc_network_link', { network: 'Instagram' })!}
 									 value={accounts.instagram!}
-									 onChange={e => setAccounts({ instagram: e.target.value } as LinkedAccounts)}
+									 onChange={e => setAccounts({ ...accounts, instagram: e.target.value } as LinkedAccounts)}
 						/>
 					</div>
 					<div className='flex items-center border-2 mb-8 py-2 px-3 rounded-2xl '>
 						<FaTwitch className='h-4 w-4 text-gray-400' />
 						<input className='pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600' type='text'
 									 placeholder={t('soc_network_link', { network: 'Twitch' })!}
-									 value={accounts.twitch!} onChange={e => setAccounts({ twitch: e.target.value } as LinkedAccounts)}
+									 value={accounts.twitch!}
+									 onChange={e => setAccounts({ ...accounts, twitch: e.target.value } as LinkedAccounts)}
 						/>
 					</div>
 					<div className='flex items-center border-2 mb-8 py-2 px-3 rounded-2xl '>
 						<FaTwitter className='h-4 w-4 text-gray-400' />
 						<input className='pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600' type='text'
 									 placeholder={t('soc_network_link', { network: 'Twitter' })!}
-									 value={accounts.twitter!} onChange={e => setAccounts({ twitter: e.target.value } as LinkedAccounts)}
+									 value={accounts.twitter!}
+									 onChange={e => setAccounts({ ...accounts, twitter: e.target.value } as LinkedAccounts)}
 						/>
 					</div>
 					<div className='flex items-center border-2 mb-8 py-2 px-3 rounded-2xl '>
 						<FaYoutube className='h-4 w-4 text-gray-400' />
 						<input className='pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600' type='text'
 									 placeholder={t('soc_network_link', { network: 'Youtube' })!}
-									 value={accounts.youtube!} onChange={e => setAccounts({ youtube: e.target.value } as LinkedAccounts)}
+									 value={accounts.youtube!}
+									 onChange={e => setAccounts({ ...accounts, youtube: e.target.value } as LinkedAccounts)}
 						/>
 					</div>
 					<div className='flex items-center border-2 mb-8 py-2 px-3 rounded-2xl '>
@@ -75,7 +78,8 @@ const SNEditForm: FC = () => {
 						<input className='pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600' type='text'
 									 placeholder={t('soc_network_link', { network: 'Telegram' })!}
 									 value={accounts.telegram!}
-									 onChange={e => setAccounts({ telegram: e.target.value } as LinkedAccounts)}
+									 onChange={e =>
+										 setAccounts({ ...accounts, telegram: e.target.value } as LinkedAccounts)}
 						/>
 					</div>
 					<button type='submit'
