@@ -11,27 +11,32 @@ import { useActions } from '@/hooks/useActions'
 
 const RegisterForm: FC = () => {
 	const { t } = useTranslation('user-auth')
+	const { register } = useActions()
+
 	const [email, setEmail] = useState<string>('')
 	const [nickName, setNickName] = useState<string>('')
 	const [country, setCountry] = useState<string>('UA')
 	const [password, setPassword] = useState<string>('')
+
 	const [message, setMessage] = useState<string>('')
 	const [error, setError] = useState<string>('')
-	const { register } = useActions()
 	const registration = async (e: any) => {
 		e.preventDefault()
 		setMessage('')
 		setError('')
 		await fetcher('https://fortniteapi.io/v1/lookup?username=' + nickName)
 			.then((res: AccountIdResponse) => {
-				register({
-					email,
-					password,
-					egsId: res.account_id,
-					country: country.toLowerCase()
-				})
+				if (res.account_id) {
+					register({
+						email,
+						password,
+						egsId: res.account_id,
+						country: country.toLowerCase()
+					})
+					setMessage(t('succ_register')!)
+				} else
+					setError(t('egs_not_found')!)
 			})
-			.catch(() => setError(t('egs_not_found')!))
 	}
 	return (
 		<>
@@ -71,7 +76,7 @@ const RegisterForm: FC = () => {
 										))}
 								</select>
 							</div>
-							<div className='flex items-center border-2 mb-12 py-2 px-3 rounded-2xl '>
+							<div className='flex items-center border-2 mb-6 py-2 px-3 rounded-2xl '>
 								<FaLock className='h-4 w-4 text-gray-400' />
 								<input className='pl-2 w-full outline-none border-none bg-gray-600 focus:bg-gray-600' type='password'
 											 placeholder={t('pass_placeholder')!} value={password}
