@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-const SkeletonPosts: FC = () => {
+const SkeletonNews: FC = () => {
 	const arr = Array(6).fill(0)
 	return (<>
 			{arr.map((value, index) => (
@@ -19,4 +19,4 @@ const SkeletonPosts: FC = () => {
 	)
 }
 
-export default SkeletonPosts
+export default SkeletonNews

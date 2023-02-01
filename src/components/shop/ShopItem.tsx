@@ -9,7 +9,6 @@ import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/ap
 import { ItemShop } from '@/types/shop.type'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
-import { fixImageWidth } from '@/utils/api.utils'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { t } = useTranslation('shop')
@@ -17,7 +16,6 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const [like, setLike] = useState<boolean>(
 		user?.subscriptions?.some(p => p.shopItemId === data.mainId)
 		|| false)
-
 	const navigate = useNavigate()
 	const [subscribe] = useItemSubscribeMutation()
 	const [unSubscribe] = useItemUnsubscribeMutation()
@@ -29,14 +27,14 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 					await unSubscribe(data.mainId).then(() => {
 						dispatch(unSubscribeItem(data.mainId))
 						setLike(false)
-						toast.error(t('unlike_item'))
+						toast.error(t('unlike_item' ,{ name: data.displayName }))
 					})
 				} else {
 					await subscribe(data.mainId)
 						.then(() => {
 							dispatch(subscribeItem(data.mainId))
 							setLike(true)
-							toast.success(t('like_item'))
+							toast.success(t('like_item', { name: data.displayName }))
 						})
 				}
 			} else
@@ -56,10 +54,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				<Link to={'/locker/' + data.mainId}>
 					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'>
 						<img
-							src={
-								fixImageWidth(data.displayAssets[0].background)
-								|| '/images/preloader.gif'
-							}
+							src={data?.displayAssets[0]?.background || '/images/preloader.gif'}
 							alt={data.mainId}
 							className='mx-auto block'
 							loading={'lazy'}

@@ -9,7 +9,7 @@ import ItemDataTable from '@/components/locker/ItemDataTable'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ShopItemResponse } from '@/types/shop.type'
 import { Helmet } from 'react-helmet-async';
-const AboutItemPage: FC = () => {
+const LockerItemPage: FC = () => {
 	const { id } = useParams()
 	const { data } = useSWR<ShopItemResponse>(
 		`https://fortniteapi.io/v2/items/get?id=${id}&lang=${i18next.language}`,
@@ -20,8 +20,8 @@ const AboutItemPage: FC = () => {
 	return (
 		<>
 			<Helmet>
-				<title>{data?.item.name || "Locker"} | FNTracker</title>
-				<meta name="description" content={data?.item.description || "Desc"}/>
+				<title>{data?.item?.name || "Locker"} | FNTracker</title>
+				<meta name="description" content={data?.item.description || data?.item.name}/>
 			</Helmet>
 			<Layout>
 				<div className='container text-white mx-auto p-3 min-h-[81.1vh]'>
@@ -44,4 +44,4 @@ const AboutItemPage: FC = () => {
 	)
 }
 
-export default AboutItemPage
+export default LockerItemPage

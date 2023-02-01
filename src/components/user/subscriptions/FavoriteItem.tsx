@@ -30,7 +30,7 @@ const FavoriteItem: FC<PropsWithChildren<
 		await unSubscribe(subscription.shopItemId)
 		if (isSuccess) {
 			deleteItem(subscription.shopItemId)
-			toast.success(t('unlike_item'))
+			toast.success(t('unlike_item', { name: data?.item.name }))
 		}
 
 	}

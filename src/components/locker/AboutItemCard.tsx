@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { ShopItemResponse } from '@/types/shop.type'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
-import { fixImageWidth } from '@/utils/api.utils'
+import { fixImageWidth, getRelativeTimeString } from '@/utils/api.utils'
 
 interface IAboutItemCardProps {
 	data: ShopItemResponse
@@ -37,14 +37,14 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => 
 					await unSubscribe(data.item.id).then(() => {
 						dispatch(unSubscribeItem(data.item.id))
 						setLike(false)
-						toast.error(t('unlike_item'))
+						toast.error(t('unlike_item', { name: data.item.name }))
 					})
 				} else {
 					await subscribe(data.item.id)
 						.then(() => {
 							dispatch(subscribeItem(data.item.id))
 							setLike(true)
-							toast.success(t('like_item'))
+							toast.success(t('like_item', { name: data.item.name }))
 						})
 				}
 			} else
@@ -84,8 +84,12 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => 
 					</p>
 					<p className='text-md'>{data?.item.description}</p>
 					<p className='text-sm'>
-						{Math.floor(10000 * data!.item.interest) + t('card_interested')}
+						{Math.floor(100 * data!.item.interest) + t('card_interested')}
 					</p>
+
+					{data.item.shopHistory && <p>
+						{t('item_available') + ' ' + getRelativeTimeString(data.item.shopHistory)}
+					</p>}
 					<div className='items-end bottom-0 relative lg:absolute mt-2'>
 
 						{

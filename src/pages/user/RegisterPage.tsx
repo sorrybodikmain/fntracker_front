@@ -11,7 +11,8 @@ const RegisterPage: FC = () => {
 			<Helmet>
 				<title>{t('registration')} | FNTracker</title>
 			</Helmet>
-		<Layout>
+
+			<Layout>
 				<RegisterForm />
 		</Layout>
 		</>
