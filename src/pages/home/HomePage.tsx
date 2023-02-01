@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import Layout from '@/components/Layout'
 import SearchBar from '@/components/search-bar/SearchBar'
-import AllPosts from '@/components/posts/AllPosts'
+import AllPosts from '@/components/news/AllNews'
 import MiniShop from '@/components/mini-shop/MiniShop'
 import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'

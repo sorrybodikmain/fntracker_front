@@ -43,6 +43,7 @@ const StatsPage: FC = () => {
 		<>
 			<Helmet>
 				<title>{t('title', { nickname }) || 'Stats'} | FNTracker</title>
+                <meta name='description' content={t('title', { nickname })!} />
 			</Helmet>
 			<Layout>
 				{

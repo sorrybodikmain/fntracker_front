@@ -18,7 +18,7 @@ const ShopPage: FC = () => {
 	if (isLoading)
 		return <Layout>
 			<ShopBanner />
-			<div className='flex justify-center items-center p-3 min-h-[61.1vh]'>
+			<div className='flex justify-center items-center p-3 min-h-[64vh]'>
 				<span className="h-10 w-10 animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-90"></span>
 			</div>
 		</Layout>

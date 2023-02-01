@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async'
 const SubscriptionPage: FC = () => {
 	const { t } = useTranslation('user-profile')
 	const { accessToken } = useAuth()
+
 	if (!accessToken)
 		return <Navigate to={'/user/login'} />
 
@@ -17,6 +18,7 @@ const SubscriptionPage: FC = () => {
 			<Helmet>
 				<title>{t('favorite_title')} | FNTracker</title>
 			</Helmet>
+
 			<Layout>
 				<FavoriteList />
 			</Layout>

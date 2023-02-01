@@ -1,17 +1,17 @@
 import { FC } from 'react'
-import Post from './Post'
+import Novelty from './Novelty'
 import useSWR from 'swr'
 import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
 import { useTranslation } from 'react-i18next'
-import SkeletonPosts from '@/components/posts/SkeletonPosts'
-import { IOnePost, IPostsResponse } from '@/types/posts.type'
+import SkeletonNews from '@/components/news/SkeletonNews'
+import { INewsResponse, INovelty } from '@/types/posts.type'
 
-const AllPostsResponse: FC = () => {
+const AllNews: FC = () => {
 	const { t } = useTranslation('home')
 	const filterDate = new Date()
 	filterDate.setDate(filterDate.getDate() - 20)
-	const { data } = useSWR<IPostsResponse>(
+	const { data } = useSWR<INewsResponse>(
 		`https://fortniteapi.io/v1/news?lang=${i18next.language}&type=br`,
 		fetcher
 	)
@@ -24,14 +24,13 @@ const AllPostsResponse: FC = () => {
 					</h2>
 					<div className='grid grid-cols-1 space-y-4 mt-4'>
 						{data ?
-
 							data?.news
 								.filter(item => new Date(item.date) > filterDate)
-								.map((post: IOnePost, index: number) => (
-									<Post key={index} data={post} />
+								.map((post: INovelty, index: number) => (
+									<Novelty key={index} data={post} />
 								))
 							:
-							<SkeletonPosts />
+							<SkeletonNews />
 						}
 
 					</div>
@@ -41,4 +40,4 @@ const AllPostsResponse: FC = () => {
 	)
 }
 
-export default AllPostsResponse
+export default AllNews

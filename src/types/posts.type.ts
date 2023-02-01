@@ -1,4 +1,5 @@
-export interface IOnePost {
+
+export interface INovelty {
 	id: string
 	title: string
 	tabTitle: string
@@ -10,10 +11,10 @@ export interface IOnePost {
 	video: any
 }
 
-export interface IPostsResponse {
+export interface INewsResponse {
 	result: boolean
 	type: string
 	lang: string
 	show: number
-	news: IOnePost[]
+	news: INovelty[]
 }

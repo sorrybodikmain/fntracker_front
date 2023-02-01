@@ -1,17 +1,9 @@
+import { DIVISIONS } from '@/data/divisions'
+import i18next from 'i18next'
 
 export const getContentType = () => ({
 	'Content-Type': 'application/json'
 })
-
-export function parseDates(dates: string[]) {
-	const filterDates = dates
-		.filter(i => new Date(i).getMonth() === (new Date().getMonth() + 1)
-			|| new Date(i).getMonth() === new Date().getMonth()
-		).sort()
-	const minDate = new Date(filterDates[0]).getDate()
-	const maxDate = new Date(filterDates[filterDates.length - 1]).getDate()
-	return { maxDate, minDate }
-}
 
 export function fixImageWidth(url: string, width = 480) {
 	const url1 = new URL(url)
@@ -19,4 +11,21 @@ export function fixImageWidth(url: string, width = 480) {
 	search_params.set('width', width.toString())
 	url1.search = search_params.toString()
 	return url1.toString()
+}
+
+
+export function getRelativeTimeString(shopHistory: string[]) {
+	const lastDate = shopHistory[shopHistory.length - 1]
+	const formatter = new Intl.RelativeTimeFormat(i18next.language, {
+		numeric: 'auto', style: 'long', localeMatcher: 'best fit'
+	})
+	let duration = (new Date(lastDate).getTime() - new Date().getTime()) / 1000
+	for (let i = 0; i <= DIVISIONS.length; i++) {
+		const division = DIVISIONS[i]
+		if (Math.abs(duration) < division.amount) {
+			return formatter.format(Math.round(duration), division.name)
+		}
+		duration /= division.amount
+	}
+	return
 }

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from '../pages/home/HomePage'
-import AboutItemPage from '../pages/shop/AboutItemPage'
+import LockerItemPage from '../pages/shop/LockerItemPage'
 import StatsPage from '../pages/stats/StatsPage'
 import ShopPage from '../pages/shop/ShopPage'
 import ProfilePage from '../pages/user/ProfilePage'
@@ -16,7 +16,7 @@ const Router: FC = () => {
 	return (
 		<Routes>
 			<Route path={'/'} element={<HomePage />} />
-			<Route path={'locker/:id'} element={<AboutItemPage />} />
+			<Route path={'locker/:id'} element={<LockerItemPage />} />
 			<Route path={'stats/:nickname'} element={<StatsPage />} />
 			<Route path={'shop/'} element={<ShopPage />} />
 			<Route path={'/user/activate'} element={<ActivationPage />} />
