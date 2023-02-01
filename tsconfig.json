@@ -21,6 +21,12 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-  ]
+    "./src", "**/*.ts", "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".vscode",
+    ".idea"
+  ],
+  "extends": "./tsconfig.paths.json"
 }
