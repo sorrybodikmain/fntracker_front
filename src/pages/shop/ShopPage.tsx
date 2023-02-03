@@ -16,12 +16,12 @@ const ShopPage: FC = () => {
 		fetcher
 	)
 	if (isLoading)
-		return <Layout>
+		return <div>
 			<ShopBanner />
-			<div className='flex justify-center items-center p-3 min-h-[64vh]'>
+			<div className='flex justify-center items-center p-3 min-h-screen'>
 				<span className="h-10 w-10 animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-90"></span>
 			</div>
-		</Layout>
+		</div>
 
 	const sections = Object.keys(data?.currentRotation)
 
@@ -31,14 +31,14 @@ const ShopPage: FC = () => {
 				<title>{t('title')} | FNTracker</title>
 				<meta name='description' content={t('banner_title')!} />
 			</Helmet>
-			<Layout>
+			<div>
 				<ShopBanner />
 				<div className='container mx-auto text-white p-3 min-h-[81.1vh]'>
 					{sections?.map(item => (
 						<ShopSection key={item} data={data!} sectionId={item} />
 					))}
 				</div>
-			</Layout>
+			</div>
 		</>
 	)
 }

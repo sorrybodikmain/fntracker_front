@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import Layout from '@/components/Layout'
 import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
 import i18next from 'i18next'
@@ -23,7 +22,7 @@ const LockerItemPage: FC = () => {
 				<title>{data?.item?.name || "Locker"} | FNTracker</title>
 				<meta name="description" content={data?.item.description || data?.item.name}/>
 			</Helmet>
-			<Layout>
+			<div>
 				<div className='container text-white mx-auto p-3 min-h-[81.1vh]'>
 					{data ?
 						<>
@@ -39,7 +38,7 @@ const LockerItemPage: FC = () => {
 						</>
 					}
 				</div>
-			</Layout>
+			</div>
 		</>
 	)
 }

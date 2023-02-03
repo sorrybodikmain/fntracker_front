@@ -20,7 +20,9 @@ export const authSlice = createSlice({
 			state.accessToken = payload.accessToken
 		},
 		activateProfile: (state) => {
-			state!.user!.isVerified = true
+			if (state.user) {
+				state.user.isVerified = true
+			}
 		},
 		subscribeItem: (state, action: PayloadAction<string>) => {
 			state?.user?.subscriptions?.push({ shopItemId: action.payload } as Subscription)

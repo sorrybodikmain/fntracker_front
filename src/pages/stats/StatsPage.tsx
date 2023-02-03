@@ -45,7 +45,7 @@ const StatsPage: FC = () => {
 				<title>{t('title', { nickname }) || 'Stats'} | FNTracker</title>
                 <meta name='description' content={t('title', { nickname })!} />
 			</Helmet>
-			<Layout>
+			<div>
 				{
 					idCheck?.result === false && data ?
 						<NotFountError /> :
@@ -56,7 +56,6 @@ const StatsPage: FC = () => {
 								: <SkeletonCard />
 							}
 							{data ? <EventsStats data={pr?.data?.data} /> : <SkeletonCard />}
-
 							{
 								data?.accountLevelHistory ?
 									<SeasonStats data={data!} />
@@ -69,7 +68,7 @@ const StatsPage: FC = () => {
 						</>
 				}
 
-			</Layout>
+			</div>
 		</>
 	)
 }

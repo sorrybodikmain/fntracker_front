@@ -42,7 +42,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 		} else {
 			toast.error(t('not_logged'))
 			setTimeout(() => {
-				navigate(`/user/login?redirectTo=${location.pathname}`)
+				navigate('/user/login')
 			}, 1000)
 		}
 	}

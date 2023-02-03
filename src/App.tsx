@@ -1,19 +1,22 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
-import Router from './routes/Router'
+import AppRouter from './routes/AppRouter'
+import Layout from '@/components/Layout'
 
 function App() {
 	return (
 		<>
-			<Router />
-			<ToastContainer
-				position='top-right'
-				closeOnClick
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme='colored'
-			/>
+			<Layout>
+				<AppRouter />
+				<ToastContainer
+					position='top-right'
+					closeOnClick
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme='colored'
+				/>
+			</Layout>
 		</>
 
 	)

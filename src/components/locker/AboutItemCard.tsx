@@ -1,20 +1,22 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { useTranslation } from 'react-i18next'
-import { useLocation, useNavigate } from 'react-router'
+import {  useNavigate } from 'react-router'
 import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
 import { toast } from 'react-toastify'
 import { useAuth } from '@/hooks/useAuth'
 import { ShopItemResponse } from '@/types/shop.type'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
-import { fixImageWidth, getRelativeTimeString } from '@/utils/api.utils'
+import { fixImageWidth } from '@/utils/api.utils'
 
 interface IAboutItemCardProps {
 	data: ShopItemResponse
 }
 
-const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => {
+const AboutItemCard: FC<PropsWithChildren<
+	IAboutItemCardProps
+>> = ({ data }) => {
 
 	const { t } = useTranslation('locker')
 	const { user } = useAuth()
@@ -23,13 +25,11 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => 
 		|| false
 	)
 
-	const location = useLocation()
 	const navigate = useNavigate()
 
 	const [subscribe] = useItemSubscribeMutation()
 	const [unSubscribe] = useItemUnsubscribeMutation()
 	const dispatch = useAppDispatch()
-
 	const handleLike = async () => {
 		if (user) {
 			if (user.isVerified) {
@@ -52,7 +52,7 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => 
 		} else {
 			toast.error(t('not_logged'))
 			setTimeout(() => {
-				navigate(`/user/login?redirectTo=${location.pathname}`)
+				navigate(`/user/login`)
 			}, 1000)
 		}
 	}
@@ -86,10 +86,6 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({ data }) => 
 					<p className='text-sm'>
 						{Math.floor(100 * data!.item.interest) + t('card_interested')}
 					</p>
-
-					{data.item.shopHistory && <p>
-						{t('item_available') + ' ' + getRelativeTimeString(data.item.shopHistory)}
-					</p>}
 					<div className='items-end bottom-0 relative lg:absolute mt-2'>
 
 						{

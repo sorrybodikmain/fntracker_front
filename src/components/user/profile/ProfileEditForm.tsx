@@ -5,8 +5,9 @@ import countries from '@/data/countries.json'
 import { useTranslation } from 'react-i18next'
 import { ProfileType } from '@/types/profile.type'
 import { toast } from 'react-toastify'
-import { useAppDispatch, useTypedSelector } from '@/hooks/useTypedSelector'
+import { useAppDispatch } from '@/hooks/useTypedSelector'
 import { updateProfileData } from '@/store/auth/auth.slice'
+import { useAuth } from '@/hooks/useAuth'
 
 const ProfileEditForm: FC = () => {
 	const { t } = useTranslation('user-profile')
@@ -14,9 +15,9 @@ const ProfileEditForm: FC = () => {
 	const [fullName, setFullName] = useState<string>('')
 	const [avatar, setAvatar] = useState<string>('')
 
-	const { user } = useTypedSelector(state => state.auth)
-	const [updateProfile] = useUserUpdateProfileMutation()
+	const { user } = useAuth()
 	const dispatch = useAppDispatch()
+	const [updateProfile] = useUserUpdateProfileMutation()
 
 	const saveProfile = async (e: any) => {
 		e.preventDefault()
@@ -38,7 +39,7 @@ const ProfileEditForm: FC = () => {
 	useEffect(() => {
 		setAvatar(user?.profile?.avatar || '')
 		setFullName(user?.profile?.fullName || '')
-		setCountry(user?.profile?.country.toUpperCase() || '')
+		setCountry(user?.profile?.country.toUpperCase() || 'UA')
 	}, [])
 
 	return (

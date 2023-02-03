@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 import { INovelty } from '@/types/posts.type'
-import { fixImageWidth, getRelativeTimeString } from '@/utils/api.utils'
+import { fixImageWidth } from '@/utils/api.utils'
 
 const Novelty: FC<PropsWithChildren<{ data: INovelty }>> = ({ data }) => {
 	return (
@@ -15,7 +15,7 @@ const Novelty: FC<PropsWithChildren<{ data: INovelty }>> = ({ data }) => {
 			<div className='w-full md:w-8/12 xl:w-6/12 px-3 mb-4 md:mb-0 mr-auto'>
 				<h5 className='text-lg mb-2'>{data.title}</h5>
 				<p className='text-gray-300'>{data.body}</p>
-				<p className='text-gray-500'>{getRelativeTimeString([data.date])}</p>
+				<p className='text-gray-500'>{new Date(data.date).toLocaleDateString()}</p>
 			</div>
 		</div>
 	)

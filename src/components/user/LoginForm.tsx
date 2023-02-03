@@ -4,7 +4,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useActions } from '@/hooks/useActions'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router'
+import { Navigate, useNavigate } from 'react-router'
+import { useAuth } from '@/hooks/useAuth'
 
 const LoginForm: FC = () => {
 	const { t } = useTranslation('user-auth')
@@ -12,25 +13,27 @@ const LoginForm: FC = () => {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 
-	const [searchParams] = useSearchParams(window.location.pathname)
-	const navigate = useNavigate()
-
 	const { login } = useActions()
+	const { accessToken } = useAuth()
+
+	if (accessToken)
+		return <Navigate to={'/user/profile'}/>
 
 	const handleLogin = async (e: any) => {
 		e.preventDefault()
 		try {
-			await login({ email, password })
-			toast.success(t('succ_login'))
-			navigate(searchParams.get('redirectTo') || '/user/profile')
-		} catch (e) {
+			login({ email, password })
+			if (accessToken) {
+				toast.success(t('succ_login'))
+			}
+		} catch (e: any) {
 			toast.error(t('err_wrong'))
 		}
 	}
 
 	return (
 		<>
-			<div className='min-h-[81.1vh] flex max-w-[1920px] mx-auto'>
+			<div className='min-h-screen flex max-w-[1920px] mx-auto'>
 				<div
 					className='hidden lg:flex w-full lg:w-1/2 justify-around items-center bg-gradient-to-bl from-blue-800 to-black'>
 					<div className=' w-full mx-auto px-20 flex-col items-center space-y-6'>

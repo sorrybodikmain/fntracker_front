@@ -1,23 +1,24 @@
 import { FC, useState } from 'react'
+import { supportedLngs } from '../../i18n'
 import i18next from 'i18next'
 
-
 const LangSwitcher: FC = () => {
-	const [locale, setLocale] = useState()
-	const allLocales = ['ru', 'de', 'es', 'fr', 'it', 'pl', 'en']
-	const loc = [i18next.language, ...allLocales.filter(item => item !== i18next.language)]
-	const handleLocale = async (e: any) => {
-		setLocale(e.target.value)
-		await i18next.changeLanguage(e.target.value)
+	const [locale, setLocale] = useState(i18next.language || 'en')
+	const languageHandler = async (e: any) => {
+		const newLang = e.target.value
+		if (locale !== newLang) {
+			setLocale(newLang)
+			await i18next.changeLanguage(newLang)
+		}
 	}
 
 	return (
 		<>
 			<select
 				className='bg-gray-800 rounded-lg text-xs'
-				onChange={handleLocale}
+				onChange={languageHandler}
 				value={locale}>
-				{loc?.map((item, index) => (
+				{supportedLngs?.map((item, index) => (
 					<option key={index} value={item}>
 						{item?.toUpperCase()}
 					</option>
