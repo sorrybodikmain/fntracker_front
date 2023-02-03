@@ -34,7 +34,7 @@ export default function ProfilePage() {
 				<title>{t('title')} | FNTracker</title>
 			</Helmet>
 
-			<Layout>
+			<div>
 				<div className='min-h-screen'>
 					<ProfileCard profileData={user.profile! || profileData.data?.profile}
 											 nickname={data?.name}
@@ -43,7 +43,7 @@ export default function ProfilePage() {
 					<ProfileEditForm />
 					<SNEditForm />
 				</div>
-			</Layout>
+			</div>
 		</>
 	)
 }

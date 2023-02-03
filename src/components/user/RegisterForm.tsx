@@ -8,18 +8,21 @@ import { fetcher } from '@/libs/apiFetcher'
 import { AccountIdResponse } from '@/types/user-stats.type'
 import { useActions } from '@/hooks/useActions'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router'
+import { Navigate } from 'react-router'
+import { useAuth } from '@/hooks/useAuth'
 
 const RegisterForm: FC = () => {
 	const { t } = useTranslation('user-auth')
 	const { register } = useActions()
-	const navigate = useNavigate()
 
 	const [email, setEmail] = useState<string>('')
 	const [nickName, setNickName] = useState<string>('')
 	const [country, setCountry] = useState<string>('UA')
 	const [password, setPassword] = useState<string>('')
 
+	const { accessToken } = useAuth()
+	if (accessToken)
+		return <Navigate to={'/user/profile'} />
 
 	const registration = async (e: any) => {
 		e.preventDefault()
@@ -34,7 +37,6 @@ const RegisterForm: FC = () => {
 							country: country.toLowerCase()
 						})
 						toast.success(t('succ_register')!)
-						setTimeout(() => navigate('/user/profile'), 1000)
 					} catch (e: any) {
 						toast.error(e.data.message || t('err_wrong')!)
 					}

@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import Layout from '@/components/Layout'
 import FavoriteList from '@/components/user/subscriptions/FavoriteList'
 import { Navigate } from 'react-router'
 import { useAuth } from '@/hooks/useAuth'
@@ -18,10 +17,7 @@ const SubscriptionPage: FC = () => {
 			<Helmet>
 				<title>{t('favorite_title')} | FNTracker</title>
 			</Helmet>
-
-			<Layout>
-				<FavoriteList />
-			</Layout>
+			<FavoriteList />
 		</>)
 }
 

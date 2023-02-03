@@ -11,7 +11,7 @@ const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 					<div className='relative w-full h-40 sm:h-44 md:h-52 lg:h-36 object-cover'>
 						<img
 							src={
-								fixImageWidth(data.displayAssets[0].background, 200)
+								fixImageWidth(data.displayAssets[0].background, 300)
 								|| '/images/preloader.gif'
 							}
 							alt={data.mainId}

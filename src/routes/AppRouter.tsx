@@ -11,7 +11,7 @@ import RegisterPage from '../pages/user/RegisterPage'
 import LoginPage from '../pages/user/LoginPage'
 import RecoveryPage from '../pages/user/RecoveryPage'
 
-const Router: FC = () => {
+const AppRouter: FC = () => {
 
 	return (
 		<Routes>
@@ -24,11 +24,11 @@ const Router: FC = () => {
 			<Route path={'/user/login'} element={<LoginPage />} />
 			<Route path={'/user/recovery'} element={<RecoveryPage />} />
 
-
 			<Route path={'/user/profile'} element={<ProfilePage />} />
 			<Route path={'/user/favorite'} element={<SubscriptionPage />} />
 		</Routes>
+
 	)
 }
 
-export default Router
+export default AppRouter
