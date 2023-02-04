@@ -1,13 +1,12 @@
 import { FC } from 'react'
-import Layout from '@/components/Layout'
 import ShopBanner from '@/components/shop/ShopBanner'
 import ShopSection from '@/components/shop/ShopSection'
 import useSWR from 'swr'
 import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
 import { ShopTodayResponse } from '@/types/shop.type'
-import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
+import AppHelmet from '@/components/AppHelmet'
 
 const ShopPage: FC = () => {
 	const { t } = useTranslation('shop')
@@ -27,10 +26,7 @@ const ShopPage: FC = () => {
 
 	return (
 		<>
-			<Helmet>
-				<title>{t('title')} | FNTracker</title>
-				<meta name='description' content={t('banner_title')!} />
-			</Helmet>
+			<AppHelmet title={t('title')} desc={t('banner_title')!} />
 			<div>
 				<ShopBanner />
 				<div className='container mx-auto text-white p-3 min-h-[81.1vh]'>

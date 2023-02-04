@@ -7,7 +7,8 @@ import AboutItemCard from '@/components/locker/AboutItemCard'
 import ItemDataTable from '@/components/locker/ItemDataTable'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ShopItemResponse } from '@/types/shop.type'
-import { Helmet } from 'react-helmet-async';
+import AppHelmet from '@/components/AppHelmet'
+
 const LockerItemPage: FC = () => {
 	const { id } = useParams()
 	const { data } = useSWR<ShopItemResponse>(
@@ -18,10 +19,11 @@ const LockerItemPage: FC = () => {
 
 	return (
 		<>
-			<Helmet>
-				<title>{data?.item?.name || "Locker"} | FNTracker</title>
-				<meta name="description" content={data?.item.description || data?.item.name}/>
-			</Helmet>
+			<AppHelmet
+				title={data?.item?.name || 'Locker'}
+				desc={data?.item.description}
+				img={data?.item?.images.background}
+			/>
 			<div>
 				<div className='container text-white mx-auto p-3 min-h-[81.1vh]'>
 					{data ?

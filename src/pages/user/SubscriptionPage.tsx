@@ -3,7 +3,7 @@ import FavoriteList from '@/components/user/subscriptions/FavoriteList'
 import { Navigate } from 'react-router'
 import { useAuth } from '@/hooks/useAuth'
 import { useTranslation } from 'react-i18next'
-import { Helmet } from 'react-helmet-async'
+import AppHelmet from '@/components/AppHelmet'
 
 const SubscriptionPage: FC = () => {
 	const { t } = useTranslation('user-profile')
@@ -14,9 +14,7 @@ const SubscriptionPage: FC = () => {
 
 	return (
 		<>
-			<Helmet>
-				<title>{t('favorite_title')} | FNTracker</title>
-			</Helmet>
+			<AppHelmet title={t('favorite_title')} />
 			<FavoriteList />
 		</>)
 }

@@ -1,3 +1,4 @@
+import i18next from 'i18next'
 
 export const getContentType = () => ({
 	'Content-Type': 'application/json'
@@ -10,3 +11,7 @@ export function fixImageWidth(url: string, width = 480) {
 	url1.search = search_params.toString()
 	return url1.toString()
 }
+
+export const generatePathToMapImg = (id: string, poi: boolean) =>
+	fixImageWidth(`https://media.fortniteapi.io/images/maps${
+		poi ? `/poi/${i18next.language}` : ''}/map-${id}.png`, 800)

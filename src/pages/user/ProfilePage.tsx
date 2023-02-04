@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '@/components/Layout'
 import { Navigate } from 'react-router'
 import ProfileCard from '@/components/stats/ProfileCard'
 import SNEditForm from '@/components/user/profile/SNEditForm'
@@ -9,8 +8,8 @@ import { useAuth } from '@/hooks/useAuth'
 import useSWR from 'swr'
 import { AccountStatsResponse } from '@/types/user-stats.type'
 import { useTranslation } from 'react-i18next'
-import { Helmet } from 'react-helmet-async'
 import { ProfileResponse } from '@/types/profile.type'
+import AppHelmet from '@/components/AppHelmet'
 
 export default function ProfilePage() {
 	const { user } = useAuth()
@@ -30,10 +29,7 @@ export default function ProfilePage() {
 
 	return (
 		<>
-			<Helmet>
-				<title>{t('title')} | FNTracker</title>
-			</Helmet>
-
+			<AppHelmet title={t('title')}/>
 			<div>
 				<div className='min-h-screen'>
 					<ProfileCard profileData={user.profile! || profileData.data?.profile}

@@ -15,6 +15,10 @@ const Header: FC = () => {
 		{
 			name: t('shop_link'),
 			href: '/shop'
+		},
+		{
+			name: t('maps_link'),
+			href: '/compare-maps'
 		}
 	]
 	return (
