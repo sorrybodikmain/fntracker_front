@@ -1,15 +1,13 @@
 import React, { FC } from 'react'
 import LoginForm from '@/components/user/LoginForm'
 import { useTranslation } from 'react-i18next'
-import { Helmet } from 'react-helmet-async'
+import AppHelmet from '@/components/AppHelmet'
 
 const LoginPage: FC = () => {
 	const { t } = useTranslation('user-auth')
 	return (
 		<>
-			<Helmet>
-				<title>{t('login')} | FNTracker</title>
-			</Helmet>
+			<AppHelmet title={t('registration')} desc={t('auth_body')!}/>
 			<LoginForm />
 		</>
 	)

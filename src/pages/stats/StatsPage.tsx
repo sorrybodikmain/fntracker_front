@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { defaultFetcher, fetcher, patchFetcher } from '@/libs/apiFetcher'
-import Layout from '@/components/Layout'
 import ProfileCard from '@/components/stats/ProfileCard'
 import ModesStats from '@/components/stats/ModesStats'
 import EventsStats from '@/components/stats/EventsStats'
@@ -11,8 +10,8 @@ import useSWR from 'swr'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ProfileResponse } from '@/types/profile.type'
 import { AccountIdStr, AccountStatsResponse, PrResponse } from '@/types/user-stats.type'
-import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
+import AppHelmet from '@/components/AppHelmet'
 
 const StatsPage: FC = () => {
 	const { nickname } = useParams()
@@ -41,11 +40,10 @@ const StatsPage: FC = () => {
 
 	return (
 		<>
-			<Helmet>
-				<title>{t('title', { nickname }) || 'Stats'} | FNTracker</title>
-                <meta name='description' content={t('title', { nickname })!} />
-			</Helmet>
-			<div>
+			<AppHelmet
+				title={t('title', { nickname })}
+			/>
+			<>
 				{
 					idCheck?.result === false && data ?
 						<NotFountError /> :
@@ -68,7 +66,7 @@ const StatsPage: FC = () => {
 						</>
 				}
 
-			</div>
+			</>
 		</>
 	)
 }
