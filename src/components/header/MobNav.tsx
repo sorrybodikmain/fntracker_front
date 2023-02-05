@@ -15,11 +15,11 @@ const MobNav: FC<{ routes: Route[] }> = ({ routes }) => {
 				<Popover.Button className='py-2 md:hidden'>
 					<VscListFlat />
 				</Popover.Button>
-				<Popover.Panel className='fixed z-10 bg-gray-800 px-2 py-2 rounded-lg -mx-10 border'>
-					<ul className='text-xs text-gray-500 hover:text-gray-300'>
+				<Popover.Panel className='fixed z-10 bg-gray-800 px-2 py-2 rounded-lg -mx-10'>
+					<ul className='text-xs text-gray-400'>
 						{routes.map((route, index) => (
 							<li key={index}>
-								<Link to={route.href} className='py-1 md:mx-1'>
+								<Link to={route.href} className='py-1 md:mx-1 hover:text-gray-300'>
 									{route.name}
 								</Link>
 							</li>

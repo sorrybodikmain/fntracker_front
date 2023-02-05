@@ -83,7 +83,7 @@ export type ItemShop = {
 	displayDescription: string
 	displayType: string
 	mainType: string
-	displayAssets: [SectionImages]
+	displayAssets: SectionImages[]
 	firstReleaseDate: string
 	previousReleaseDate: string
 	giftAllowed: boolean

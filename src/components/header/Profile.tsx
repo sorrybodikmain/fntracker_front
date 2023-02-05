@@ -20,12 +20,18 @@ const Profile: FC = () => {
 					<VscAccount />
 				</Popover.Button>
 				<Popover.Panel className='fixed z-50 bg-gray-800 px-2 py-2 rounded-lg -mx-20'>
-					<div className='grid grid-col text-xs'>
+					<div className='grid grid-col text-xs text-gray-400'>
 						{accessToken ? (
 							<>
-								<Link to={'/user/favorite'} className='border-b-2 border-gray-500'>{t('favorite_link')}</Link>
-								<Link to={'/user/profile'} className='border-b-2 border-gray-500'>{t('profile_link')}</Link>
-								<Link to={'/user/login'} onClick={handleLogout}>{t('exit_link')}</Link>
+								<Link to='/user/favorite'
+											className='hover:text-gray-300'>
+									{t('favorite_link')}</Link>
+								<Link to='/user/profile'
+											className='hover:text-gray-300'>
+									{t('profile_link')}</Link>
+								<Link to='/user/login' className='hover:text-gray-300'
+											onClick={handleLogout}>
+									{t('exit_link')}</Link>
 							</>
 						) : (
 							<>
