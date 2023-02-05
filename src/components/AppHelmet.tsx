@@ -10,7 +10,7 @@ interface ICustomHelmetProps {
 const AppHelmet: FC<PropsWithChildren<
 	ICustomHelmetProps
 >> = ({ img, desc, title }) => {
-	const defaultImg = 'public/images/icons/icon-384x384.png'
+	const defaultImg = 'https://fntracker.pp.ua/images/icons/icon-384x384.png'
 	return (
 		<Helmet>
 			<title>{title} | FNTracker</title>

@@ -8,11 +8,10 @@ const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 		<>
 			<div className='relative overflow-hidden rounded-lg hover:scale-105 transition'>
 				<Link to={'locker/' + data.mainId}>
-					<div className='relative w-full h-40 sm:h-44 md:h-52 lg:h-36 object-cover'>
+					<div className='relative w-full h-44 sm:h-48 md:h-52 lg:h-36 object-cover'>
 						<img
 							src={
-								fixImageWidth(data.displayAssets[0].background, 300)
-								|| '/images/preloader.gif'
+								fixImageWidth( data.displayAssets[0].background, 300) || '/images/preloader.gif'
 							}
 							alt={data.mainId}
 						/>
