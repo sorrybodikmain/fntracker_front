@@ -1,10 +1,10 @@
 import { FC, useState } from 'react'
 import { FaAt, FaLock } from 'react-icons/fa'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useActions } from '@/hooks/useActions'
 import { toast } from 'react-toastify'
-import { Navigate, useNavigate } from 'react-router'
+import { Navigate } from 'react-router'
 import { useAuth } from '@/hooks/useAuth'
 
 const LoginForm: FC = () => {
