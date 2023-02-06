@@ -13,8 +13,10 @@ const ActivationPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const { data } = useUserActivateQuery(location.search)
 	useEffect(() => {
-		dispatch(activateProfile())
-		toast.success(t('succ_activate'))
+		if (data) {
+			dispatch(activateProfile())
+			toast.success(t('succ_activate'))
+		}
 		navigate('/user/profile')
 	}, [data])
 	return (<div></div>)

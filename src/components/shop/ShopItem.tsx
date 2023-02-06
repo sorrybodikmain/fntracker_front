@@ -9,6 +9,7 @@ import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/ap
 import { ItemShop } from '@/types/shop.type'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
+import { fixImageWidth } from '@/utils/api.utils'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { t } = useTranslation('shop')
@@ -54,14 +55,15 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				<Link to={'/locker/' + data.mainId}>
 					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'>
 						<img
-							src={data?.displayAssets[0]?.background || '/images/preloader.gif'}
+							src={fixImageWidth(data?.displayAssets[0]?.background , 250)}
 							alt={data.mainId}
 							className='mx-auto block'
 							loading={'lazy'}
 						/>
 					</div>
 				</Link>
-				<div className={`absolute top-0 right-0 text-4xl p-2 ${like ? 'text-red-500' : ''}`} onClick={handleLike}>
+				<div className={`absolute top-0 right-0 text-4xl p-2 ${like ? 'text-red-500' : ''}`}
+						 onClick={handleLike}>
 					{like ? <AiFillHeart /> : <AiOutlineHeart />}
 				</div>
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>

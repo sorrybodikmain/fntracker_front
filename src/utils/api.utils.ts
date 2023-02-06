@@ -14,20 +14,15 @@ export function fixImageWidth(url: string, width = 480) {
 
 export const generatePathToMapImg = (id: string, poi: boolean) =>
 	fixImageWidth(`https://media.fortniteapi.io/images/maps${
-		poi ? `/poi/${i18next.language}` : ''}/map-${id}.png`, 800)
+		poi ? `/poi/${i18next.language}` : ''}/map-${id}.png`, 760)
 
 
-export const generateLockerSiteMap = (mas =
-																	['432423', '432432423', '432423']
-) => {
-	const siteUrl = 'https://fntracker.pp.ua/locker/'
-	const getBaseLink = (loc: string) => `<url><loc>${loc}</loc></url>`
-	const getBaseLayout = () =>
-		`<?xml version="1.0" encoding="UTF-8"?> 
-			<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"> 
-			${JSON.stringify(mas.map(value => getBaseLink(siteUrl + value)))
-		}
-			</urlset>`
-	console.log(getBaseLayout())
+export function validURL(str: string) {
+	const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+		'((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+		'(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+		'(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
+	return !!pattern.test(str)
 }
-
