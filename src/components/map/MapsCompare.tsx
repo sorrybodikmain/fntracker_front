@@ -6,13 +6,12 @@ import { generatePathToMapImg } from '@/utils/api.utils'
 import { useTranslation } from 'react-i18next'
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider'
 
-const MapContent: FC = () => {
+const MapsCompare: FC = () => {
 	const { data } = useSWR<MapsResponse>('https://fortniteapi.io/v1/maps/list', fetcher)
 	const { t } = useTranslation('compare-maps')
 	const [leftMapId, setLeftMapId] = useState<string>('23.00')
 	const [rightMapId, setRightMapId] = useState<string>('23.30')
 	const [enablePOI, setEnablePOI] = useState<boolean>(false)
-
 
 	const preloadMaps = async (ids: string[]) =>
 		ids.map(id => new Image().src = generatePathToMapImg(id, !enablePOI))
@@ -84,4 +83,4 @@ const MapContent: FC = () => {
 	)
 }
 
-export default MapContent
+export default MapsCompare

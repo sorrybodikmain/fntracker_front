@@ -72,7 +72,9 @@ export const authSlice = createSlice({
 				state.accessToken = ''
 			})
 			.addCase(logout.pending, state => {
-				state.isLoading = true
+				state.isLoading = false
+				state.user = undefined
+				state.accessToken = ''
 			})
 			.addCase(logout.fulfilled, state => {
 				state.isLoading = false

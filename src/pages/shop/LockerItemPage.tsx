@@ -8,6 +8,7 @@ import ItemDataTable from '@/components/locker/ItemDataTable'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ShopItemResponse } from '@/types/shop.type'
 import AppHelmet from '@/components/AppHelmet'
+import LockerGallery from '@/components/locker/gallery/LockerGallery'
 
 const LockerItemPage: FC = () => {
 	const { id } = useParams()
@@ -25,10 +26,12 @@ const LockerItemPage: FC = () => {
 				img={data?.item?.images.background}
 			/>
 			<div>
-				<div className='container text-white mx-auto p-3 min-h-[81.1vh]'>
+				<div className='container text-white mx-auto p-3 min-h-screen'>
 					{data ?
 						<>
 							<AboutItemCard data={data!} />
+							{data.item.displayAssets.length > 1 &&
+								<LockerGallery data={data.item.displayAssets} />}
 							{data?.item.shopHistory &&
 								<ItemDataTable data={data} />}
 						</>

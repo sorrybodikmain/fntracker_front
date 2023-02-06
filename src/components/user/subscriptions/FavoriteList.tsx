@@ -5,6 +5,7 @@ import { Subscription } from '@/types/subscription.type'
 import { useLazyGetAllSubscriptionsQuery } from '@/store/api/subscribe.api'
 import { unSubscribeItem } from '@/store/auth/auth.slice'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
+import Preloader from '@/components/Preloader'
 
 const FavoriteList: FC = () => {
 	const { t } = useTranslation('user-profile')
@@ -25,17 +26,21 @@ const FavoriteList: FC = () => {
 
 	return (
 		<section id='mini-shop'>
-			<div className='p-6 text-white w-full min-h-[81.1vh] mx-auto container'>
+			<div className='p-6 text-white w-full min-h-screen mx-auto container'>
 				<h2 className='border-l-4 border-primary text-lg pl-2'>{t('favorite_title')}</h2>
-				<div
-					className='mt-6 grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:rid-cols-6 lg:gap-6'>
-					{data ?
-						data.map((item, index) => (
-							<FavoriteItem key={index} subscription={item} deleteItem={deleteItem} />
-						)) :
-						<p className='text-red-500 text-center '>Items not found</p>
-					}
-				</div>
+				{data ?
+					<div
+						className='mt-6 grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:rid-cols-6 lg:gap-6'>
+						{data &&
+							data.map((item, index) => (
+								<FavoriteItem key={index} subscription={item} deleteItem={deleteItem} />
+							))
+						}
+					</div> :
+					<Preloader />
+				}
+
+
 			</div>
 		</section>
 	)

@@ -29,12 +29,14 @@ type GrantedItem = {
 	rarity: ItemRarity
 	images: ItemImages
 }
-type SectionImages = {
-	displayAsset: string
-	materialInstance: string
-	url: string
-	background: string
-	full_background: string
+export type SectionImages = {
+	displayAsset: string;
+	materialInstance: string;
+	url: string;
+	flipbook?: any;
+	background_texture?: any;
+	background: string;
+	full_background: string;
 }
 export type ShopItemResponse = {
 	result: boolean

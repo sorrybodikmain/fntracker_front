@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { useTranslation } from 'react-i18next'
-import {  useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
 import { toast } from 'react-toastify'
 import { useAuth } from '@/hooks/useAuth'
@@ -57,7 +57,8 @@ const AboutItemCard: FC<PropsWithChildren<
 		}
 	}
 
-	return (<div>
+	return (
+		<>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>
 				{t('card_title').toUpperCase()}
 			</h2>
@@ -106,7 +107,7 @@ const AboutItemCard: FC<PropsWithChildren<
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 
