@@ -55,7 +55,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				<Link to={'/locker/' + data.mainId}>
 					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'>
 						<img
-							src={fixImageWidth(data?.displayAssets[0]?.background , 250)}
+							src={fixImageWidth(data?.displayAssets[0]?.background , 400)}
 							alt={data.mainId}
 							className='mx-auto block'
 							loading={'lazy'}

@@ -26,3 +26,16 @@ export function validURL(str: string) {
 		'(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
 	return !!pattern.test(str)
 }
+export const generateLockerSiteMap = (mas =
+																				['432423', '432432423', '432423']
+) => {
+	const siteUrl = 'https://fntracker.pp.ua/locker/'
+	const getBaseLink = (loc: string) =>
+		`<url>
+		<lastmod>${new Date().toLocaleDateString()}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+		<loc>${loc}</loc>
+		</url>`
+	console.log(JSON.stringify(mas.map(value => getBaseLink(siteUrl + value))))
+}
