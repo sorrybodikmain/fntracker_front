@@ -32,12 +32,10 @@ const MapsCompare: FC = () => {
 						className='rounded-xl w-full'
 						itemOne={
 							<ReactCompareSliderImage src={generatePathToMapImg(leftMapId, enablePOI)}
-																			 srcSet={generatePathToMapImg(leftMapId, enablePOI)}
 																			 alt={`map-${leftMapId}`}
 							/>}
 						itemTwo={
 							<ReactCompareSliderImage src={generatePathToMapImg(rightMapId, enablePOI)}
-																			 srcSet={generatePathToMapImg(rightMapId, enablePOI)}
 																			 alt={`map-${rightMapId}`}
 
 							/>}

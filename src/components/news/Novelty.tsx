@@ -4,11 +4,11 @@ import { fixImageWidth } from '@/utils/api.utils'
 
 const Novelty: FC<PropsWithChildren<{ data: INovelty }>> = ({ data }) => {
 	return (
-		<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition-all'>
+		<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 			<div className='relative bg-cover w-full md:w-4/12 mx-auto mb-3 sm:mb-0'>
 				<img
 					src={fixImageWidth(data.image, 360)}
-					alt={'post-image'}
+					alt='post-image'
 					className='object-cover w-full h-full rounded-lg'
 				/>
 			</div>

@@ -5,7 +5,7 @@ import { Subscription } from '@/types/subscription.type'
 import { useLazyGetAllSubscriptionsQuery } from '@/store/api/subscribe.api'
 import { unSubscribeItem } from '@/store/auth/auth.slice'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
-import Preloader from '@/components/Preloader'
+import Preloader from '@/components/preloaders/Preloader'
 
 const FavoriteList: FC = () => {
 	const { t } = useTranslation('user-profile')
