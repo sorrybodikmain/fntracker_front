@@ -10,6 +10,7 @@ import AppHelmet from '@/components/AppHelmet'
 import Preloader from '@/components/preloaders/Preloader'
 
 const ShopPage: FC = () => {
+
 	const { t } = useTranslation('shop')
 	const { data, isLoading } = useSWR<ShopTodayResponse>(
 		`https://fortniteapi.io/v2/shop?lang=${i18next.language}`,
@@ -30,7 +31,7 @@ const ShopPage: FC = () => {
 				<ShopBanner />
 				<div className='container mx-auto text-white p-3 min-h-screen'>
 					{sections?.map(item => (
-						<ShopSection key={item} data={data!} sectionId={item} />
+						<ShopSection key={item} items={data!.shop} sectionId={item} />
 					))}
 				</div>
 
