@@ -2,6 +2,7 @@ import { FC, PropsWithChildren } from 'react'
 import { BsFillEyeFill, BsInstagram, BsTelegram, BsTwitch, BsTwitter, BsYoutube } from 'react-icons/bs'
 import { useTranslation } from 'react-i18next'
 import { ProfileType } from '@/types/profile.type'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 
 interface IProfileCardProps {
@@ -29,12 +30,12 @@ const ProfileCard: FC<
 				className='flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gradient-to-r from-purple-900 to-cyan-900'>
 				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className='relative bg-cover'>
-						<img
+						<LazyLoadImage
 							src={`/images/flags/${profileData?.country || 'ua'}.svg`}
 							alt={'country-image'}
 							className='rounded w-10 absolute bottom-0 left-0'
 						/>
-						<img
+						<LazyLoadImage
 							src={profileData?.avatar || '/images/default-avatar.webp'}
 							alt={'avatar-image'}
 							className='object-cover rounded-full w-32 h-32'

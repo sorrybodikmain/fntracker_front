@@ -28,7 +28,7 @@ const Header: FC = () => {
 					<div className='container mx-auto'>
 						<nav className='flex justify-between'>
 							<div className='flex items-center space-x-3 lg:pr-16 pr-6'>
-								<Link to={'/'} className='text-white text-base'>
+								<Link to='/' className='text-white text-base'>
 									FNTracker
 								</Link>
 							</div>
