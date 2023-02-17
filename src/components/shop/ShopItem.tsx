@@ -10,6 +10,7 @@ import { ItemShop } from '@/types/shop.type'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
 import { fixImageWidth } from '@/utils/api.utils'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { t } = useTranslation('shop')
@@ -17,6 +18,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const [like, setLike] = useState<boolean>(
 		user?.subscriptions?.some(p => p.shopItemId === data.mainId)
 		|| false)
+	const [imgLoaded, setImgLoaded] = useState<boolean>(false)
 	const navigate = useNavigate()
 	const [subscribe] = useItemSubscribeMutation()
 	const [unSubscribe] = useItemUnsubscribeMutation()
@@ -48,17 +50,18 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 		}
 	}
 
-
 	return (
 		<div>
 			<div className='relative overflow-hidden rounded-lg hover:scale-[1.02] transition'>
 				<Link to={'/locker/' + data.mainId}>
 					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'>
-						<img
-							src={fixImageWidth(data?.displayAssets[0]?.background , 400)}
+						<LazyLoadImage
+							src={fixImageWidth(data?.displayAssets[0]?.background, 400)}
 							alt={data.mainId}
-							className='mx-auto block'
-							loading={'lazy'}
+							className={`mx-auto block ${!imgLoaded && 'animate-pulse blur-sm bg-gray-600 transition-all'}`}
+							onLoad={() => setImgLoaded(true)}
+							loading='lazy'
+							decoding='async'
 						/>
 					</div>
 				</Link>
@@ -70,7 +73,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 					<h1 className='text-center text-gray-100'>{data.displayName}</h1>
 					<p className=' text-gray-400 flex justify-center'>{data.price.finalPrice}
 						<img
-							src={'/images/v-bucks.webp'}
+							src='/images/v-bucks.webp'
 							className='h-5'
 							alt='v-bucks icon'
 						/>

@@ -7,7 +7,7 @@ import { fetcher } from '@/libs/apiFetcher'
 import { ShopTodayResponse } from '@/types/shop.type'
 import { useTranslation } from 'react-i18next'
 import AppHelmet from '@/components/AppHelmet'
-import Preloader from '@/components/Preloader'
+import Preloader from '@/components/preloaders/Preloader'
 
 const ShopPage: FC = () => {
 	const { t } = useTranslation('shop')

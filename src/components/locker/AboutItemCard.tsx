@@ -85,7 +85,7 @@ const AboutItemCard: FC<PropsWithChildren<
 					</p>
 					<p className='text-md'>{data?.item.description}</p>
 					<p className='text-sm'>
-						{Math.floor(100 * data!.item.interest) + t('card_interested')}
+						{Math.floor(100 * data!.item.interest) + ' ' + t('card_interested')}
 					</p>
 					<div className='items-end bottom-0 relative lg:absolute mt-2'>
 
