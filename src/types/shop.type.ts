@@ -38,6 +38,14 @@ export type SectionImages = {
 	background: string;
 	full_background: string;
 }
+
+
+export interface IUpcomingItemsResponse {
+	result: boolean;
+	lastUpdate: ShopLastUpdate
+	items: ItemShop[]
+}
+
 export type ShopItemResponse = {
 	result: boolean
 	item: {
@@ -70,21 +78,18 @@ export type ShopItemResponse = {
 			}
 			battlePassName: string
 		}
-		images: {
-			icon: string
-			featured: string
-			background: string
-			icon_background: string
-			full_background: string
-		}
+		images: ItemImages
 	}
 }
 export type ItemShop = {
+	id: string
 	mainId: string
 	displayName: string
 	displayDescription: string
 	displayType: string
 	mainType: string
+	name: string
+	images: ItemImages
 	displayAssets: SectionImages[]
 	firstReleaseDate: string
 	previousReleaseDate: string

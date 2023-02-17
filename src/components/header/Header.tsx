@@ -4,6 +4,7 @@ import LangSwitcher from './LangSwitcher'
 import MobNav from './MobNav'
 import Profile from './Profile'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router'
 
 const Header: FC = () => {
 	const { t } = useTranslation('header')
@@ -17,10 +18,15 @@ const Header: FC = () => {
 			href: '/shop'
 		},
 		{
+			name: t('upcoming_title'),
+			href: '/upcoming-items/'
+		},
+		{
 			name: t('maps_link'),
 			href: '/compare-maps'
 		}
 	]
+	const location = useLocation()
 	return (
 		<>
 			<section id='header'>
@@ -37,7 +43,11 @@ const Header: FC = () => {
 									<li key={index}>
 										<Link
 											to={router.href}
-											className='block text-gray-500 hover:text-gray-300 py-1 md:mx-1'
+											className={
+												`block text-gray-500 hover:text-gray-300 py-1 md:mx-1 ${
+													location.pathname === router.href ? 'underline' : ''
+												}`
+											}
 										>
 											{router.name}
 										</Link>

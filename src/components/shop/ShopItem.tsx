@@ -18,7 +18,11 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const [like, setLike] = useState<boolean>(
 		user?.subscriptions?.some(p => p.shopItemId === data.mainId)
 		|| false)
-	const [currentImg, setCurrentImg] = useState<string>(fixImageWidth(data?.displayAssets[0]?.background, 400))
+	const [currentImg, setCurrentImg] = useState<string>(fixImageWidth(
+		(data.displayAssets ?
+			data.displayAssets[0].background :
+			data.images.background)
+		, 400))
 	const [imgLoaded, setImgLoaded] = useState<boolean>(false)
 	const onLoad = () => setTimeout(() => setImgLoaded(true), 100)
 
@@ -54,16 +58,18 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	}
 
 	const mouseEnter = () => {
-		if (data.displayAssets.length > 1)
+		if (data.displayAssets && data.displayAssets.length > 1)
 			setCurrentImg(fixImageWidth(data?.displayAssets[1]?.background, 400))
 	}
-	const mouseLeave = () =>
-		setCurrentImg(fixImageWidth(data?.displayAssets[0]?.background, 400))
+	const mouseLeave = () =>{
+		if (data.displayAssets)
+			setCurrentImg(fixImageWidth(data?.displayAssets[0]?.background, 400))
+	}
 
 	return (
 		<div>
 			<div className='relative overflow-hidden rounded-lg hover:scale-[1.02] transition'>
-				<Link to={'/locker/' + data.mainId}>
+				<Link to={'/locker/' + (data.mainId || data.id)}>
 					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'
 							 onMouseEnter={mouseEnter}
 							 onMouseLeave={mouseLeave}
@@ -83,8 +89,8 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 					{like ? <AiFillHeart /> : <AiOutlineHeart />}
 				</div>
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
-					<h1 className='text-center text-gray-100'>{data.displayName}</h1>
-					<p className=' text-gray-400 flex justify-center'>{data.price.finalPrice}
+					<h1 className='text-center text-gray-100'>{data.displayName || data.name}</h1>
+					<p className=' text-gray-400 flex justify-center'>{data.price.finalPrice || 0}
 						<LazyLoadImage
 							src='/images/v-bucks.webp'
 							className='h-5'

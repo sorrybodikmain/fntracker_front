@@ -11,14 +11,16 @@ import RegisterPage from '../pages/user/RegisterPage'
 import LoginPage from '../pages/user/LoginPage'
 import RecoveryPage from '../pages/user/RecoveryPage'
 import MapComparePage from '../pages/maps/MapComparePage'
+import UpcomingItemsPage from '../pages/shop/UpcomingItemsPage'
+import NotFoundPage from '../pages/NotFoundPage'
 
 const AppRouter: FC = () => {
-
 	return (
 		<Routes>
 			<Route path='/' element={<HomePage />} />
 			<Route path='locker/:id' element={<LockerItemPage />} />
 			<Route path='stats/:nickname' element={<StatsPage />} />
+			<Route path='upcoming-items/' element={<UpcomingItemsPage />} />
 			<Route path='shop/' element={<ShopPage />} />
 			<Route path='compare-maps' element={<MapComparePage />} />
 			<Route path='/user/activate' element={<ActivationPage />} />
@@ -27,6 +29,7 @@ const AppRouter: FC = () => {
 			<Route path='/user/recovery' element={<RecoveryPage />} />
 			<Route path='/user/profile' element={<ProfilePage />} />
 			<Route path='/user/favorite' element={<SubscriptionPage />} />
+			<Route path='*' element={<NotFoundPage />} />
 		</Routes>
 
 	)
