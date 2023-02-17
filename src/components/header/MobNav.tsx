@@ -12,7 +12,7 @@ const MobNav: FC<{ routes: Route[] }> = ({ routes }) => {
 	return (
 		<>
 			<Popover>
-				<Popover.Button className='py-2 md:hidden'>
+				<Popover.Button className='py-2 md:hidden outline-none'>
 					<VscListFlat />
 				</Popover.Button>
 				<Popover.Panel className='fixed z-10 bg-gray-800 px-2 py-2 rounded-lg -mx-10'>

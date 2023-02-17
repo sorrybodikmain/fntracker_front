@@ -16,7 +16,7 @@ const Profile: FC = () => {
 	return (
 		<>
 			<Popover>
-				<Popover.Button className='py-2' >
+				<Popover.Button className='py-2 outline-none'>
 					<VscAccount />
 				</Popover.Button>
 				<Popover.Panel className='fixed z-50 bg-gray-800 px-2 py-2 rounded-lg -mx-20'>

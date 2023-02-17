@@ -9,6 +9,10 @@ import { ShopItemResponse } from '@/types/shop.type'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
 import { fixImageWidth } from '@/utils/api.utils'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
+import styles from '@/styles/Zoom.module.css'
+import Zoom from 'react-medium-image-zoom'
 
 interface IAboutItemCardProps {
 	data: ShopItemResponse
@@ -19,7 +23,7 @@ const AboutItemCard: FC<PropsWithChildren<
 >> = ({ data }) => {
 
 	const { t } = useTranslation('locker')
-	const { user } = useAuth()
+	const { user, accessToken } = useAuth()
 	const [like, setLike] = useState<boolean>(
 		user?.subscriptions?.some(p => p.shopItemId === data.item.id)
 		|| false
@@ -27,12 +31,15 @@ const AboutItemCard: FC<PropsWithChildren<
 
 	const navigate = useNavigate()
 
+	const [imgLoaded, setImgLoaded] = useState<boolean>(false)
+	const onLoad = () => setTimeout(() => setImgLoaded(true), 100)
+
 	const [subscribe] = useItemSubscribeMutation()
 	const [unSubscribe] = useItemUnsubscribeMutation()
 	const dispatch = useAppDispatch()
 	const handleLike = async () => {
-		if (user) {
-			if (user.isVerified) {
+		if (accessToken) {
+			if (user?.isVerified) {
 				if (like) {
 					await unSubscribe(data.item.id).then(() => {
 						dispatch(unSubscribeItem(data.item.id))
@@ -57,6 +64,7 @@ const AboutItemCard: FC<PropsWithChildren<
 		}
 	}
 
+
 	return (
 		<>
 			<h2 className='border-l-4 border-primary pl-2 mb-4'>
@@ -65,13 +73,18 @@ const AboutItemCard: FC<PropsWithChildren<
 			<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className='relative bg-cover shadow-lg'>
-						<img
-							src={fixImageWidth(data?.item.images.background, 500) || '/images/preloader.gif'}
-							alt={'shop-item-image'}
-							className='object-cover w-full rounded-lg'
-						/>
+						<Zoom classDialog={styles.zoom}>
+							<LazyLoadImage
+								src={fixImageWidth(data?.item.images.background, 500)}
+								alt={data.item.id}
+								className={`object-cover w-full rounded-lg ${!imgLoaded && 'animate-pulse blur-sm bg-gray-600 transition-all'}`}
+								onLoad={onLoad}
+								loading='eager'
+								decoding='async'
+							/>
+						</Zoom>
 					</div>
-				</div>
+					</div>
 
 				<div className='relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
 					<h5 className='text-2xl mb-1 text-white flex'>

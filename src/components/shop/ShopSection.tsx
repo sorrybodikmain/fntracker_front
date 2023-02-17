@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren} from 'react'
 import ShopItem from './ShopItem'
 import { ShopTodayResponse } from '@/types/shop.type'
 

@@ -9,6 +9,7 @@ import { useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
 import { toast } from 'react-toastify'
 import i18next from 'i18next'
 import useSWR from 'swr'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 interface IFavoriteItemProps {
 	subscription: Subscription,
@@ -42,7 +43,7 @@ const FavoriteItem: FC<PropsWithChildren<
 			<div className='relative overflow-hidden rounded-lg hover:scale-105 transition'>
 				<div className='relative w-full h-44 sm:h-48 md:h-56 object-cover'>
 					<Link to={'/locker/' + data?.item.id}>
-						<img
+						<LazyLoadImage
 							src={data?.item.images.background || '/images/preloader.gif'}
 							alt={data?.item.id}
 						/>
@@ -54,11 +55,11 @@ const FavoriteItem: FC<PropsWithChildren<
 				</div>
 
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
-					<h1 className='text-center text-gray-100'>{data?.item.name}</h1>
+					<h1 className='text-center text-gray-100'>{data?.item.name || 'Loading...'}</h1>
 					<p className=' text-gray-400 flex justify-center'>
-						{data?.item.price}
-						<img
-							src={'/images/v-bucks.webp'}
+						{data?.item.price || 'Loading...'}
+						<LazyLoadImage
+							src='/images/v-bucks.webp'
 							className='h-5'
 							alt='v-bucks icon'
 						/>
