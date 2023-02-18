@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import useSWR from 'swr'
 import { defaultFetcher, fetcher, patchFetcher } from '@/libs/apiFetcher'
 import ProfileCard from '@/components/stats/ProfileCard'
 import ModesStats from '@/components/stats/ModesStats'
 import EventsStats from '@/components/stats/EventsStats'
 import SeasonStats from '@/components/stats/SeasonStats'
 import NotFountError from '@/components/stats/NotFountError'
-import useSWR from 'swr'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ProfileResponse } from '@/types/profile.type'
 import { AccountIdStr, AccountStatsResponse, PrResponse } from '@/types/user-stats.type'
@@ -49,8 +49,10 @@ const StatsPage: FC = () => {
 						<NotFountError /> :
 						<>
 							{profileData.data && data ?
-								<ProfileCard profileData={profileData.data.profile!} nickname={nickname!}
-														 views={profileData.data.viewsCount} />
+								<ProfileCard
+									profileData={profileData.data.profile!}
+									nickname={nickname!}
+									views={profileData.data.viewsCount} />
 								: <SkeletonCard />
 							}
 							{data ? <EventsStats data={pr?.data?.data} /> : <SkeletonCard />}

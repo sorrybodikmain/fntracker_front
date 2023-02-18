@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import HomePage from '../pages/home/HomePage'
-import LockerItemPage from '../pages/shop/LockerItemPage'
+import ItemPage from '../pages/shop/ItemPage'
 import StatsPage from '../pages/stats/StatsPage'
 import ShopPage from '../pages/shop/ShopPage'
 import ProfilePage from '../pages/user/ProfilePage'
@@ -13,12 +12,13 @@ import RecoveryPage from '../pages/user/RecoveryPage'
 import MapComparePage from '../pages/maps/MapComparePage'
 import UpcomingItemsPage from '../pages/shop/UpcomingItemsPage'
 import NotFoundPage from '../pages/NotFoundPage'
+import HomePage from '../pages/home/HomePage'
 
 const AppRouter: FC = () => {
 	return (
 		<Routes>
 			<Route path='/' element={<HomePage />} />
-			<Route path='locker/:id' element={<LockerItemPage />} />
+			<Route path='locker/:id' element={<ItemPage />} />
 			<Route path='stats/:nickname' element={<StatsPage />} />
 			<Route path='upcoming-items/' element={<UpcomingItemsPage />} />
 			<Route path='shop/' element={<ShopPage />} />

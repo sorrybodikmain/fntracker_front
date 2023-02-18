@@ -1,5 +1,10 @@
+
+export interface IStatsFilter {
+	region:string
+	platform:string
+}
 export type PrResponse = {
-	status: 200
+	status: number
 	data: PrStats
 }
 export type PrStats = {

@@ -15,7 +15,7 @@ const Search: FC = () => {
 	const debounced = useDebounce(nickname)
 	const navigate = useNavigate()
 	const handleSubmit = (e: any) => {
-		navigate('/stats/' + nickname)
+		navigate(`/stats/${nickname}`)
 		e.preventDefault()
 	}
 
@@ -37,14 +37,12 @@ const Search: FC = () => {
 		<div
 			className='flex items-center justify-center'
 		>
-			<div className='relative  text-sm'>
+			<div className='relative text-sm'>
 				<form onSubmit={handleSubmit}>
 					<input
 						type={'search'}
 						value={nickname}
-						onChange={e => {
-							setNickname(e.target.value)
-						}}
+						onChange={e => setNickname(e.target.value)}
 						placeholder={t('seach_input')!}
 						className='w-full sm:w-80 h-9 bg-gray-800 rounded-lg p-2 hover:scale-105 transition'
 					/>
@@ -59,7 +57,7 @@ const Search: FC = () => {
 									<Link to={'stats/' + item.matches[0].value}>
 										{item.matches[0].value}
 									</Link>
-									<p className={'text-gray-400'}>{item.matches[0].platform}</p>
+									<p className='text-gray-400'>{item.matches[0].platform}</p>
 								</li>
 							))}
 						</ul>

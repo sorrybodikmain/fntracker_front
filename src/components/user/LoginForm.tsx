@@ -17,12 +17,12 @@ const LoginForm: FC = () => {
 	const { accessToken } = useAuth()
 
 	if (accessToken)
-		return <Navigate to={'/user/profile'}/>
+		return <Navigate to='/user/profile'/>
 
 	const handleLogin = async (e: any) => {
 		e.preventDefault()
 		try {
-			login({ email, password })
+			await login({ email, password })
 			if (accessToken) {
 				toast.success(t('succ_login'))
 			}

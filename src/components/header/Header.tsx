@@ -44,8 +44,9 @@ const Header: FC = () => {
 										<Link
 											to={router.href}
 											className={
-												`block text-gray-500 hover:text-gray-300 py-1 md:mx-1 ${
-													location.pathname === router.href ? 'underline' : ''
+												`block hover:text-gray-300 py-1 md:mx-1 ${
+													location.pathname === router.href ? 'underline text-gray-200'
+														: 'text-gray-500'
 												}`
 											}
 										>
