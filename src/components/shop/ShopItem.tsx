@@ -89,7 +89,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 					{like ? <AiFillHeart /> : <AiOutlineHeart />}
 				</div>
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
-					<h1 className='text-center text-gray-100'>{data.displayName || data.name}</h1>
+					<h1 className='text-center text-gray-100 px-1'>{data.displayName || data.name}</h1>
 					<p className=' text-gray-400 flex justify-center'>{data.price.finalPrice || 0}
 						<LazyLoadImage
 							src='/images/v-bucks.webp'

@@ -5,47 +5,50 @@ import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
 import AboutItemCard from '@/components/locker/AboutItemCard'
 import ItemDataTable from '@/components/locker/ItemDataTable'
-import SkeletonCard from '@/components/stats/SkeletonCard'
 import { ShopItemResponse } from '@/types/shop.type'
 import AppHelmet from '@/components/AppHelmet'
 import LockerGallery from '@/components/locker/gallery/LockerGallery'
+import { Navigate } from 'react-router'
+import SkeletonCard from '@/components/stats/SkeletonCard'
 
-const LockerItemPage: FC = () => {
+const ItemPage: FC = () => {
 	const { id } = useParams()
-	const { data } = useSWR<ShopItemResponse>(
+	const { data, isLoading } = useSWR<ShopItemResponse>(
 		`https://fortniteapi.io/v2/items/get?id=${id}&lang=${i18next.language}`,
 		fetcher
 	)
 	scroll(0, 0)
+	if (isLoading)
+		return <>
+			<SkeletonCard />
+			<SkeletonCard />
+			<SkeletonCard />
+		</>
 
 	return (
 		<>
 			<AppHelmet
 				title={data?.item?.name || 'Locker'}
-				desc={data?.item.description}
-				img={data?.item?.images.background}
+				desc={data?.item?.description}
+				img={data?.item?.images?.background}
 			/>
 			<div>
 				<div className='container text-white mx-auto p-3 min-h-screen'>
-					{data ?
-						<>
-							<AboutItemCard data={data!} />
-							{data.item.displayAssets.length > 1 &&
-								<LockerGallery data={data.item.displayAssets} />}
-							{data?.item.shopHistory &&
-								<ItemDataTable data={data} />}
-						</>
-						:
-						<>
-							<SkeletonCard />
-							<SkeletonCard />
-							<SkeletonCard />
-						</>
-					}
+					<>
+						{data?.result ? <>
+								<AboutItemCard data={data!} />
+								{data!.item.displayAssets.length > 1 &&
+									<LockerGallery data={data!.item.displayAssets} />}
+								{data?.item.shopHistory && <ItemDataTable data={data} />}
+							</>
+							:
+							<Navigate to='/404' />
+						}
+					</>
 				</div>
 			</div>
 		</>
 	)
 }
 
-export default LockerItemPage
+export default ItemPage

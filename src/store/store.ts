@@ -3,8 +3,8 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import storage from 'redux-persist/lib/storage'
 
 import { api } from '@/store/api/api'
-import { rtkQueryErrorLogger } from '@/store/middlewares/error-middleware'
 import { rootReducer } from '@/store/root-reducer'
+import { rtkQueryErrorLogger } from '@/store/middlewares/error-middleware'
 
 const persistConfig = {
 	key: 'root',

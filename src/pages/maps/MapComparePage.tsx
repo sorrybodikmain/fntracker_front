@@ -9,7 +9,7 @@ const MapComparePage: FC = () => {
 		<>
 			<AppHelmet title={t('pageTitle')}
 								 desc={t('pageDesc')!}
-								 img={'https://media.fortniteapi.io/images/maps/map-23.30.png?width=800'}
+								 img='https://media.fortniteapi.io/images/maps/map-23.30.png?width=800'
 			/>
 			<MapsCompare />
 		</>

@@ -20,7 +20,7 @@ const ShopSection: FC<
 				sectionName ||
 				items.find(item => item.section.id === sectionId)?.section.name
 			}</h2>
-			<div className='grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:rid-cols-6 lg:gap-6'>
+			<div className='grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-6'>
 				{sectionId?
 					items
 					.filter(item => item.section.id === sectionId)
