@@ -22,6 +22,10 @@ const Header: FC = () => {
 			href: '/upcoming-items/'
 		},
 		{
+			name: t('allitems_title'),
+			href: '/all-items/'
+		},
+		{
 			name: t('maps_link'),
 			href: '/compare-maps'
 		}

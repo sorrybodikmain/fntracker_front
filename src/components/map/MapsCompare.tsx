@@ -25,9 +25,9 @@ const MapsCompare: FC = () => {
 		<section id='map-images'>
 			<div className='container mx-auto text-white py-3 min-h-screen'>
 				<div className='mx-auto rounded-xl relative max-w-3xl'>
-					<h2 className='border-l-4 border-primary pl-2 mb-4'>
+					<h1 className='border-l-4 border-primary pl-2 mb-4'>
 						{t('pageTitle')}
-					</h2>
+					</h1>
 					<ReactCompareSlider
 						className='rounded-xl w-full'
 						itemOne={

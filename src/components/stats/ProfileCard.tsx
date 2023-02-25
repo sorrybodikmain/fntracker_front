@@ -23,9 +23,9 @@ const ProfileCard: FC<
 
 	return (
 		<div className='container text-white mx-auto p-3'>
-			<h2 className='border-l-4 border-primary pl-2 mb-4'>
+			<h1 className='border-l-4 border-primary pl-2 mb-4'>
 				{t('profile_card_title').toUpperCase()}
-			</h2>
+			</h1>
 			<div
 				className='flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gradient-to-r from-purple-900 to-cyan-900'>
 				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
@@ -44,10 +44,10 @@ const ProfileCard: FC<
 				</div>
 
 				<div className='relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
-					<h2 className='text-2xl mb-1 text-white gap-x-2 flex'>
+					<h1 className='text-2xl mb-1 text-white gap-x-2 flex'>
 						{nickname || 'Your nickname'}
 						<p className='text-sm mt-3'>{profileData?.fullName || ''}</p>
-					</h2>
+					</h1>
 
 					{
 						profileData?.socialNetworks &&

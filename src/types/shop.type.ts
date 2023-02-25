@@ -46,6 +46,11 @@ export interface IUpcomingItemsResponse {
 	items: ItemShop[]
 }
 
+interface IItemIntroduction {
+	chapter: string;
+	season: string;
+	text: string;
+}
 export type ShopItemResponse = {
 	result: boolean
 	item: {
@@ -63,6 +68,7 @@ export type ShopItemResponse = {
 		reactive: boolean
 		releaseDate: string
 		lastAppearance: string
+		introduction: IItemIntroduction;
 		interest: number
 		displayAssets: [SectionImages]
 		shopHistory: string[]
@@ -107,6 +113,11 @@ export type ItemShop = {
 	groupIndex: number
 	storeName: string
 	tileSize: string
+}
+export type AllItemsResponse = {
+	status: number
+	pages: number
+	items: ItemShop[]
 }
 export type ShopTodayResponse = {
 	result: boolean

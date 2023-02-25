@@ -67,9 +67,9 @@ const AboutItemCard: FC<PropsWithChildren<
 
 	return (
 		<>
-			<h2 className='border-l-4 border-primary pl-2 mb-4'>
+			<h1 className='border-l-4 border-primary pl-2 mb-4'>
 				{t('card_title').toUpperCase()}
-			</h2>
+			</h1>
 			<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className='relative bg-cover shadow-lg'>
@@ -115,7 +115,6 @@ const AboutItemCard: FC<PropsWithChildren<
 										{t('card_sold') + ' ' + data?.item.price} V-bucks.
 									</h4>
 								</>
-
 						}
 					</div>
 				</div>

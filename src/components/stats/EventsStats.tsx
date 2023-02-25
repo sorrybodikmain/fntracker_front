@@ -15,9 +15,9 @@ const EventsStats: FC<PropsWithChildren<
 	console.log('fdgfdfdgfdgdf', data)
 	return (
 		<div className='container text-white mx-auto p-3'>
-			<h2 className='border-l-4 border-primary pl-2 mb-4'>
+			<h1 className='border-l-4 border-primary pl-2 mb-4'>
 				{t('events_title').toUpperCase()}
-			</h2>
+			</h1>
 			<div className='flex bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 				<div className='relative w-full px-1 mb-4 md:mb-0 mr-auto text-gray-500'>
 					<div className='grid grid-cols-2 gap-2'>

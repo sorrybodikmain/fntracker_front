@@ -13,6 +13,7 @@ import MapComparePage from '../pages/maps/MapComparePage'
 import UpcomingItemsPage from '../pages/shop/UpcomingItemsPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import HomePage from '../pages/home/HomePage'
+import AllItemsPage from '../pages/shop/AllItemsPage'
 
 const AppRouter: FC = () => {
 	return (
@@ -20,8 +21,9 @@ const AppRouter: FC = () => {
 			<Route path='/' element={<HomePage />} />
 			<Route path='locker/:id' element={<ItemPage />} />
 			<Route path='stats/:nickname' element={<StatsPage />} />
-			<Route path='upcoming-items/' element={<UpcomingItemsPage />} />
 			<Route path='shop/' element={<ShopPage />} />
+			<Route path='upcoming-items/' element={<UpcomingItemsPage />} />
+			<Route path='all-items/' element={<AllItemsPage />} />
 			<Route path='compare-maps' element={<MapComparePage />} />
 			<Route path='/user/activate' element={<ActivationPage />} />
 			<Route path='/user/register' element={<RegisterPage />} />

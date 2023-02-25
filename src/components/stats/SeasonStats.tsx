@@ -7,9 +7,9 @@ const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ da
 	const { t } = useTranslation('stats')
 	return (
 		<div className='container text-white mx-auto p-3'>
-			<h2 className='border-l-4 border-primary pl-2 mb-4'>
+			<h1 className='border-l-4 border-primary pl-2 mb-4'>
 				{t('seasons_title').toUpperCase()}
-			</h2>
+			</h1>
 			<div className='bg-gray-600 rounded-lg p-3 transition hover:scale-[1.01] h-96'>
 				<ResponsiveContainer width='100%' height='100%' className='-ml-4'>
 					<LineChart data={data.accountLevelHistory}>

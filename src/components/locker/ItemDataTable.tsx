@@ -10,9 +10,9 @@ const ItemDataTable: FC<PropsWithChildren<IItemDataTableProps>> = ({ data }) => 
 	const { t } = useTranslation('locker')
 	return (
 		<div className='mb-4'>
-			<h2 className='border-l-4 border-primary pl-2 my-4'>
+			<h1 className='border-l-4 border-primary pl-2 my-4'>
 				{t('table_title').toUpperCase()}
-			</h2>
+			</h1>
 			<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 				<table className='w-full text-sm text-left'>
 					<thead className='text-xs uppercase text-gray-300'>

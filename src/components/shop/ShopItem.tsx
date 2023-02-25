@@ -6,23 +6,21 @@ import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '@/hooks/useAuth'
 import { useItemSubscribeMutation, useItemUnsubscribeMutation } from '@/store/api/subscribe.api'
-import { ItemShop } from '@/types/shop.type'
 import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
 import { useAppDispatch } from '@/hooks/useTypedSelector'
 import { fixImageWidth } from '@/utils/api.utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { ItemShop } from '@/types/shop.type'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { t } = useTranslation('shop')
 	const { user, accessToken } = useAuth()
-	const [like, setLike] = useState<boolean>(
-		user?.subscriptions?.some(p => p.shopItemId === data.mainId)
-		|| false)
-	const [currentImg, setCurrentImg] = useState<string>(fixImageWidth(
-		(data.displayAssets ?
-			data.displayAssets[0].background :
-			data.images.background)
-		, 400))
+	const itemId = data.mainId || data.id
+	const name = data.displayName || data.name
+	const itemImg = fixImageWidth((data.displayAssets ? data.displayAssets[0].background :
+		data.images.background), 400)
+	const hasLiked = user?.subscriptions?.some(p => p.shopItemId === itemId)
+	const [like, setLike] = useState<boolean>(hasLiked || false)
 	const [imgLoaded, setImgLoaded] = useState<boolean>(false)
 	const onLoad = () => setTimeout(() => setImgLoaded(true), 100)
 
@@ -34,17 +32,17 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 		if (accessToken) {
 			if (user?.isVerified) {
 				if (like) {
-					await unSubscribe(data.mainId).then(() => {
-						dispatch(unSubscribeItem(data.mainId))
+					await unSubscribe(itemId).then(() => {
+						dispatch(unSubscribeItem(itemId))
 						setLike(false)
-						toast.error(t('unlike_item', { name: data.displayName }))
+						toast.error(t('unlike_item', { name }))
 					})
 				} else {
-					await subscribe(data.mainId)
+					await subscribe(itemId)
 						.then(() => {
-							dispatch(subscribeItem(data.mainId))
+							dispatch(subscribeItem(itemId))
 							setLike(true)
-							toast.success(t('like_item', { name: data.displayName }))
+							toast.success(t('like_item', { name }))
 						})
 				}
 			} else
@@ -57,27 +55,18 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 		}
 	}
 
-	const mouseEnter = () => {
-		if (data.displayAssets && data.displayAssets.length > 1)
-			setCurrentImg(fixImageWidth(data?.displayAssets[1]?.background, 400))
-	}
-	const mouseLeave = () =>{
-		if (data.displayAssets)
-			setCurrentImg(fixImageWidth(data?.displayAssets[0]?.background, 400))
-	}
+
 
 	return (
 		<div>
 			<div className='relative overflow-hidden rounded-lg hover:scale-[1.02] transition'>
-				<Link to={'/locker/' + (data.mainId || data.id)}>
+				<Link to={'/locker/' + itemId}>
 					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'
-							 onMouseEnter={mouseEnter}
-							 onMouseLeave={mouseLeave}
 					>
 						<LazyLoadImage
-							src={currentImg}
-							alt={data.mainId}
-							className={`mx-auto block transition-all ${!imgLoaded && 'animate-pulse blur-sm bg-gray-600'}`}
+							src={itemImg}
+							alt={itemId}
+							className={`mx-auto hover:scale-[1.1] block transition-all ${!imgLoaded && 'animate-pulse blur-sm'}`}
 							onLoad={onLoad}
 							loading='lazy'
 							decoding='async'
@@ -89,8 +78,8 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 					{like ? <AiFillHeart /> : <AiOutlineHeart />}
 				</div>
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
-					<h1 className='text-center text-gray-100 px-1'>{data.displayName || data.name}</h1>
-					<p className=' text-gray-400 flex justify-center'>{data.price.finalPrice || 0}
+					<h1 className='text-center text-gray-100 px-1'>{name}</h1>
+					<p className=' text-gray-400 flex justify-center'>{data.price?.finalPrice || JSON.stringify(data.price) || 0}
 						<LazyLoadImage
 							src='/images/v-bucks.webp'
 							className='h-5'

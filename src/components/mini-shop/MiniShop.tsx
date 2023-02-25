@@ -20,7 +20,7 @@ const MiniShop: FC = () => {
 	return (
 		<section id='mini-shop'>
 			<div className='p-6 text-white w-full lg:w-96'>
-				<h2 className='border-l-4 border-primary pl-2'>{t('shop_title').toUpperCase()}</h2>
+				<h1 className='border-l-4 border-primary pl-2'>{t('shop_title').toUpperCase()}</h1>
 				<div
 					className='mt-4 grid-cols-2 grid-rows-3 gap-3 sm:gap-5 grid lg:grid-cols-2 lg:grid-rows-3 md:grid-rows-2 sm:grid-rows-2 sm:grid-cols-3'>
 					{data ?
