@@ -56,6 +56,7 @@ export type ShopItemResponse = {
 	item: {
 		id: string
 		type: ItemType
+		displayName: string
 		name: string
 		description: string
 		rarity: ItemRarity

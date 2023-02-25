@@ -23,29 +23,28 @@ const FavoriteItem: FC<PropsWithChildren<
 				deleteItem
 			}) => {
 
-
 	const { t } = useTranslation('user-profile')
+	const { data } = useSWR<ShopItemResponse>(
+		`https://fortniteapi.io/v2/items/get?id=${subscription.shopItemId}&lang=${i18next.language}`,
+		fetcher)
 	const [unSubscribe, { isSuccess }] = useItemUnsubscribeMutation()
-
+	const name = data?.item?.name || data?.item?.displayName || ''
 	const handleLike = async () => {
 		await unSubscribe(subscription.shopItemId)
 		if (isSuccess) {
 			deleteItem(subscription.shopItemId)
-			toast.success(t('unlike_item', { name: data?.item.name }))
-		}
+			toast.success(t('unlike_item', { name }))
 
+		}
 	}
-	const { data } = useSWR<ShopItemResponse>(
-		`https://fortniteapi.io/v2/items/get?id=${subscription.shopItemId}&lang=${i18next.language}`,
-		fetcher)
 	return (
 		<>
 			<div className='relative overflow-hidden rounded-lg hover:scale-105 transition'>
 				<div className='relative w-full h-44 sm:h-48 md:h-56 object-cover'>
-					<Link to={'/locker/' + data?.item.id}>
+					<Link to={'/locker/' + subscription.shopItemId}>
 						<LazyLoadImage
-							src={data?.item.images.background || '/images/preloader.gif'}
-							alt={data?.item.id}
+							src={data?.item?.images?.background || '/images/preloader.gif'}
+							alt={subscription.shopItemId}
 						/>
 					</Link>
 				</div>
@@ -55,9 +54,9 @@ const FavoriteItem: FC<PropsWithChildren<
 				</div>
 
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
-					<h1 className='text-center text-gray-100'>{data?.item.name || 'Loading...'}</h1>
+					<h1 className='text-center text-gray-100'>{name || 'Loading...'}</h1>
 					<p className=' text-gray-400 flex justify-center'>
-						{data?.item.price || 'Loading...'}
+						{data?.item?.price || 'Loading...'}
 						<LazyLoadImage
 							src='/images/v-bucks.webp'
 							className='h-5'
