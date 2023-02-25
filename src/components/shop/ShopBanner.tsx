@@ -11,7 +11,7 @@ const ShopBanner: FC = () => {
     return (
       <div className='container mx-auto text-white p-3'>
           <div className='bg-gray-700 p-4 rounded'>
-              <h2 className='text-lg'> {t('banner_title')}</h2>
+              <h1 className='text-lg'> {t('banner_title')}</h1>
               <p className='text-sm'>
                   {t('banner_body')}
               </p>

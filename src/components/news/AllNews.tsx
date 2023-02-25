@@ -19,9 +19,9 @@ const AllNews: FC = () => {
 		<section id='news'>
 			<div className='bg-gray-900 p-6 text-white'>
 				<div className='container mx-auto'>
-					<h2 className='text-md border-l-4 border-primary pl-2'>
+					<h1 className='text-md border-l-4 border-primary pl-2'>
 						{t('posts_title').toUpperCase()}
-					</h2>
+					</h1>
 					<div className='grid grid-cols-1 space-y-4 mt-4'>
 						{data ?
 							data?.news

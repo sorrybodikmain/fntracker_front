@@ -16,9 +16,9 @@ const SearchBar: FC = () => {
 						className='blur-sm brightness-50 object-cover h-full w-full transition'
 					/>
 					<div className='absolute left-0 right-0 top-0 py-20 text-white text-center'>
-						<h2 className='text-md sm:text-lg md:text-xl'>
+						<h1 className='text-md sm:text-lg md:text-xl'>
 							{t('seacrh_title').toUpperCase()}
-						</h2>
+						</h1>
 						<Search />
 						<div className='text-xs md:text-sm text-gray-300'>
 							{t('search_link')}

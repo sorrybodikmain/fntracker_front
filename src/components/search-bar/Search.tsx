@@ -12,7 +12,7 @@ const Search: FC = () => {
 	const [nickname, setNickname] = useState('')
 	const [data, setData] = useState<AccountIdStr>()
 	const { ref, isShow, setIsShow } = useOutside(false)
-	const debounced = useDebounce(nickname)
+	const debounced = useDebounce<string>(nickname)
 	const navigate = useNavigate()
 	const handleSubmit = (e: any) => {
 		navigate(`/stats/${nickname}`)
@@ -61,7 +61,8 @@ const Search: FC = () => {
 								</li>
 							))}
 						</ul>
-					</div>}
+					</div>
+				}
 
 			</div>
 		</div>

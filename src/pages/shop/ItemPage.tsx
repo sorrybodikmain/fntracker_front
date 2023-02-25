@@ -11,6 +11,7 @@ import LockerGallery from '@/components/locker/gallery/LockerGallery'
 import { Navigate } from 'react-router'
 import SkeletonCard from '@/components/stats/SkeletonCard'
 
+
 const ItemPage: FC = () => {
 	const { id } = useParams()
 	const { data, isLoading } = useSWR<ShopItemResponse>(
@@ -20,6 +21,7 @@ const ItemPage: FC = () => {
 	scroll(0, 0)
 	if (isLoading)
 		return <>
+			<SkeletonCard />
 			<SkeletonCard />
 			<SkeletonCard />
 			<SkeletonCard />
@@ -39,6 +41,8 @@ const ItemPage: FC = () => {
 								<AboutItemCard data={data!} />
 								{data!.item.displayAssets.length > 1 &&
 									<LockerGallery data={data!.item.displayAssets} />}
+								{/*{data.item.shopHistory && data.item.shopHistory.length > 5*/}
+								{/*	&& <DatesGuesser data={data} />}*/}
 								{data?.item.shopHistory && <ItemDataTable data={data} />}
 							</>
 							:

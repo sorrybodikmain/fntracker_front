@@ -36,9 +36,9 @@ const SNEditForm: FC = () => {
 
 	return (
 		<div className='container text-white mx-auto p-3'>
-			<h2 className='border-l-4 border-primary pl-2 mb-4 uppercase'>
+			<h1 className='border-l-4 border-primary pl-2 mb-4 uppercase'>
 				{t('soc_networks_title')}
-			</h2>
+			</h1>
 			<div className='flex flex-wrap bg-gray-600 rounded-lg p-5 hover:scale-[1.01] transition'>
 				<form className='text-gray-300 w-full' onSubmit={handleUpdateSN}>
 					<div className='flex items-center border-2 mb-8 py-2 px-3 rounded-2xl'>
