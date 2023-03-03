@@ -1,5 +1,5 @@
 import { $http } from '@/api/http'
-import { IAuthData } from '@/types/formData.type'
+import { IAuthData } from '@/types/form-data.type'
 
 export const AuthService = {
 	async login(email: string, password: string) {

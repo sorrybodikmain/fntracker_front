@@ -17,7 +17,7 @@ type ItemImages = {
 	icon_background: string
 	full_background: string
 }
-type ItemPrice = {
+export type ItemPrice = {
 	regularPrice: number
 	finalPrice: number
 }

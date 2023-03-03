@@ -16,7 +16,7 @@ const ShopSection: FC<
 		 }) => {
 	return (
 		<>
-			<h1 className='border-l-4 border-primary text-lg pl-2 my-4'>{
+			<h1 className='border-l-4 border-primary text-md pl-2 my-4'>{
 				sectionName ||
 				items.find(item => item.section.id === sectionId)?.section.name
 			}</h1>
