@@ -1,4 +1,5 @@
 import i18next from 'i18next'
+import { BPSeasonDates } from '@/types/battle-pass.types'
 
 export const getContentType = () => ({
 	'Content-Type': 'application/json'
@@ -38,4 +39,16 @@ export const generateLockerSiteMap = (mas =
 		<loc>${loc}</loc>
 		</url>`
 	console.log(JSON.stringify(mas.map(value => getBaseLink(siteUrl + value))))
+}
+
+export const getPercentByDates = (dates: BPSeasonDates) => {
+	const start = new Date(dates.begin),
+		end = new Date(dates.end),
+		now = new Date()
+	return (((+now - +start) / (+end - +start)) * 100).toFixed(3)
+}
+export const fillMassive = (from: number, to: number) => {
+	const arr = Array(to)
+	for (let i = from; i < to; i++) arr[i] = i
+	return arr
 }

@@ -5,14 +5,11 @@ import MobNav from './MobNav'
 import Profile from './Profile'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router'
+import { AiFillCaretDown } from 'react-icons/ai'
 
 const Header: FC = () => {
 	const { t } = useTranslation('header')
-	const routes = [
-		{
-			name: t('home_link'),
-			href: '/'
-		},
+	const shopRoutes = [
 		{
 			name: t('shop_link'),
 			href: '/shop'
@@ -24,6 +21,12 @@ const Header: FC = () => {
 		{
 			name: t('allitems_title'),
 			href: '/all-items/'
+		}
+	]
+	const baseRoutes = [
+		{
+			name: t('bp_title'),
+			href: '/battle-pass/current'
 		},
 		{
 			name: t('maps_link'),
@@ -42,14 +45,38 @@ const Header: FC = () => {
 									FNTracker
 								</Link>
 							</div>
+
 							<ul className='hidden md:flex items-center space-x-2'>
-								{routes.map((router, index) => (
+
+								<div className='group inline-block relative'>
+									<Link
+										to='/shop'
+										className='text-gray-500 py-2 inline-flex items-center'
+									>
+										<span className='mr-1'>{t('shop_link')}</span>
+										<AiFillCaretDown className='fill-current h-4 w-4'/>
+									</Link>
+									<ul className='absolute hidden rounded bg-gray-700 text-gray-300 group-hover:block'>
+										{shopRoutes.map((router, index) => (
+											<li key={index}>
+												<Link
+													className=' hover:bg-gray-600 py-1.5 px-4 block w-28'
+													to={router.href}
+												>{router.name}
+												</Link>
+											</li>
+										))}
+									</ul>
+								</div>
+
+								{baseRoutes.map((router, index) => (
 									<li key={index}>
 										<Link
 											to={router.href}
 											className={
 												`block hover:text-gray-300 py-1 md:mx-1 ${
-													location.pathname === router.href ? 'underline text-gray-200'
+													location.pathname === router.href ? 
+														'underline text-gray-200'
 														: 'text-gray-500'
 												}`
 											}
@@ -61,7 +88,7 @@ const Header: FC = () => {
 							</ul>
 							<div className='text-white flex space-x-2 justify-center items-center pl-2'>
 								<LangSwitcher />
-								<MobNav routes={routes} />
+								<MobNav routes={shopRoutes.concat(baseRoutes)} />
 								<Profile />
 							</div>
 						</nav>

@@ -17,8 +17,9 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { user, accessToken } = useAuth()
 	const itemId = data.mainId || data.id
 	const name = data.displayName || data.name
-	const itemImg = fixImageWidth((data.displayAssets ? data.displayAssets[0].background :
-		data.images.background), 400)
+	const itemPrice = data.price?.finalPrice || JSON.stringify(data.price) || 0
+	const itemImg = fixImageWidth((data.images ?
+		data.images.background : data.displayAssets[0].background), 400)
 	const hasLiked = user?.subscriptions?.some(p => p.shopItemId === itemId)
 	const [like, setLike] = useState<boolean>(hasLiked || false)
 	const [imgLoaded, setImgLoaded] = useState<boolean>(false)
@@ -79,7 +80,9 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				</div>
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
 					<h1 className='text-center text-gray-100 px-1'>{name}</h1>
-					<p className=' text-gray-400 flex justify-center'>{data.price?.finalPrice || JSON.stringify(data.price) || 0}
+					<p className='text-gray-400 flex justify-center'>
+						<span
+							className='mr-1'>{itemPrice}</span>
 						<LazyLoadImage
 							src='/images/v-bucks.webp'
 							className='h-5'

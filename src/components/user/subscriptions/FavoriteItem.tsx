@@ -56,7 +56,7 @@ const FavoriteItem: FC<PropsWithChildren<
 				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
 					<h1 className='text-center text-gray-100'>{name || 'Loading...'}</h1>
 					<p className=' text-gray-400 flex justify-center'>
-						{data?.item?.price || 'Loading...'}
+						{data?.item?.price || 0}
 						<LazyLoadImage
 							src='/images/v-bucks.webp'
 							className='h-5'

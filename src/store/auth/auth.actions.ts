@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { AuthService } from '@/services/auth.service'
-import { IAuthData } from '@/types/formData.type'
+import { IAuthData } from '@/types/form-data.type'
 
 export const register = createAsyncThunk<IAuthData, any>(
 	'auth/register',
