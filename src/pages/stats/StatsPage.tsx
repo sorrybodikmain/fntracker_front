@@ -47,11 +47,11 @@ const StatsPage: FC = () => {
 					idCheck?.result === false && stats ?
 						<NotFountError /> :
 						<>
-							{profileData && stats ?
+							{profileData?.data && stats ?
 								<ProfileCard
-									profileData={profileData.profile!}
+									profileData={profileData?.data?.profile!}
 									nickname={nickname!}
-									views={profileData.viewsCount} />
+									views={profileData?.data?.viewsCount} />
 								: <SkeletonCard />
 							}
 							{stats ? <EventsStats data={pr?.data?.data} /> : <SkeletonCard />}
