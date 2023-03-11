@@ -19,7 +19,7 @@ const BPCardProgressBar: FC<
 				</h2>
 				<div className='text-right'>
 						<span className='text-xs inline-block'>
-							{percent}%
+							{percent > 100 ? 100 : percent} %
 						</span>
 				</div>
 			</div>

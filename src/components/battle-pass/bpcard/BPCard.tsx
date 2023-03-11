@@ -14,7 +14,7 @@ const BPCard: FC<
 > = ({ data }) => {
   const { t } = useTranslation('battle-pass')
   const navigate = useNavigate()
-  const versions = fillMassive(2, 24)
+  const versions = fillMassive(2, 25)
   const version = data.season || 23
   const handleVersion = (e: any) => navigate('/battle-pass/' + e.target.value)
 
