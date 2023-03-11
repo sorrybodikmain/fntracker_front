@@ -21,7 +21,7 @@ const BPVideoCard: FC<
 
 				<div className='flex flex-wrap mt-2'>
 					{videos.map((video, index) => (
-						<div className='flex flex-wrap w-1/2' key={index}>
+						<div className='flex flex-wrap w-full sm:w-1/2 my-1' key={index}>
 							<video className='w-full rounded-lg px-1' controls>
 								<source src={video.url} type='video/mp4' />
 							</video>

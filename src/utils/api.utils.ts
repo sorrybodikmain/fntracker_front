@@ -41,11 +41,11 @@ export const generateLockerSiteMap = (mas =
 	console.log(JSON.stringify(mas.map(value => getBaseLink(siteUrl + value))))
 }
 
-export const getPercentByDates = (dates: BPSeasonDates) => {
+export const getPercentByDates = (dates: BPSeasonDates): number => {
 	const start = new Date(dates.begin),
 		end = new Date(dates.end),
 		now = new Date()
-	return (((+now - +start) / (+end - +start)) * 100).toFixed(3)
+	return +(((+now - +start) / (+end - +start)) * 100).toFixed(2)
 }
 export const fillMassive = (from: number, to: number) => {
 	const arr = Array(to)
