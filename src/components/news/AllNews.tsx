@@ -25,7 +25,7 @@ const AllNews: FC = () => {
 					<div className='grid grid-cols-1 space-y-4 mt-4'>
 						{data ?
 							data?.news
-								.filter(item => new Date(item.date) > filterDate)
+								.slice(0,6)
 								.map((post: INovelty, index: number) => (
 									<Novelty key={index} data={post} />
 								))
