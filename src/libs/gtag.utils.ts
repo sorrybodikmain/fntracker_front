@@ -6,7 +6,11 @@ const initGA = (trackingId: string) => {
 
 const logPageView = () => {
 	ReactGA.set({ page: window.location.pathname })
-	ReactGA.send({ pageView: window.location.pathname })
+	ReactGA.send({
+		hitType: 'pageview',
+		page: window.location.pathname,
+		title: document.title
+	})
 }
 
 const logEvent = (
