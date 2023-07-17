@@ -7,7 +7,6 @@ import { logEvent } from '@/libs/gtag.utils'
 
 const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	return (
-		<>
 			<div
 				className='relative overflow-hidden rounded-lg hover:scale-105 transition'
 				onClick={() => logEvent('Shop', 'Click', 'Mini-Shop', +data.mainId)}
@@ -33,7 +32,6 @@ const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 					</div>
 				</Link>
 			</div>
-		</>
 	)
 }
 

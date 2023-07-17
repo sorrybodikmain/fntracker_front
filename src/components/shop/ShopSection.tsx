@@ -22,9 +22,7 @@ const ShopSection: FC<PropsWithChildren<IShopSectionProps>> = ({
 			</h1>
 			<div
 				className='grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-6'
-				onClick={() =>
-					logEvent('Shop', 'Click', `Popular-Shop-Section-${sectionName}`)
-				}
+				onClick={() => logEvent('Shop', 'Click', `Shop-Section-${sectionName}`)}
 			>
 				{sectionId
 					? items

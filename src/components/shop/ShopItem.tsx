@@ -36,6 +36,7 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const [unSubscribe] = useItemUnsubscribeMutation()
 	const dispatch = useAppDispatch()
 	const handleLike = async () => {
+		logEvent('Shop', like ? 'Liked' : 'Unliked', `${data.name}(${data.id})`)
 		if (accessToken) {
 			if (user?.isVerified) {
 				if (like) {

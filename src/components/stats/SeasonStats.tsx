@@ -1,9 +1,20 @@
 import { FC, PropsWithChildren } from 'react'
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+	CartesianGrid,
+	Legend,
+	Line,
+	LineChart,
+	ResponsiveContainer,
+	Tooltip,
+	XAxis,
+	YAxis
+} from 'recharts'
 import { useTranslation } from 'react-i18next'
 import { AccountStatsResponse } from '@/types/user-stats.type'
 
-const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ data }) => {
+const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({
+	data
+}) => {
 	const { t } = useTranslation('stats')
 	return (
 		<div className='container text-white mx-auto p-3'>
@@ -14,14 +25,13 @@ const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({ da
 				<ResponsiveContainer width='100%' height='100%' className='-ml-4'>
 					<LineChart data={data.accountLevelHistory}>
 						<CartesianGrid strokeDasharray='3 3' />
-						<XAxis dataKey='season' name={'Season:'}/>
+						<XAxis dataKey='season' name='Season:' />
 						<YAxis />
-						<Tooltip labelClassName={'text-primary'}  />
+						<Tooltip labelClassName='text-primary' />
 						<Legend />
 						<Line type='monotone' dataKey='level' stroke='#4F75FB' />
 					</LineChart>
 				</ResponsiveContainer>
-
 			</div>
 		</div>
 	)

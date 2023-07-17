@@ -89,7 +89,14 @@ const MapsCompare: FC = () => {
 							<select
 								className='w-full outline-none border-none bg-gray-600'
 								value={rightMapId}
-								onChange={e => setRightMapId(e.target.value)}
+								onChange={e => {
+									setRightMapId(e.target.value)
+									logEvent(
+										'GameMaps',
+										'Change',
+										`Map-Change-To-${e.target.value}`
+									)
+								}}
 							>
 								{data?.maps.map((item, index) => (
 									<option key={index} value={item.patchVersion}>
