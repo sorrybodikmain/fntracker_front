@@ -3,11 +3,15 @@ import { Link } from 'react-router-dom'
 import { ItemShop } from '@/types/shop.type'
 import { fixImageWidth } from '@/utils/api.utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { logEvent } from '@/libs/gtag.utils'
 
 const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	return (
 		<>
-			<div className='relative overflow-hidden rounded-lg hover:scale-105 transition'>
+			<div
+				className='relative overflow-hidden rounded-lg hover:scale-105 transition'
+				onClick={() => logEvent('Shop', 'Click', 'Mini-Shop', +data.mainId)}
+			>
 				<Link to={'locker/' + data.mainId}>
 					<div className='relative w-full h-44 sm:h-48 md:h-52 lg:h-36 object-cover'>
 						<LazyLoadImage
@@ -30,7 +34,6 @@ const MiniItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				</Link>
 			</div>
 		</>
-
 	)
 }
 

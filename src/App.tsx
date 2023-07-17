@@ -1,9 +1,14 @@
-import React from 'react'
+import { initGA, logPageView } from '@/libs/gtag.utils'
 import { ToastContainer } from 'react-toastify'
 import AppRouter from './routes/AppRouter'
 import Layout from '@/components/Layout'
+import { useEffect } from 'react'
 
 function App() {
+	useEffect(() => {
+		initGA('G-0PPX7B396X')
+		logPageView()
+	}, [])
 	return (
 		<>
 			<Layout>
@@ -18,7 +23,6 @@ function App() {
 				/>
 			</Layout>
 		</>
-
 	)
 }
 
