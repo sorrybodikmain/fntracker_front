@@ -1,74 +1,49 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
-import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
-import { useAuth } from '@/hooks/useAuth'
-import {
-	useItemSubscribeMutation,
-	useItemUnsubscribeMutation
-} from '@/store/api/subscribe.api'
-import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
-import { useAppDispatch } from '@/hooks/useTypedSelector'
-import { fixImageWidth } from '@/utils/api.utils'
+import { useActions, useTypedSelector } from '@/hooks'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { ItemShop } from '@/types/shop.type'
-import { logEvent } from '@/libs/gtag.utils'
+import { ItemShop } from '@/interfaces'
+import { fixImageWidth, logEvent } from '@/utils'
 
 const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 	const { t } = useTranslation('shop')
-	const { user, accessToken } = useAuth()
 	const itemId = data.mainId || data.id
 	const name = data.displayName || data.name
-	const itemPrice = data.price?.finalPrice || JSON.stringify(data.price) || 0
+	const itemPrice = data.price?.finalPrice || +JSON.stringify(data.price) || 0
 	const itemImg = fixImageWidth(
-		data.images ? data.images.background : data.displayAssets[0].background,
+		data.images ? data.images.background : data?.displayAssets?.[0]?.background,
 		400
 	)
-	const hasLiked = user?.subscriptions?.some(p => p.shopItemId === itemId)
+	const { items } = useTypedSelector(state => state.likes)
+	const hasLiked = items?.some(p => p === itemId)
 	const [like, setLike] = useState<boolean>(hasLiked || false)
 	const [imgLoaded, setImgLoaded] = useState<boolean>(false)
 	const onLoad = () => setTimeout(() => setImgLoaded(true), 100)
-
-	const navigate = useNavigate()
-	const [subscribe] = useItemSubscribeMutation()
-	const [unSubscribe] = useItemUnsubscribeMutation()
-	const dispatch = useAppDispatch()
+	const { addLike, deleteLike } = useActions()
 	const handleLike = async () => {
 		logEvent('Shop', like ? 'Liked' : 'Unliked', `${data.name}(${data.id})`)
-		if (accessToken) {
-			if (user?.isVerified) {
-				if (like) {
-					await unSubscribe(itemId).then(() => {
-						dispatch(unSubscribeItem(itemId))
-						setLike(false)
-						toast.error(t('unlike_item', { name }))
-					})
-				} else {
-					await subscribe(itemId).then(() => {
-						dispatch(subscribeItem(itemId))
-						setLike(true)
-						toast.success(t('like_item', { name }))
-					})
-				}
-			} else toast.error(t('err_activate'))
+		if (like) {
+			addLike(itemId)
+			setLike(false)
+			toast.error(t('unlike_item', { name }))
 		} else {
-			toast.error(t('not_logged'))
-			setTimeout(() => {
-				navigate('/user/login')
-			}, 1000)
+			deleteLike(itemId)
+			setLike(true)
+			toast.success(t('like_item', { name }))
 		}
 	}
 
 	return (
 		<div>
 			<div
-				className='relative overflow-hidden rounded-lg hover:scale-[1.02] transition'
+				className=':uno: relative overflow-hidden rounded-lg hover:scale-[1.02] transition'
 				onClick={() => logEvent('Shop', 'Click', 'Shop', +data.id)}
 			>
 				<Link to={'/locker/' + itemId}>
-					<div className='relative w-full h-44 sm:h-56 md:h-66 object-center'>
+					<div className=':uno: relative w-full h-44 sm:h-56 object-center'>
 						<LazyLoadImage
 							src={itemImg}
 							alt={itemId}
@@ -89,13 +64,13 @@ const ShopItem: FC<PropsWithChildren<{ data: ItemShop }>> = ({ data }) => {
 				>
 					{like ? <AiFillHeart /> : <AiOutlineHeart />}
 				</div>
-				<div className='absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
-					<h1 className='text-center text-gray-100 px-1'>{name}</h1>
-					<p className='text-gray-400 flex justify-center'>
-						<span className='mr-1'>{itemPrice}</span>
+				<div className=':uno: absolute text-xs sm:text-sm bottom-0 w-full p-1.5 bg-gray-600'>
+					<h1 className=':uno: text-center text-gray-100 px-1 pb-1'>{name}</h1>
+					<p className=':uno: text-gray-400 flex justify-center'>
+						<span className=':uno: mr-1'>{itemPrice}</span>
 						<LazyLoadImage
 							src='/images/v-bucks.webp'
-							className='h-5'
+							className=':uno: h-5'
 							alt='v-bucks icon'
 						/>
 					</p>

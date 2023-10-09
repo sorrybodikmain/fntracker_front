@@ -5,14 +5,11 @@ import CookieBanner from '@/components/CookieBanner'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
-
 	return (
 		<>
 			<main className={'bg-gray-900'}>
 				<Header />
-				<Suspense fallback={'loading'}>
-					{children}
-				</Suspense>
+				<Suspense fallback={'loading'}>{children}</Suspense>
 				<Footer />
 				<CookieBanner />
 			</main>

@@ -5,12 +5,11 @@ import i18next from 'i18next'
 import { fetcher } from '@/libs/apiFetcher'
 import AboutItemCard from '@/components/locker/AboutItemCard'
 import ItemDataTable from '@/components/locker/ItemDataTable'
-import { ShopItemResponse } from '@/types/shop.type'
+import { ShopItemResponse } from '../../interfaces/shop.interface'
 import AppHelmet from '@/components/AppHelmet'
 import LockerGallery from '@/components/locker/gallery/LockerGallery'
 import { Navigate } from 'react-router'
 import SkeletonCard from '@/components/stats/SkeletonCard'
-
 
 const ItemPage: FC = () => {
 	const { id } = useParams()
@@ -20,12 +19,14 @@ const ItemPage: FC = () => {
 	)
 	scroll(0, 0)
 	if (isLoading)
-		return <>
-			<SkeletonCard />
-			<SkeletonCard />
-			<SkeletonCard />
-			<SkeletonCard />
-		</>
+		return (
+			<>
+				<SkeletonCard />
+				<SkeletonCard />
+				<SkeletonCard />
+				<SkeletonCard />
+			</>
+		)
 
 	return (
 		<>
@@ -35,19 +36,21 @@ const ItemPage: FC = () => {
 				img={data?.item?.images?.background}
 			/>
 			<div>
-				<div className='container text-white mx-auto p-3 min-h-screen'>
+				<div className=':uno: container text-white mx-auto p-3 min-h-screen'>
 					<>
-						{data?.result ? <>
+						{data?.result ? (
+							<>
 								<AboutItemCard data={data!} />
-								{data!.item.displayAssets.length > 1 &&
-									<LockerGallery data={data!.item.displayAssets} />}
+								{data!.item.displayAssets.length > 1 && (
+									<LockerGallery data={data!.item.displayAssets} />
+								)}
 								{/*{data.item.shopHistory && data.item.shopHistory.length > 5*/}
 								{/*	&& <DatesGuesser data={data} />}*/}
 								{data?.item.shopHistory && <ItemDataTable data={data} />}
 							</>
-							:
+						) : (
 							<Navigate to='/404' />
-						}
+						)}
 					</>
 				</div>
 			</div>

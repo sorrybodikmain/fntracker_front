@@ -5,20 +5,20 @@ import styles from '@/styles/Zoom.module.css'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { fixImageWidth } from '@/utils/api.utils'
 
-const GalleryImage: FC<
-  PropsWithChildren<{ src: string }
-  >> = ({ src }) => {
-  return <div className='flex flex-wrap w-1/6'>
-    <div className='w-full p-1 md:p-2'>
-      <Zoom classDialog={styles.zoom}>
-        <LazyLoadImage
-          alt='gallery'
-          className='block object-cover object-center w-full h-full rounded-lg'
-          src={fixImageWidth(src, 500)} />
-      </Zoom>
-    </div>
-  </div>
-
+const GalleryImage: FC<PropsWithChildren<{ src: string }>> = ({ src }) => {
+	return (
+		<div className=':uno: flex flex-wrap w-1/6'>
+			<div className=':uno: w-full p-1 md:p-2'>
+				<Zoom classDialog={styles.zoom}>
+					<LazyLoadImage
+						alt='gallery'
+						className=':uno: block object-cover object-center w-full h-full rounded-lg'
+						src={fixImageWidth(src, 500)}
+					/>
+				</Zoom>
+			</div>
+		</div>
+	)
 }
 
 export default GalleryImage

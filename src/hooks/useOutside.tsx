@@ -11,9 +11,9 @@ export const useOutside = (initialIsVisible: boolean): TypeOut => {
 	const ref = useRef<HTMLElement>(null)
 
 	const handleClickOutside = (event: any) => {
-		if (ref.current && !ref.current.contains(event.target)) {
+		if (ref.current && !ref.current.contains(event.target))
 			setIsShow(false)
-		}
+
 	}
 
 	useEffect(() => {

@@ -9,10 +9,10 @@ const HomePage: FC = () => {
 	const { t } = useTranslation('header')
 	return (
 		<>
-			<AppHelmet title={t('home_link')!}	/>
+			<AppHelmet title={t('home_link')!} />
 			<div>
 				<SearchBar />
-				<div className='container flex flex-col-reverse lg:flex-row mx-auto'>
+				<div className=':uno: container flex flex-col-reverse lg:flex-row mx-auto'>
 					<AllPosts />
 					<MiniShop />
 				</div>

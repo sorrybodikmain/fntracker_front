@@ -5,21 +5,21 @@ import { FC } from 'react'
 const SearchBar: FC = () => {
 	const { t } = useTranslation('home')
 	return (
-		<section id='search' className='bg-gray-900'>
-			<div className='relative h-80'>
+		<section id='search' className=':uno: bg-gray-900'>
+			<div className=':uno: relative h-80'>
 				<img
 					src='/images/search-bg.webp'
 					alt='search-bg-image'
 					decoding='async'
 					loading='eager'
-					className='blur-sm brightness-50 object-cover h-full w-full transition'
+					className=':uno: blur-sm brightness-50 object-cover h-full w-full transition'
 				/>
-				<div className='absolute left-0 right-0 top-0 py-20 text-white text-center'>
-					<h1 className='text-md sm:text-lg md:text-xl'>
+				<div className=':uno: absolute left-0 right-0 top-0 py-20 text-white text-center'>
+					<h1 className=':uno: text-md sm:text-lg md:text-xl pb-2'>
 						{t('seacrh_title').toUpperCase()}
 					</h1>
 					<Search />
-					<div className='text-xs md:text-sm text-gray-300'>
+					<div className=':uno: pt-1 text-xs md:text-sm text-gray-300'>
 						{t('search_link')}
 					</div>
 				</div>

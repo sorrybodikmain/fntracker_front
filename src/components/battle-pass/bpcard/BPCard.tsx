@@ -1,9 +1,9 @@
 import BPCardProgressBar from '@/components/battle-pass/bpcard/BPCardProgressBar'
-import { IBattlePassResponse } from '@/types/battle-pass.types'
+import { IBattlePassResponse } from '@/interfaces/battle-pass.interface'
 import { fillMassive } from '@/utils/api.utils'
 import { useTranslation } from 'react-i18next'
 import { FC, PropsWithChildren } from 'react'
-import { logEvent } from '@/libs/gtag.utils'
+import { logEvent } from '@/utils/gtag.utils'
 import { useNavigate } from 'react-router'
 
 interface IBPCard {
@@ -21,13 +21,13 @@ const BPCard: FC<PropsWithChildren<IBPCard>> = ({ data }) => {
 	}
 
 	return (
-		<div className='container text-white mx-auto'>
-			<div className='flex justify-between'>
-				<h1 className='border-l-4 border-primary pl-2 mb-4'>
+		<div className=':uno: container text-white mx-auto'>
+			<div className=':uno: flex justify-between'>
+				<h1 className=':uno: border-l-4 border-primary pl-2 mb-4'>
 					{t('bp_card_title').toUpperCase()}
 				</h1>
 				<select
-					className='bg-gray-800 rounded-lg text-xs h-min'
+					className=':uno: bg-gray-800 rounded-lg text-xs h-min'
 					onChange={handleVersion}
 					value={version}
 				>
@@ -38,10 +38,10 @@ const BPCard: FC<PropsWithChildren<IBPCard>> = ({ data }) => {
 					))}
 				</select>
 			</div>
-			<div className='flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gray-600'>
-				<h2 className='text-md uppercase'>{t('bp_details')}</h2>
-				<div className='w-full text-gray-500'>
-					<p className='inline-flex font-bold text-lg text-gray-300'>
+			<div className=':uno: flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gray-600'>
+				<h2 className=':uno: text-md uppercase'>{t('bp_details')}</h2>
+				<div className=':uno: w-full text-gray-500'>
+					<p className=':uno: inline-flex font-bold text-lg text-gray-300'>
 						{data.displayInfo.chapterSeason}
 					</p>
 				</div>

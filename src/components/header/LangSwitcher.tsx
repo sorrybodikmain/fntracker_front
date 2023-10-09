@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
-import { supportedLngs } from '../../i18n'
+import { supportedLngs } from '@/i18n.ts'
 import i18next from 'i18next'
-import { logEvent } from '@/libs/gtag.utils'
+import { logEvent } from '@/utils/gtag.utils'
 
 const LangSwitcher: FC = () => {
 	const [locale, setLocale] = useState(i18next.language || 'en')
@@ -17,7 +17,7 @@ const LangSwitcher: FC = () => {
 	return (
 		<>
 			<select
-				className='bg-gray-800 rounded-lg text-xs'
+				className=':uno: bg-gray-800 rounded-lg text-xs'
 				onChange={languageHandler}
 				value={locale}
 			>

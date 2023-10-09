@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ShopItemResponse } from '@/types/shop.type'
+import { ShopItemResponse } from '@/interfaces/shop.interface.ts'
 import { ImSpinner9 } from 'react-icons/im'
 import axios from 'axios'
 
@@ -23,23 +23,23 @@ const DatesGuesser: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({
 	}
 	return (
 		<>
-			<h1 className='border-l-4 border-primary pl-2 my-4'>
+			<h1 className=':uno: border-l-4 border-primary pl-2 my-4'>
 				{t('possible_dates').toUpperCase()}
 			</h1>
-			<div className='flex bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
-				<div className='relative w-full px-1 text-gray-300'>
+			<div className=':uno: flex bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
+				<div className=':uno: relative w-full px-1 text-gray-300'>
 					{!dates ? (
-						<div className='flex items-center justify-between'>
-							<p className='font-medium text-white sm:text-sm'>
+						<div className=':uno: flex items-center justify-between'>
+							<p className=':uno: font-medium text-white sm:text-sm'>
 								{t('dates_guesser_title')}
 							</p>
 							<button
 								onClick={handleLoad}
-								className='flex items-center px-4 py-2 rounded-lg text-sm text-gray-600 bg-white hover:bg-gray-200'
+								className=':uno: flex items-center px-4 py-2 rounded-lg text-sm text-gray-600 bg-white hover:bg-gray-200'
 							>
 								{loaded ? (
 									<>
-										<ImSpinner9 className='inline w-4 h-4 mr-2 text-black animate-spin' />
+										<ImSpinner9 className=':uno: inline w-4 h-4 mr-2 text-black animate-spin' />
 										<span>{t('loading')}</span>
 									</>
 								) : (
@@ -48,9 +48,9 @@ const DatesGuesser: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({
 							</button>
 						</div>
 					) : (
-						<div className='grid grid-cols-4 lg:grid-cols-8 gap-2'>
+						<div className=':uno: grid grid-cols-4 lg:grid-cols-8 gap-2'>
 							{dates?.map((value, index) => (
-								<p key={index} className='inline-flex flex-col mx-auto'>
+								<p key={index} className=':uno: inline-flex flex-col mx-auto'>
 									{value}
 								</p>
 							))}

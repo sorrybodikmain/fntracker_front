@@ -8,8 +8,7 @@ import EventsStats from '@/components/stats/EventsStats'
 import SeasonStats from '@/components/stats/SeasonStats'
 import NotFountError from '@/components/stats/NotFountError'
 import SkeletonCard from '@/components/stats/SkeletonCard'
-import { ProfileResponse } from '@/types/profile.type'
-import { AccountIdStr, AccountStatsResponse, PrResponse } from '@/types/user-stats.type'
+import { AccountIdStr, AccountStatsResponse, ProfileResponse, PrResponse } from '@/interfaces'
 import { useTranslation } from 'react-i18next'
 import AppHelmet from '@/components/AppHelmet'
 
@@ -33,41 +32,43 @@ const StatsPage: FC = () => {
 		defaultFetcher
 	)
 	useEffect(() => {
-		(async () => {
-			await patchFetcher(`https://api.fntracker.pp.ua/profile/${idCheck?.account_id}/increment`)
+		;(async () => {
+			await patchFetcher(
+				`https://api.fntracker.pp.ua/profile/${idCheck?.account_id}/increment`
+			)
 		})()
 	}, [idCheck])
 
 	return (
 		<>
-			<AppHelmet
-				title={t('title', { nickname })}
-			/>
+			<AppHelmet title={t('title', { nickname })} />
 			<>
-				{
-					idCheck?.result === false && data ?
-						<NotFountError /> :
-						<>
-							{profileData.data && data ?
-								<ProfileCard
-									profileData={profileData.data.profile!}
-									nickname={nickname!}
-									views={profileData.data.viewsCount} />
-								: <SkeletonCard />
-							}
-							{data ? <EventsStats data={pr?.data?.data} /> : <SkeletonCard />}
-							{
-								data?.accountLevelHistory ?
-									<SeasonStats data={data!} />
-									: <SkeletonCard />
-							}
-							{data?.global_stats ?
-								<ModesStats data={data!} />
-								: <SkeletonCard />
-							}
-						</>
-				}
-
+				{idCheck?.result === false && data ? (
+					<NotFountError />
+				) : (
+					<>
+						{profileData.data && data ? (
+							<ProfileCard
+								profileData={profileData.data.profile!}
+								nickname={nickname!}
+								views={profileData.data.viewsCount}
+							/>
+						) : (
+							<SkeletonCard />
+						)}
+						{data ? <EventsStats data={pr?.data?.data} /> : <SkeletonCard />}
+						{data?.accountLevelHistory ? (
+							<SeasonStats data={data!} />
+						) : (
+							<SkeletonCard />
+						)}
+						{data?.global_stats ? (
+							<ModesStats data={data!} />
+						) : (
+							<SkeletonCard />
+						)}
+					</>
+				)}
 			</>
 		</>
 	)

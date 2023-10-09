@@ -1,82 +1,56 @@
-import { FC, PropsWithChildren, useState } from 'react'
+import { FC, useState } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
-import {
-	useItemSubscribeMutation,
-	useItemUnsubscribeMutation
-} from '@/store/api/subscribe.api'
 import { toast } from 'react-toastify'
-import { useAuth } from '@/hooks/useAuth'
-import { ShopItemResponse } from '@/types/shop.type'
-import { useAppDispatch } from '@/hooks/useTypedSelector'
-import { subscribeItem, unSubscribeItem } from '@/store/auth/auth.slice'
-import { fixImageWidth } from '@/utils/api.utils'
+import { ShopItemResponse } from '@/interfaces'
+import { useTypedSelector } from '@/hooks'
+import { fixImageWidth, logEvent } from '@/utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-
-import styles from '@/styles/Zoom.module.css'
 import Zoom from 'react-medium-image-zoom'
-import { logEvent } from '@/libs/gtag.utils'
+import styles from '@/styles/Zoom.module.css'
 
 interface IAboutItemCardProps {
 	data: ShopItemResponse
 }
 
-const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({
-	data
-}) => {
+const AboutItemCard: FC<IAboutItemCardProps> = ({
+																									data
+																								}) => {
 	const { t } = useTranslation('locker')
-	const { user, accessToken } = useAuth()
+	const { items } = useTypedSelector(state => state.likes)
 	const [like, setLike] = useState<boolean>(
-		user?.subscriptions?.some(p => p.shopItemId === data.item.id) || false
+		items.some(p => p === data.item.id)
 	)
-
-	const navigate = useNavigate()
 
 	const [imgLoaded, setImgLoaded] = useState<boolean>(false)
 	const onLoad = () => setTimeout(() => setImgLoaded(true), 100)
-
-	const [subscribe] = useItemSubscribeMutation()
-	const [unSubscribe] = useItemUnsubscribeMutation()
-	const dispatch = useAppDispatch()
 	const handleLike = async () => {
 		logEvent(
 			'Shop',
 			like ? 'Liked' : 'Unliked',
 			`${data.item.name}(${data.item.id})`
 		)
-		if (accessToken) {
-			if (user?.isVerified) {
-				if (like) {
-					await unSubscribe(data.item.id).then(() => {
-						dispatch(unSubscribeItem(data.item.id))
-						setLike(false)
-						toast.error(t('unlike_item', { name: data.item.name }))
-					})
-				} else {
-					await subscribe(data.item.id).then(() => {
-						dispatch(subscribeItem(data.item.id))
-						setLike(true)
-						toast.success(t('like_item', { name: data.item.name }))
-					})
-				}
-			} else toast.error(t('err_activate'))
+
+		if (like) {
+
+			setLike(false)
+			toast.error(t('unlike_item', { name: data.item.name }))
+
 		} else {
-			toast.error(t('not_logged'))
-			setTimeout(() => {
-				navigate(`/user/login`)
-			}, 1000)
+			setLike(true)
+			toast.success(t('like_item', { name: data.item.name }))
+
 		}
 	}
 
 	return (
 		<>
-			<h1 className='border-l-4 border-primary pl-2 mb-4'>
+			<h1 className=':uno: border-l-4 border-primary pl-2 mb-4'>
 				{t('card_title').toUpperCase()}
 			</h1>
-			<div className='flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
-				<div className='w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
-					<div className='relative bg-cover shadow-lg'>
+			<div className=':uno: flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
+				<div className=':uno: w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
+					<div className=':uno: relative bg-cover shadow-lg'>
 						<Zoom classDialog={styles.zoom}>
 							<LazyLoadImage
 								src={fixImageWidth(data?.item.images.background, 500)}
@@ -93,23 +67,23 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({
 					</div>
 				</div>
 
-				<div className='relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
-					<h5 className='text-2xl mb-1 text-white flex'>
+				<div className=':uno: relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
+					<h5 className=':uno: text-2xl mb-1 text-white flex'>
 						{data?.item.name}
-						<div className='ml-auto' onClick={handleLike}>
+						<div className=':uno: ml-auto' onClick={handleLike}>
 							{like ? <AiFillHeart /> : <AiOutlineHeart />}
 						</div>
 					</h5>
-					<p className='text-md'>
+					<p className=':uno: text-md'>
 						{data?.item.rarity.name} | {data?.item.type.name}
 					</p>
-					<p className='text-md'>{data?.item.description}</p>
-					<p className='text-sm'>
+					<p className=':uno: text-md'>{data?.item.description}</p>
+					<p className=':uno: text-sm'>
 						{Math.floor(100 * data!.item.interest) + ' ' + t('card_interested')}
 					</p>
-					<div className='items-end bottom-0 relative lg:absolute mt-2'>
+					<div className=':uno: items-end bottom-0 relative lg:absolute mt-2'>
 						{data?.item.battlepass ? (
-							<h4 className='text-white'>
+							<h4 className=':uno: text-white'>
 								{' '}
 								{t('card_bp') +
 									data.item.battlepass.displayText.chapterSeason.toLowerCase()}
@@ -122,7 +96,7 @@ const AboutItemCard: FC<PropsWithChildren<IAboutItemCardProps>> = ({
 										' ' +
 										new Date(data?.item.releaseDate).toLocaleDateString()}
 								</p>
-								<h4 className='text-white text-lg'>
+								<h4 className=':uno: text-white text-lg'>
 									{t('card_sold') + ' ' + data?.item.price} V-bucks.
 								</h4>
 							</>

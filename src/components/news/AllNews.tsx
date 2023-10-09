@@ -1,4 +1,4 @@
-import { INewsResponse, INovelty } from '@/types/posts.type'
+import { INewsResponse, INovelty } from '@/interfaces/posts.interface.ts'
 import SkeletonNews from '@/components/news/SkeletonNews'
 import { useTranslation } from 'react-i18next'
 import { fetcher } from '@/libs/apiFetcher'
@@ -18,12 +18,12 @@ const AllNews: FC = () => {
 
 	return (
 		<section id='news'>
-			<div className='bg-gray-900 p-6 text-white'>
-				<div className='container mx-auto'>
-					<h1 className='text-md border-l-4 border-primary pl-2'>
+			<div className=':uno: bg-gray-900 p-6 text-white'>
+				<div className=':uno: container mx-auto'>
+					<h1 className=':uno: text-md border-l-4 border-primary pl-2'>
 						{t('posts_title').toUpperCase()}
 					</h1>
-					<div className='grid grid-cols-1 space-y-4 mt-4'>
+					<div className=':uno: grid grid-cols-1 space-y-4 mt-4'>
 						{data ? (
 							data?.news
 								.slice(0, 6)

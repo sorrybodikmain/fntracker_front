@@ -1,20 +1,15 @@
-import React, { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import ItemPage from '../pages/shop/ItemPage'
-import StatsPage from '../pages/stats/StatsPage'
-import ShopPage from '../pages/shop/ShopPage'
-import ProfilePage from '../pages/user/ProfilePage'
-import SubscriptionPage from '../pages/user/SubscriptionPage'
-import ActivationPage from '../pages/user/ActivationPage'
-import RegisterPage from '../pages/user/RegisterPage'
-import LoginPage from '../pages/user/LoginPage'
-import RecoveryPage from '../pages/user/RecoveryPage'
-import MapComparePage from '../pages/maps/MapComparePage'
-import UpcomingItemsPage from '../pages/shop/UpcomingItemsPage'
-import NotFoundPage from '../pages/NotFoundPage'
 import HomePage from '../pages/home/HomePage'
-import AllItemsPage from '../pages/shop/AllItemsPage'
-import BattlePassPage from '../pages/battle-pass/BattlePassPage'
+import { FC, lazy } from 'react'
+
+const ItemPage = lazy(() => import('../pages/shop/ItemPage'))
+const StatsPage = lazy(() => import('../pages/stats/StatsPage'))
+const ShopPage = lazy(() => import( '../pages/shop/ShopPage'))
+const MapComparePage = lazy(() => import('../pages/maps/MapComparePage'))
+const UpcomingItemsPage = lazy(() => import('../pages/shop/UpcomingItemsPage'))
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage'))
+const AllItemsPage = lazy(() => import('../pages/shop/AllItemsPage'))
+const BattlePassPage = lazy(() => import('../pages/battle-pass/BattlePassPage'))
 
 const AppRouter: FC = () => {
 	return (
@@ -22,20 +17,13 @@ const AppRouter: FC = () => {
 			<Route path='/' element={<HomePage />} />
 			<Route path='/locker/:id' element={<ItemPage />} />
 			<Route path='/stats/:nickname' element={<StatsPage />} />
-			<Route path='/shop/' element={<ShopPage />} />
-			<Route path='/upcoming-items/' element={<UpcomingItemsPage />} />
-			<Route path='/all-items/' element={<AllItemsPage />} />
-			<Route path='/compare-maps/' element={<MapComparePage />} />
+			<Route path='/shop' element={<ShopPage />} />
+			<Route path='/upcoming-items' element={<UpcomingItemsPage />} />
+			<Route path='/all-items' element={<AllItemsPage />} />
+			<Route path='/compare-maps' element={<MapComparePage />} />
 			<Route path='/battle-pass/:season' element={<BattlePassPage />} />
-			<Route path='/user/activate' element={<ActivationPage />} />
-			<Route path='/user/register' element={<RegisterPage />} />
-			<Route path='/user/login' element={<LoginPage />} />
-			<Route path='/user/recovery' element={<RecoveryPage />} />
-			<Route path='/user/profile' element={<ProfilePage />} />
-			<Route path='/user/favorite' element={<SubscriptionPage />} />
 			<Route path='*' element={<NotFoundPage />} />
 		</Routes>
-
 	)
 }
 

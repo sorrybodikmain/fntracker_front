@@ -1,0 +1,7 @@
+export * from './battle-pass.interface'
+export * from './map.interface'
+export * from './base.interface'
+export * from './posts.interface'
+export * from './profile.interface'
+export * from './shop.interface'
+export * from './user-stats.interface'
