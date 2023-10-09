@@ -41,4 +41,4 @@ const i18next = i18nextDefault
 		}
 	})
 
-export default await i18next
+export default i18next

@@ -27,7 +27,7 @@ const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({
 						<CartesianGrid strokeDasharray='3 3' />
 						<XAxis dataKey='season' name='Season:' />
 						<YAxis />
-						<Tooltip labelclassName=':uno: text-primary' />
+						<Tooltip labelClassName=':uno: text-primary' />
 						<Legend />
 						<Line type='monotone' dataKey='level' stroke='#4F75FB' />
 					</LineChart>

@@ -1,0 +1,5 @@
+# https://www.robotstxt.org/robots.txt
+Sitemap:https://fntracker.pp.ua/sitemaps/sitemap-locker.xml
+Sitemap:https://fntracker.pp.ua/sitemaps/sitemap-general.xml
+User-agent: *
+Disallow:
