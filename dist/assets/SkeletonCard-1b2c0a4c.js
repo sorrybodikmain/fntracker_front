@@ -1,1 +1,0 @@
-import{j as s}from"./index-92121e7b.js";const e=()=>s.jsxs("div",{className:"fntracker-67wedf",children:[s.jsx("div",{className:"fntracker-qfbcl1"}),s.jsx("div",{className:"fntracker-44ob6o"})]});export{e as S};
