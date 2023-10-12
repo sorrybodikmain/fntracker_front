@@ -9,7 +9,7 @@ const Novelty: FC<PropsWithChildren<{ data: INovelty }>> = ({ data }) => {
 	return (
 		<div className=':uno: flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 			<div
-				className=':uno: relative bg-cover w-full md:w-4/12 mb-3 sm:mb-0'
+				className=':uno: relative bg-cover w-full md:w-4/12 max-h-[18rem] md:max-h-[14rem] mb-3 sm:mb-0'
 				onClick={() => logEvent('News', 'View', data.title)}
 			>
 				<Zoom classDialog={styles.zoom}>
