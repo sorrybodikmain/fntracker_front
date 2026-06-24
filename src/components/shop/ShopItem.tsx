@@ -1,16 +1,16 @@
 import { ShopItemContent } from './ShopItemContent'
-import type { ItemShop } from '@/interfaces'
+import type { ShopEntry } from '@/types/fnapi'
 
 interface ShopItemProps {
-	data: ItemShop
+	entry: ShopEntry
 	likeLabel: string
 	unlikeLabel: string
 }
 
-export function ShopItem({ data, likeLabel, unlikeLabel }: ShopItemProps) {
+export function ShopItem({ entry, likeLabel, unlikeLabel }: ShopItemProps) {
 	return (
 		<ShopItemContent
-			data={data}
+			entry={entry}
 			likeLabel={likeLabel}
 			unlikeLabel={unlikeLabel}
 		/>

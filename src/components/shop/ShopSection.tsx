@@ -1,9 +1,10 @@
 import { getTranslations } from 'next-intl/server'
 import { ShopItem } from './ShopItem'
-import type { ItemShop } from '@/interfaces'
+import type { ShopEntry } from '@/types/fnapi'
+import { entryCosmeticName, entryLayoutId, entryLayoutName } from '@/utils/cosmetic'
 
 interface ShopSectionProps {
-	items: ItemShop[]
+	entries: ShopEntry[]
 	sectionId?: string
 	sectionName?: string
 	likeLabel?: string
@@ -11,7 +12,7 @@ interface ShopSectionProps {
 }
 
 export async function ShopSection({
-	items,
+	entries,
 	sectionId,
 	sectionName,
 	likeLabel,
@@ -19,12 +20,14 @@ export async function ShopSection({
 }: ShopSectionProps) {
 	const t = await getTranslations('shop')
 	const filtered = sectionId
-		? items.filter(item => item.section.id === sectionId)
-		: items
+		? entries.filter(entry => entryLayoutId(entry) === sectionId)
+		: entries
 
+	const sectionEntry = entries.find(
+		entry => entryLayoutId(entry) === sectionId
+	)
 	const resolvedSectionName =
-		sectionName ||
-		items.find(item => item.section.id === sectionId)?.section.name
+		sectionName ?? (sectionEntry ? entryLayoutName(sectionEntry) : undefined)
 
 	return (
 		<>
@@ -32,18 +35,14 @@ export async function ShopSection({
 				{resolvedSectionName}
 			</h1>
 			<div className=':uno: grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-6'>
-				{filtered.map((item, index) => {
-					const name = item.displayName || item.name
+				{filtered.map((entry, index) => {
+					const name = entryCosmeticName(entry)
 					return (
 						<ShopItem
-							key={index}
-							data={item}
-							likeLabel={
-								likeLabel ?? t('like_item', { name })
-							}
-							unlikeLabel={
-								unlikeLabel ?? t('unlike_item', { name })
-							}
+							key={`${entry.offerId}-${index}`}
+							entry={entry}
+							likeLabel={likeLabel ?? t('like_item', { name })}
+							unlikeLabel={unlikeLabel ?? t('unlike_item', { name })}
 						/>
 					)
 				})}

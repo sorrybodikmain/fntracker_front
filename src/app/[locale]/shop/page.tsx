@@ -1,0 +1,32 @@
+import { getLocale, getTranslations } from 'next-intl/server'
+import type { Metadata } from 'next'
+import { ShopBanner } from '@/components/shop/ShopBanner'
+import { ShopSection } from '@/components/shop/ShopSection'
+import { getShop } from '@/lib/api/fortnite'
+
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations('shop')
+	return {
+		title: `${t('title')} | FNTracker`,
+		description: t('banner_title')
+	}
+}
+
+export default async function ShopPage() {
+	const locale = await getLocale()
+	const shop = await getShop(locale)
+	const sectionIds = [
+		...new Set(shop.entries.map(entry => entry.layout?.id ?? entry.layoutId))
+	]
+
+	return (
+		<div>
+			<ShopBanner />
+			<div className=':uno: container mx-auto text-white p-3 min-h-screen'>
+				{sectionIds.map(id => (
+					<ShopSection key={id} entries={shop.entries} sectionId={id} />
+				))}
+			</div>
+		</div>
+	)
+}

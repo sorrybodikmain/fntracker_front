@@ -1,40 +1,39 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { LikeButton } from '@/components/like/LikeButton'
-import type { ItemShop } from '@/interfaces'
+import type { ShopEntry } from '@/types/fnapi'
 import { fixImageWidth } from '@/utils'
+import { entryCosmeticId, entryCosmeticName, entryImage } from '@/utils/cosmetic'
 
 interface ShopItemContentProps {
-	data: ItemShop
+	entry: ShopEntry
 	likeLabel: string
 	unlikeLabel: string
 }
 
 export function ShopItemContent({
-	data,
+	entry,
 	likeLabel,
 	unlikeLabel
 }: ShopItemContentProps) {
-	const itemId = data.mainId || data.id
-	const name = data.displayName || data.name
-	const itemPrice = data.price?.finalPrice || +JSON.stringify(data.price) || 0
-	const itemImg = fixImageWidth(
-		data.images ? data.images.background : data?.displayAssets?.[0]?.background,
-		400
-	)
+	const itemId = entryCosmeticId(entry)
+	const name = entryCosmeticName(entry)
+	const itemImg = fixImageWidth(entryImage(entry), 400)
 
 	return (
 		<div>
 			<div className=':uno: relative overflow-hidden rounded-lg hover:scale-[1.02] transition'>
 				<Link href={`/locker/${itemId}`}>
 					<div className=':uno: relative w-full h-44 sm:h-56'>
-						<Image
-							src={itemImg}
-							alt={name}
-							fill
-							className=':uno: mx-auto hover:scale-[1.1] block transition-all object-cover'
-							sizes='(max-width: 640px) 50vw, 200px'
-						/>
+						{itemImg ? (
+							<Image
+								src={itemImg}
+								alt={name}
+								fill
+								className=':uno: mx-auto hover:scale-[1.1] block transition-all object-cover'
+								sizes='(max-width: 640px) 50vw, 200px'
+							/>
+						) : null}
 					</div>
 				</Link>
 				<LikeButton
@@ -47,7 +46,7 @@ export function ShopItemContent({
 				<div className=':uno: absolute text-xs sm:text-sm bottom-0 w-full p-1.5 bg-gray-600'>
 					<h1 className=':uno: text-center text-gray-100 px-1 pb-1'>{name}</h1>
 					<p className=':uno: text-gray-400 flex justify-center items-center'>
-						<span className=':uno: mr-1'>{itemPrice}</span>
+						<span className=':uno: mr-1'>{entry.finalPrice}</span>
 						<Image
 							src='/images/v-bucks.webp'
 							width={20}

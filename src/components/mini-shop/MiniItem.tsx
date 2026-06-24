@@ -1,35 +1,36 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import type { ItemShop } from '@/interfaces'
+import type { ShopEntry } from '@/types/fnapi'
 import { fixImageWidth } from '@/utils'
+import { entryCosmeticId, entryCosmeticName, entryImage } from '@/utils/cosmetic'
 
 interface MiniItemProps {
-	data: ItemShop
+	entry: ShopEntry
 }
 
-export function MiniItem({ data }: MiniItemProps) {
-	const itemId = data.mainId || data.id
-	const background =
-		data.displayAssets?.[0]?.background ??
-		(data.images ? data.images.background : '')
+export function MiniItem({ entry }: MiniItemProps) {
+	const itemId = entryCosmeticId(entry)
+	const name = entryCosmeticName(entry)
+	const itemImg = fixImageWidth(entryImage(entry), 400)
 
 	return (
 		<div className=':uno: relative overflow-hidden rounded-lg hover:scale-105 transition'>
 			<Link href={`/locker/${itemId}`}>
 				<div className=':uno: relative w-full h-44 sm:h-48 md:h-52 lg:h-36'>
-					<Image
-						src={fixImageWidth(background, 400)}
-						alt={data.displayName || data.name}
-						fill
-						className=':uno: object-cover'
-						sizes='(max-width: 1024px) 33vw, 200px'
-					/>
+					{itemImg ? (
+						<Image
+							src={itemImg}
+							alt={name}
+							fill
+							className=':uno: object-cover'
+							sizes='200px'
+						/>
+					) : null}
 				</div>
-
 				<div className=':uno: absolute text-xs sm:text-sm bottom-0 w-full bg-gray-600'>
-					<h1 className=':uno: text-center text-gray-100'>{data.displayName}</h1>
+					<h1 className=':uno: text-center text-gray-100'>{name}</h1>
 					<p className=':uno: text-gray-400 flex justify-center items-center'>
-						{data.price.finalPrice}
+						{entry.finalPrice}
 						<Image
 							src='/images/v-bucks.webp'
 							width={20}

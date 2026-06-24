@@ -2,28 +2,20 @@
 
 import { useEffect, useState } from 'react'
 import { BiCookie } from 'react-icons/bi'
-import { useCookies } from 'react-cookie'
 import { useTranslations } from 'next-intl'
+import { useCookieConsentStore } from '@/stores/use-cookie-consent-store'
 
 export function CookieBanner() {
-	const [showBanner, setShowBanner] = useState(false)
-	const [cookies, setCookie] = useCookies(['fntracker-allow-cookie'])
+	const [mounted, setMounted] = useState(false)
+	const accepted = useCookieConsentStore(state => state.accepted)
+	const accept = useCookieConsentStore(state => state.accept)
 	const t = useTranslations('cookie-banner')
 
-	const handleClick = (e: React.MouseEvent) => {
-		e.preventDefault()
-		setShowBanner(false)
-		setCookie('fntracker-allow-cookie', true, {
-			maxAge: 24 * 60 * 60 * 365,
-			path: '/'
-		})
-	}
-
 	useEffect(() => {
-		if (!cookies['fntracker-allow-cookie']) setShowBanner(true)
-	}, [cookies])
+		setMounted(true)
+	}, [])
 
-	if (!showBanner) return null
+	if (!mounted || accepted) return null
 
 	return (
 		<div className=':uno: fixed bottom-5 z-10 text-white p-3 left-1/2 -translate-x-1/2 container'>
@@ -35,7 +27,7 @@ export function CookieBanner() {
 					</div>
 					<div className=':uno: flex ml-3 gap-x-2 text-xs'>
 						<button
-							onClick={handleClick}
+							onClick={() => accept()}
 							className=':uno: bg-primary hover:bg-indigo-400 p-1 rounded'
 						>
 							{t('banner_accept')}

@@ -1,13 +1,15 @@
 import { getTranslations } from 'next-intl/server'
-import type { ShopItemResponse } from '@/interfaces'
+import type { BRCosmetic } from '@/types/fnapi'
 
 interface ItemDataTableProps {
-	data: ShopItemResponse
+	cosmetic: BRCosmetic
 }
 
-export async function ItemDataTable({ data }: ItemDataTableProps) {
+export async function ItemDataTable({ cosmetic }: ItemDataTableProps) {
 	const t = await getTranslations('locker')
-	const history = [...data.item.shopHistory].reverse()
+	const history = [...cosmetic.shopHistory].reverse()
+
+	if (history.length === 0) return null
 
 	return (
 		<div className=':uno: mb-4'>
@@ -21,18 +23,14 @@ export async function ItemDataTable({ data }: ItemDataTableProps) {
 							<th scope='col' className=':uno: py-3 px-6'>
 								{t('table_date')}
 							</th>
-							<th scope='col' className=':uno: py-3 px-6'>
-								{t('table_price')}
-							</th>
 						</tr>
 					</thead>
 					<tbody>
-						{history.map((item, index) => (
+						{history.map((date, index) => (
 							<tr key={index} className=':uno: text-white'>
 								<td className=':uno: py-4 px-6'>
-									{new Date(item).toLocaleDateString()}
+									{new Date(date).toLocaleDateString()}
 								</td>
-								<td className=':uno: py-4 px-6'>{data.item.price}</td>
 							</tr>
 						))}
 					</tbody>

@@ -17,10 +17,7 @@ export function Header() {
 		{ name: t('allitems_title'), href: '/all-items/' }
 	]
 
-	const baseRoutes = [
-		{ name: t('bp_title'), href: '/battle-pass/current' },
-		{ name: t('maps_link'), href: '/compare-maps' }
-	]
+	const baseRoutes = [{ name: t('maps_link'), href: '/map' }]
 
 	return (
 		<section id='header'>
@@ -43,30 +40,29 @@ export function Header() {
 									<AiFillCaretDown className=':uno: fill-current h-4 w-4' />
 								</Link>
 								<ul className=':uno: absolute hidden rounded bg-gray-700 text-gray-300 group-hover:block'>
-									{shopRoutes.map((router, index) => (
+									{shopRoutes.map((route, index) => (
 										<li key={index}>
 											<Link
 												className=':uno: hover:bg-gray-600 py-1.5 px-4 block w-28'
-												href={router.href}
+												href={route.href}
 											>
-												{router.name}
+												{route.name}
 											</Link>
 										</li>
 									))}
 								</ul>
 							</div>
 
-							{baseRoutes.map((router, index) => (
+							{baseRoutes.map((route, index) => (
 								<li key={index}>
 									<Link
-										href={router.href}
-										className={`block hover:text-gray-300 py-1 md:mx-1 ${
-											pathname === router.href
+										href={route.href}
+										className={`block hover:text-gray-300 py-1 md:mx-1 ${pathname === route.href
 												? 'underline text-gray-200'
 												: 'text-gray-500'
-										}`}
+											}`}
 									>
-										{router.name}
+										{route.name}
 									</Link>
 								</li>
 							))}

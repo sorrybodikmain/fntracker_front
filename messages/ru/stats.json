@@ -10,5 +10,5 @@
   "profile_card_views": "Просмотров",
   "profile_error": "404 Не Найдено. Мы не можем найти ваш профиль",
   "seasons_title": "Статистика по сезонам",
-  "title": "Статистика {{nickname}}"
+  "title": "Статистика {nickname}"
 }

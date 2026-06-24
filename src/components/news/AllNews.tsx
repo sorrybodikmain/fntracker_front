@@ -1,12 +1,20 @@
-import type { INovelty } from '@/interfaces'
+import type { BRNews } from '@/types/fnapi'
 import { Novelty } from './Novelty'
 
 interface AllNewsProps {
-	news: INovelty[]
+	news: BRNews
 	title: string
 }
 
 export function AllNews({ news, title }: AllNewsProps) {
+	const items = [
+		...(news.motds ?? []).map(motd => ({ item: motd, date: news.date })),
+		...(news.messages ?? []).map(message => ({
+			item: message,
+			date: news.date
+		}))
+	]
+
 	return (
 		<section id='news'>
 			<div className=':uno: bg-gray-900 p-6 text-white'>
@@ -15,8 +23,8 @@ export function AllNews({ news, title }: AllNewsProps) {
 						{title.toUpperCase()}
 					</h1>
 					<div className=':uno: grid grid-cols-1 space-y-4 mt-4'>
-						{news.slice(0, 6).map((post, index) => (
-							<Novelty key={index} data={post} />
+						{items.slice(0, 6).map((entry, index) => (
+							<Novelty key={index} item={entry.item} date={entry.date} />
 						))}
 					</div>
 				</div>

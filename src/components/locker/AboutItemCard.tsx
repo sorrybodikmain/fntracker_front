@@ -1,16 +1,16 @@
 import { getTranslations } from 'next-intl/server'
-import type { ShopItemResponse } from '@/interfaces'
+import type { BRCosmetic } from '@/types/fnapi'
 import { LikeButton } from '@/components/like/LikeButton'
 import { ZoomableImage } from '@/components/shared/ZoomableImage'
 import { fixImageWidth } from '@/utils'
+import { cosmeticDisplayImage } from '@/utils/cosmetic'
 
 interface AboutItemCardProps {
-	data: ShopItemResponse
+	cosmetic: BRCosmetic
 }
 
-export async function AboutItemCard({ data }: AboutItemCardProps) {
+export async function AboutItemCard({ cosmetic }: AboutItemCardProps) {
 	const t = await getTranslations('locker')
-	const itemName = data.item.name
 
 	return (
 		<>
@@ -21,8 +21,8 @@ export async function AboutItemCard({ data }: AboutItemCardProps) {
 				<div className=':uno: w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className=':uno: relative bg-cover shadow-lg'>
 						<ZoomableImage
-							src={fixImageWidth(data.item.images.background, 500)}
-							alt={data.item.id}
+							src={fixImageWidth(cosmeticDisplayImage(cosmetic), 500)}
+							alt={cosmetic.id}
 							width={500}
 							height={500}
 							className=':uno: object-cover w-full rounded-lg'
@@ -30,44 +30,29 @@ export async function AboutItemCard({ data }: AboutItemCardProps) {
 						/>
 					</div>
 				</div>
-
 				<div className=':uno: relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
 					<h5 className=':uno: text-2xl mb-1 text-white flex'>
-						{data.item.name}
+						{cosmetic.name}
 						<LikeButton
-							itemId={data.item.id}
-							itemName={itemName}
-							likeLabel={t('like_item', { name: itemName })}
-							unlikeLabel={t('unlike_item', { name: itemName })}
+							itemId={cosmetic.id}
+							itemName={cosmetic.name}
+							likeLabel={t('like_item', { name: cosmetic.name })}
+							unlikeLabel={t('unlike_item', { name: cosmetic.name })}
 							className=':uno: ml-auto'
 						/>
 					</h5>
 					<p className=':uno: text-md'>
-						{data.item.rarity.name} | {data.item.type.name}
+						{cosmetic.rarity.displayValue} | {cosmetic.type.displayValue}
 					</p>
-					<p className=':uno: text-md'>{data.item.description}</p>
-					<p className=':uno: text-sm'>
-						{Math.floor(100 * data.item.interest) + ' ' + t('card_interested')}
-					</p>
+					<p className=':uno: text-md'>{cosmetic.description}</p>
 					<div className=':uno: items-end bottom-0 relative lg:absolute mt-2'>
-						{data.item.battlepass ? (
-							<h4 className=':uno: text-white'>
-								{t('card_bp') +
-									data.item.battlepass.displayText.chapterSeason.toLowerCase()}
-								.
-							</h4>
-						) : (
-							<>
-								<p>
-									{t('card_appeared') +
-										' ' +
-										new Date(data.item.releaseDate).toLocaleDateString()}
-								</p>
-								<h4 className=':uno: text-white text-lg'>
-									{t('card_sold') + ' ' + data.item.price} V-bucks.
-								</h4>
-							</>
-						)}
+						{cosmetic.introduction?.text ? (
+							<h4 className=':uno: text-white'>{cosmetic.introduction.text}</h4>
+						) : null}
+						<p>
+							{t('card_appeared')}{' '}
+							{new Date(cosmetic.added).toLocaleDateString()}
+						</p>
 					</div>
 				</div>
 			</div>
