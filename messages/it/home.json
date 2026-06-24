@@ -1,1 +1,11 @@
-{"posts_title":"Ultime notizie sul gioco","seach_input":"Il tuo nickname","seacrh_title":"Trova le tue statistiche di Fortnite","search_link":"Ricerca disponibile su EGS, Steam e PSN","shop_link":"Visualizza l'intero negozio","shop_title":"Negozio quotidiano"}
+{
+  "posts_title": "Ultime notizie sul gioco",
+  "news_tab_br": "Battle Royale",
+  "news_tab_stw": "Save the World",
+  "news_tab_creative": "Creative",
+  "seach_input": "Il tuo nickname",
+  "seacrh_title": "Trova le tue statistiche di Fortnite",
+  "search_link": "Ricerca disponibile su EGS, Steam e PSN",
+  "shop_link": "Visualizza l'intero negozio",
+  "shop_title": "Negozio quotidiano"
+}

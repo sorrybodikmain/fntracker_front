@@ -1,1 +1,10 @@
-{"pageDesc":"Évolution de toutes les cartes Fortnite","pageTitle":"Comparaison de cartes","showNames":"PI"}
+{
+  "pageDesc": "Carte Battle Royale actuelle avec tous les points d'intérêt",
+  "pageTitle": "Carte Fortnite",
+  "showNames": "Lieux",
+  "view_blank": "Carte vierge",
+  "view_pois": "Avec labels",
+  "poi_search": "Rechercher des lieux...",
+  "poi_count": "{count} lieux",
+  "zoom_hint": "Cliquez pour zoomer"
+}

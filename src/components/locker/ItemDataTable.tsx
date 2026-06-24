@@ -7,7 +7,7 @@ interface ItemDataTableProps {
 
 export async function ItemDataTable({ cosmetic }: ItemDataTableProps) {
 	const t = await getTranslations('locker')
-	const history = [...cosmetic.shopHistory].reverse()
+	const history = [...(cosmetic.shopHistory ?? [])].reverse()
 
 	if (history.length === 0) return null
 

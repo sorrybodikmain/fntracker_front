@@ -14,10 +14,15 @@ export function Header() {
 	const shopRoutes = [
 		{ name: t('shop_link'), href: '/shop' },
 		{ name: t('upcoming_title'), href: '/upcoming-items/' },
-		{ name: t('allitems_title'), href: '/all-items/' }
+		{ name: t('allitems_title'), href: '/all-items/' },
+		{ name: t('catalog_title'), href: '/catalog' },
+		{ name: t('banners_title'), href: '/banners' }
 	]
 
-	const baseRoutes = [{ name: t('maps_link'), href: '/map' }]
+	const baseRoutes = [
+		{ name: t('maps_link'), href: '/map' },
+		{ name: t('playlists_title'), href: '/playlists' }
+	]
 
 	return (
 		<section id='header'>
@@ -39,11 +44,11 @@ export function Header() {
 									<span className=':uno: mr-1'>{t('shop_link')}</span>
 									<AiFillCaretDown className=':uno: fill-current h-4 w-4' />
 								</Link>
-								<ul className=':uno: absolute hidden rounded bg-gray-700 text-gray-300 group-hover:block'>
+								<ul className=':uno: absolute hidden rounded bg-gray-700 text-gray-300 group-hover:block z-10'>
 									{shopRoutes.map((route, index) => (
 										<li key={index}>
 											<Link
-												className=':uno: hover:bg-gray-600 py-1.5 px-4 block w-28'
+												className=':uno: hover:bg-gray-600 py-1.5 px-4 block whitespace-nowrap'
 												href={route.href}
 											>
 												{route.name}
@@ -57,7 +62,8 @@ export function Header() {
 								<li key={index}>
 									<Link
 										href={route.href}
-										className={`block hover:text-gray-300 py-1 md:mx-1 ${pathname === route.href
+										className={`block hover:text-gray-300 py-1 md:mx-1 whitespace-nowrap ${pathname === route.href ||
+												pathname.startsWith(`${route.href}/`)
 												? 'underline text-gray-200'
 												: 'text-gray-500'
 											}`}

@@ -2,7 +2,6 @@
 
 import { NextIntlClientProvider } from 'next-intl'
 import { ToastContainer } from 'react-toastify'
-import { Analytics } from '@/components/Analytics'
 
 interface ProvidersProps {
 	children: React.ReactNode
@@ -17,7 +16,6 @@ export function Providers({ children, locale, messages }: ProvidersProps) {
 			messages={messages}
 			timeZone='Europe/Kyiv'
 		>
-			<Analytics />
 			{children}
 			<ToastContainer
 				position='top-right'

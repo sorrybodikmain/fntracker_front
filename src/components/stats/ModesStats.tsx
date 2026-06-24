@@ -8,7 +8,9 @@ interface ModesStatsProps {
 
 export async function ModesStats({ stats }: ModesStatsProps) {
 	const t = await getTranslations('stats')
-	const modes = stats.stats.all
+	const modes = stats.stats?.all
+
+	if (!modes) return null
 
 	return (
 		<div className=':uno: container text-white mx-auto p-3'>

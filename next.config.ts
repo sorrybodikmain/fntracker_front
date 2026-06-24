@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "fortnite-api.com" },
       { protocol: "https", hostname: "**.fortnite-api.com" },
       { protocol: "https", hostname: "**.epicgames.com" },
+      { protocol: "https", hostname: "**.unrealengine.com" },
       { protocol: "https", hostname: "fntracker.pp.ua" },
     ],
   },

@@ -1,9 +1,14 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { SearchBar } from '@/components/search-bar/SearchBar'
-import { AllNews } from '@/components/news/AllNews'
+import { NewsTabs } from '@/components/news/NewsTabs'
 import { MiniShop } from '@/components/mini-shop/MiniShop'
-import { getNews, getShop } from '@/lib/api/fortnite'
+import {
+	getCreativeNews,
+	getNews,
+	getShop,
+	getStwNews
+} from '@/lib/api/fortnite'
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getTranslations('header')
@@ -14,13 +19,22 @@ export default async function HomePage() {
 	const locale = await getLocale()
 	const t = await getTranslations('home')
 
-	const [shop, news] = await Promise.all([getShop(locale), getNews(locale)])
+	const [shop, brNews, stwNews, creativeNews] = await Promise.all([
+		getShop(locale),
+		getNews(locale),
+		getStwNews(locale),
+		getCreativeNews(locale)
+	])
 
 	return (
 		<div>
 			<SearchBar />
 			<div className=':uno: container flex flex-col-reverse lg:flex-row mx-auto'>
-				<AllNews news={news} title={t('posts_title')} />
+				<NewsTabs
+					brNews={brNews}
+					stwNews={stwNews}
+					creativeNews={creativeNews}
+				/>
 				<MiniShop
 					entries={shop.entries}
 					title={t('shop_title')}

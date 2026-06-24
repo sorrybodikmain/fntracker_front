@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { ShopEntry } from '@/types/fnapi'
-import { entryLayoutName } from '@/utils/cosmetic'
+import { getMiniShopEntries } from '@/utils/cosmetic'
 import { MiniItem } from './MiniItem'
 interface MiniShopProps {
 	entries: ShopEntry[]
@@ -9,9 +9,7 @@ interface MiniShopProps {
 }
 
 export function MiniShop({ entries, title, shopLinkLabel }: MiniShopProps) {
-	const dailyEntries = entries.filter(entry =>
-		entryLayoutName(entry).toLowerCase().includes('daily')
-	)
+	const miniEntries = getMiniShopEntries(entries)
 
 	return (
 		<section id='mini-shop'>
@@ -20,7 +18,7 @@ export function MiniShop({ entries, title, shopLinkLabel }: MiniShopProps) {
 					{title.toUpperCase()}
 				</h1>
 				<div className=':uno: mt-4 grid-cols-2 grid-rows-3 gap-3 sm:gap-5 grid lg:grid-cols-2 lg:grid-rows-3 md:grid-rows-2 sm:grid-rows-2 sm:grid-cols-3'>
-					{dailyEntries.map((entry, index) => (
+					{miniEntries.map((entry, index) => (
 						<MiniItem key={`${entry.offerId}-${index}`} entry={entry} />
 					))}
 				</div>

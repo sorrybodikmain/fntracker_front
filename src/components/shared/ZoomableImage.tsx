@@ -7,33 +7,49 @@ import styles from '@/styles/Zoom.module.css'
 
 const Zoom = dynamic(() => import('react-medium-image-zoom'), { ssr: false })
 
-interface ZoomableImageProps {
+type ZoomableImageProps = {
 	src: string
 	alt: string
-	width: number
-	height: number
 	className?: string
 	priority?: boolean
-}
+} & (
+		| { fill: true; sizes?: string; width?: never; height?: never }
+		| { fill?: false; width: number; height: number; sizes?: never }
+	)
 
 export function ZoomableImage({
 	src,
 	alt,
 	width,
 	height,
+	fill,
+	sizes = '100vw',
 	className,
 	priority
 }: ZoomableImageProps) {
 	return (
 		<Zoom classDialog={styles.zoom}>
-			<Image
-				src={src}
-				alt={alt}
-				width={width}
-				height={height}
-				className={className}
-				priority={priority}
-			/>
+			<span className={fill ? ':uno: relative block h-full w-full' : undefined}>
+				{fill ? (
+					<Image
+						src={src}
+						alt={alt}
+						fill
+						sizes={sizes}
+						className={className}
+						priority={priority}
+					/>
+				) : (
+					<Image
+						src={src}
+						alt={alt}
+						width={width}
+						height={height}
+						className={className}
+						priority={priority}
+					/>
+				)}
+			</span>
 		</Zoom>
 	)
 }

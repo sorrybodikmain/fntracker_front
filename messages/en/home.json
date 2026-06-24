@@ -1,1 +1,11 @@
-{"posts_title":"Latest In-Game News","seach_input":"Your nickname","seacrh_title":"Find your Fortnite stats","search_link":"Search available on EGS, Steam and PSN","shop_link":"View full shop","shop_title":"Daily Shop"}
+{
+  "posts_title": "Latest In-Game News",
+  "news_tab_br": "Battle Royale",
+  "news_tab_stw": "Save the World",
+  "news_tab_creative": "Creative",
+  "seach_input": "Your nickname",
+  "seacrh_title": "Find your Fortnite stats",
+  "search_link": "Search available on EGS, Steam and PSN",
+  "shop_link": "View full shop",
+  "shop_title": "Daily Shop"
+}

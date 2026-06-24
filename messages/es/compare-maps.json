@@ -1,1 +1,10 @@
-{"pageDesc":"Evolución de todos los mapas de Fortnite","pageTitle":"Comparación de mapas","showNames":"PDI"}
+{
+  "pageDesc": "Mapa actual de Battle Royale con todos los puntos de interés",
+  "pageTitle": "Mapa de Fortnite",
+  "showNames": "Ubicaciones",
+  "view_blank": "Mapa limpio",
+  "view_pois": "Con etiquetas",
+  "poi_search": "Buscar ubicaciones...",
+  "poi_count": "{count} ubicaciones",
+  "zoom_hint": "Haz clic para ampliar"
+}

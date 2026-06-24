@@ -1,1 +1,10 @@
-{"pageDesc":"Эволюция всех карт Fortnite","pageTitle":"Сравнение карт","showNames":"POI"}
+{
+  "pageDesc": "Актуальная карта Battle Royale со всеми точками интереса",
+  "pageTitle": "Карта Fortnite",
+  "showNames": "Локации",
+  "view_blank": "Чистая карта",
+  "view_pois": "С названиями",
+  "poi_search": "Поиск локаций...",
+  "poi_count": "{count} локаций",
+  "zoom_hint": "Нажмите для увеличения"
+}

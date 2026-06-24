@@ -3,7 +3,7 @@
 import { useLocale } from 'next-intl'
 import type { BRNewsMotd, BRNewsMessage } from '@/types/fnapi'
 import { ZoomableImage } from '@/components/shared/ZoomableImage'
-import { fixImageWidth } from '@/utils'
+import { fixNewsImage } from '@/utils'
 import { logEvent } from '@/utils/gtag.utils'
 
 interface NoveltyProps {
@@ -21,15 +21,15 @@ export function Novelty({ item, date }: NoveltyProps) {
 		<div className=':uno: flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
 			{image ? (
 				<div
-					className=':uno: relative bg-cover w-full md:w-4/12 max-h-[18rem] md:max-h-[14rem] mb-3 sm:mb-0'
+					className=':uno: w-full md:w-4/12 mb-3 md:mb-0 shrink-0 overflow-hidden rounded-lg'
 					onClick={() => logEvent('News', 'View', title)}
 				>
 					<ZoomableImage
-						src={fixImageWidth(image, 360)}
+						src={fixNewsImage(image, 480)}
 						alt={title}
-						width={360}
+						width={480}
 						height={240}
-						className=':uno: object-cover w-full h-full rounded-lg'
+						className=':uno: w-full h-auto object-cover rounded-lg'
 					/>
 				</div>
 			) : null}

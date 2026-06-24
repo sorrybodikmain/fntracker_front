@@ -1,1 +1,10 @@
-{"pageDesc":"Entwicklung aller Fortnite-Karten","pageTitle":"Kartenvergleich","showNames":"Sonderziel"}
+{
+  "pageDesc": "Aktuelle Battle-Royale-Karte mit allen Points of Interest",
+  "pageTitle": "Fortnite-Karte",
+  "showNames": "Orte",
+  "view_blank": "Saubere Karte",
+  "view_pois": "Mit Beschriftung",
+  "poi_search": "Orte suchen...",
+  "poi_count": "{count} Orte",
+  "zoom_hint": "Zum Vergrößern klicken"
+}

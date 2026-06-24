@@ -1,1 +1,17 @@
-{"allitems_title":"Toutes les choses","bp_title":"Pass de combat","exit_link":"Sortie","favorite_link":"Mon préféré","home_link":"Maison","maps_link":"Carte","profile_link":"Profil","shop_link":"Boutique","signin_link":"S'identifier","signup_link":"Enregistrer","upcoming_title":"Bientôt en magasin"}
+{
+  "allitems_title": "Toutes les choses",
+  "banners_title": "Bannières",
+  "bp_title": "Pass de combat",
+  "catalog_title": "Catalogue",
+  "creator_code_title": "Code créateur",
+  "exit_link": "Sortie",
+  "favorite_link": "Mon préféré",
+  "home_link": "Maison",
+  "maps_link": "Carte",
+  "playlists_title": "Playlists",
+  "profile_link": "Profil",
+  "shop_link": "Boutique",
+  "signin_link": "S'identifier",
+  "signup_link": "Enregistrer",
+  "upcoming_title": "Bientôt en magasin"
+}

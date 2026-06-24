@@ -1,0 +1,19 @@
+{
+  "title": "Extended Catalog",
+  "tab_tracks": "Jam Tracks",
+  "tab_cars": "Cars",
+  "tab_lego": "LEGO",
+  "tab_instruments": "Instruments",
+  "tab_beans": "Fall Guys",
+  "aes_title": "AES Keys",
+  "aes_build": "Build",
+  "aes_main_key": "Main key",
+  "aes_updated": "Updated",
+  "aes_dynamic_count": "{count} dynamic keys",
+  "aes_version": "Версия",
+  "aes_copy": "Копировать",
+  "aes_copied": "Скопировано",
+  "aes_key_name": "Pak файл",
+  "aes_key_value": "Ключ",
+  "aes_no_dynamic": "Динамические ключи недоступны"
+}

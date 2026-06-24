@@ -27,7 +27,7 @@ export function CosmeticItem({
 					{itemImg ? (
 						<Image
 							src={itemImg}
-							alt={cosmetic.name}
+							alt={cosmetic.name ?? cosmetic.id}
 							fill
 							className=':uno: mx-auto hover:scale-[1.1] block transition-all object-cover'
 							sizes='(max-width: 640px) 50vw, 200px'
@@ -37,17 +37,17 @@ export function CosmeticItem({
 			</Link>
 			<LikeButton
 				itemId={cosmetic.id}
-				itemName={cosmetic.name}
+				itemName={cosmetic.name ?? cosmetic.id}
 				likeLabel={likeLabel}
 				unlikeLabel={unlikeLabel}
 				className=':uno: absolute top-0 right-0 text-4xl p-2'
 			/>
 			<div className=':uno: absolute text-xs sm:text-sm bottom-0 w-full p-1.5 bg-gray-600'>
 				<h1 className=':uno: text-center text-gray-100 px-1 pb-1'>
-					{cosmetic.name}
+					{cosmetic.name ?? cosmetic.id}
 				</h1>
 				<p className=':uno: text-center text-gray-400'>
-					{cosmetic.rarity.displayValue}
+					{cosmetic.rarity?.displayValue ?? ''}
 				</p>
 			</div>
 		</div>

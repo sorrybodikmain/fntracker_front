@@ -1,1 +1,11 @@
-{"posts_title":"Последние Внутриигровые Новости","seach_input":"Твой никнейм","seacrh_title":"Найдите свою статистику Fortnite","search_link":"Доступен поиск по EGS, Steam и PSN","shop_link":"Просмотреть весь магазин","shop_title":"Ежедневный магазин"}
+{
+  "posts_title": "Последние Внутриигровые Новости",
+  "news_tab_br": "Battle Royale",
+  "news_tab_stw": "Save the World",
+  "news_tab_creative": "Creative",
+  "seach_input": "Твой никнейм",
+  "seacrh_title": "Найдите свою статистику Fortnite",
+  "search_link": "Доступен поиск по EGS, Steam и PSN",
+  "shop_link": "Просмотреть весь магазин",
+  "shop_title": "Ежедневный магазин"
+}

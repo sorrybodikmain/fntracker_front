@@ -42,17 +42,22 @@ export async function AboutItemCard({ cosmetic }: AboutItemCardProps) {
 						/>
 					</h5>
 					<p className=':uno: text-md'>
-						{cosmetic.rarity.displayValue} | {cosmetic.type.displayValue}
+						{cosmetic.rarity?.displayValue ?? ''}
+						{cosmetic.type?.displayValue
+							? ` | ${cosmetic.type.displayValue}`
+							: ''}
 					</p>
-					<p className=':uno: text-md'>{cosmetic.description}</p>
+					<p className=':uno: text-md'>{cosmetic.description ?? ''}</p>
 					<div className=':uno: items-end bottom-0 relative lg:absolute mt-2'>
 						{cosmetic.introduction?.text ? (
 							<h4 className=':uno: text-white'>{cosmetic.introduction.text}</h4>
 						) : null}
-						<p>
-							{t('card_appeared')}{' '}
-							{new Date(cosmetic.added).toLocaleDateString()}
-						</p>
+						{cosmetic.added ? (
+							<p>
+								{t('card_appeared')}{' '}
+								{new Date(cosmetic.added).toLocaleDateString()}
+							</p>
+						) : null}
 					</div>
 				</div>
 			</div>
