@@ -1,2 +1,2 @@
-export * from './api.utils.ts'
-export * from './gtag.utils.ts'
+export * from './api.utils'
+export * from './gtag.utils'

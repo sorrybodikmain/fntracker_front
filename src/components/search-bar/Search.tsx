@@ -1,46 +1,50 @@
-import { AccountIdStr } from '@/interfaces/user-stats.interface.ts'
+'use client'
+
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import type { AccountIdStr } from '@/interfaces'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useOutside } from '@/hooks/useOutside'
-import { FC, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { logEvent } from '@/utils/gtag.utils'
-import { fetcher } from '@/libs/apiFetcher'
-import { useNavigate } from 'react-router'
-import { Link } from 'react-router-dom'
 
-const Search: FC = () => {
-	const { t } = useTranslation('home')
+export function Search() {
+	const t = useTranslations('home')
 	const [nickname, setNickname] = useState('')
 	const [data, setData] = useState<AccountIdStr>()
 	const { ref, isShow, setIsShow } = useOutside(false)
 	const debounced = useDebounce<string>(nickname)
-	const navigate = useNavigate()
-	const handleSubmit = (e: any) => {
-		navigate(`/stats/${nickname}`)
-		logEvent('Search-Profile', 'Search', `Searched-'${nickname}'`)
+	const router = useRouter()
+
+	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
+		router.push(`/stats/${nickname}`)
+		logEvent('Search-Profile', 'Search', `Searched-'${nickname}'`)
 	}
 
 	useEffect(() => {
-		if (debounced.length > 2)
-			fetcher(
-				`https://fortniteapi.io/v1/lookup?strict=false&limit=10&username=${nickname}`
-			).then(res => {
-				setIsShow(true)
-				setData(res)
-			})
-		else setIsShow(false)
-	}, [debounced])
+		if (debounced.length > 2) {
+			fetch(`/api/lookup?username=${encodeURIComponent(nickname)}`)
+				.then(res => res.json())
+				.then(res => {
+					setIsShow(true)
+					setData(res)
+				})
+		} else {
+			setIsShow(false)
+		}
+	}, [debounced, nickname, setIsShow])
 
 	return (
 		<div className=':uno: flex items-center justify-center'>
 			<div className=':uno: relative text-sm'>
 				<form onSubmit={handleSubmit}>
 					<input
-						type={'search'}
+						type='search'
 						value={nickname}
 						onChange={e => setNickname(e.target.value)}
-						placeholder={t('seach_input')!}
+						placeholder={t('seach_input')}
 						className=':uno: w-full sm:w-80 h-9 bg-gray-800 rounded-lg p-2 hover:scale-105 transition'
 					/>
 				</form>
@@ -56,10 +60,12 @@ const Search: FC = () => {
 									key={item.sortPosition}
 									className=':uno: flex justify-between p-2'
 								>
-									<Link to={'stats/' + item.matches[0].value}>
+									<Link href={`/stats/${item.matches[0].value}`}>
 										{item.matches[0].value}
 									</Link>
-									<p className=':uno: text-gray-400'>{item.matches[0].platform}</p>
+									<p className=':uno: text-gray-400'>
+										{item.matches[0].platform}
+									</p>
 								</li>
 							))}
 						</ul>
@@ -69,5 +75,3 @@ const Search: FC = () => {
 		</div>
 	)
 }
-
-export default Search

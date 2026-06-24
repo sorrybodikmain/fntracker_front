@@ -1,22 +1,24 @@
-import BPCardProgressBar from '@/components/battle-pass/bpcard/BPCardProgressBar'
-import { IBattlePassResponse } from '@/interfaces/battle-pass.interface'
-import { fillMassive } from '@/utils/api.utils'
-import { useTranslation } from 'react-i18next'
-import { FC, PropsWithChildren } from 'react'
-import { logEvent } from '@/utils/gtag.utils'
-import { useNavigate } from 'react-router'
+'use client'
 
-interface IBPCard {
+import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { BPCardProgressBar } from '@/components/battle-pass/bpcard/BPCardProgressBar'
+import type { IBattlePassResponse } from '@/interfaces'
+import { fillMassive } from '@/utils'
+import { logEvent } from '@/utils/gtag.utils'
+
+interface BPCardProps {
 	data: IBattlePassResponse
 }
 
-const BPCard: FC<PropsWithChildren<IBPCard>> = ({ data }) => {
-	const { t } = useTranslation('battle-pass')
-	const navigate = useNavigate()
+export function BPCard({ data }: BPCardProps) {
+	const t = useTranslations('battle-pass')
+	const router = useRouter()
 	const versions = fillMassive(2, 26)
 	const version = data.season || 23
-	const handleVersion = (e: any) => {
-		navigate('/battle-pass/' + e.target.value)
+
+	const handleVersion = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		router.push('/battle-pass/' + e.target.value)
 		logEvent('Battle-Pass', 'Change', `To-${e.target.value}`)
 	}
 
@@ -50,5 +52,3 @@ const BPCard: FC<PropsWithChildren<IBPCard>> = ({ data }) => {
 		</div>
 	)
 }
-
-export default BPCard

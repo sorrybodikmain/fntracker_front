@@ -1,26 +1,35 @@
-import { FC, PropsWithChildren, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ShopItemResponse } from '@/interfaces/shop.interface.ts'
-import { ImSpinner9 } from 'react-icons/im'
-import axios from 'axios'
+'use client'
 
-const DatesGuesser: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({
-	data
-}) => {
-	const { t } = useTranslation('locker')
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import type { ShopItemResponse } from '@/interfaces'
+import { ImSpinner9 } from 'react-icons/im'
+
+interface DatesGuesserProps {
+	data: ShopItemResponse
+}
+
+export function DatesGuesser({ data }: DatesGuesserProps) {
+	const t = useTranslations('locker')
 	const [dates, setDates] = useState<string[]>()
-	const [loaded, setLoaded] = useState<boolean>()
+	const [loaded, setLoaded] = useState(false)
+
 	const handleLoad = () => {
 		setLoaded(true)
-		const dates = data.item.shopHistory.reverse()
-		axios
-			.post('http://localhost:8000/dates', { dates })
+		const historyDates = [...data.item.shopHistory].reverse()
+		fetch('/api/dates', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ dates: historyDates })
+		})
+			.then(res => res.json())
 			.then(value => {
-				setDates(value.data)
+				setDates(value)
 				setLoaded(false)
 			})
 			.catch(() => setTimeout(() => setLoaded(false), 1000))
 	}
+
 	return (
 		<>
 			<h1 className=':uno: border-l-4 border-primary pl-2 my-4'>
@@ -49,7 +58,7 @@ const DatesGuesser: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({
 						</div>
 					) : (
 						<div className=':uno: grid grid-cols-4 lg:grid-cols-8 gap-2'>
-							{dates?.map((value, index) => (
+							{dates.map((value, index) => (
 								<p key={index} className=':uno: inline-flex flex-col mx-auto'>
 									{value}
 								</p>
@@ -61,5 +70,3 @@ const DatesGuesser: FC<PropsWithChildren<{ data: ShopItemResponse }>> = ({
 		</>
 	)
 }
-
-export default DatesGuesser

@@ -1,12 +1,14 @@
-import { FC, PropsWithChildren } from 'react'
-import { SectionImages } from '@/interfaces/shop.interface.ts'
-import GalleryImage from '@/components/locker/gallery/GalleryImage'
-import { useTranslation } from 'react-i18next'
+import { getTranslations } from 'next-intl/server'
+import type { SectionImages } from '@/interfaces'
+import { GalleryImage } from '@/components/locker/gallery/GalleryImage'
 
-const LockerGallery: FC<PropsWithChildren<{ data: SectionImages[] }>> = ({
-	data
-}) => {
-	const { t } = useTranslation('locker')
+interface LockerGalleryProps {
+	data: SectionImages[]
+}
+
+export async function LockerGallery({ data }: LockerGalleryProps) {
+	const t = await getTranslations('locker')
+
 	return (
 		<section>
 			<h1 className=':uno: border-l-4 border-primary pl-2 my-4 uppercase'>
@@ -22,5 +24,3 @@ const LockerGallery: FC<PropsWithChildren<{ data: SectionImages[] }>> = ({
 		</section>
 	)
 }
-
-export default LockerGallery

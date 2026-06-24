@@ -1,0 +1,20 @@
+{
+  "auth_body": "Utworzenie konta daje wiele możliwości, w tym: - Śledzenie przedmiotów ze sklepu; - dostosowanie profilu; - szybkie sprawdzenie swoich statystyk; I wiele więcej!",
+  "dont_have_acc_link": "Nie masz jeszcze konta?",
+  "egsId_placeholder": "Twój nick w EGS",
+  "egs_not_found": "Nie znaleziono pseudonimu EGS",
+  "email_placeholder": "Twój email",
+  "err_register": "Błąd rejestracji!",
+  "err_wrong": "Coś poszło nie tak!",
+  "forgot_pass_link": "Zapomniałeś hasła?",
+  "have_acc_link": "Posiadasz już konto?",
+  "login": "Wejście",
+  "login_form_body": "Witamy spowrotem!",
+  "login_form_title": "Witam ponownie!",
+  "pass_placeholder": "Twoje hasło",
+  "registration": "Rejestracja",
+  "registration_form_body": "To bardzo łatwe!",
+  "registration_form_title": "Zarejestruj się teraz!",
+  "succ_login": "Pomyślne logowanie, przekierowanie...",
+  "succ_register": "Pomyślna rejestracja, proszę aktywować konto, e-mail został już wysłany!"
+}

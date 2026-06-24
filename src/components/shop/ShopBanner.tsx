@@ -1,17 +1,21 @@
-import { FC, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+'use client'
 
-const ShopBanner: FC = () => {
-	const [value, setValue] = useState(new Date())
+import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+
+export function ShopBanner() {
+	const [value, setValue] = useState(() => new Date())
+	const t = useTranslations('shop')
+
 	useEffect(() => {
 		const interval = setInterval(() => setValue(new Date()), 1000)
 		return () => clearInterval(interval)
 	}, [])
-	const { t } = useTranslation('shop')
+
 	return (
 		<div className=':uno: container mx-auto text-white p-3'>
 			<div className=':uno: flex flex-col gap-y-3 bg-gray-700 p-4 rounded'>
-				<h1 className=':uno: text-lg'> {t('banner_title')}</h1>
+				<h1 className=':uno: text-lg'>{t('banner_title')}</h1>
 				<p className=':uno: text-sm'>{t('banner_body')}</p>
 				<h3 className=':uno: text-center text-md font-bold pt-2'>
 					{t('banner_update')}
@@ -23,5 +27,3 @@ const ShopBanner: FC = () => {
 		</div>
 	)
 }
-
-export default ShopBanner

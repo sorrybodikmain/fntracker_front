@@ -1,39 +1,41 @@
-import { FC } from 'react'
+import Image from 'next/image'
+import { getTranslations } from 'next-intl/server'
 import { BsFillEyeFill } from 'react-icons/bs'
-import { useTranslation } from 'react-i18next'
-import { ProfileInterface } from '@/interfaces'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+import type { ProfileInterface } from '@/interfaces'
 
-interface IProfileCardProps {
+interface ProfileCardProps {
 	profileData: ProfileInterface
 	nickname?: string
 	views?: number
 }
 
-const ProfileCard: FC<IProfileCardProps> = ({
-																							profileData,
-																							nickname,
-																							views
-																						}) => {
-	const { t } = useTranslation('stats')
+export async function ProfileCard({
+	profileData,
+	nickname,
+	views
+}: ProfileCardProps) {
+	const t = await getTranslations('stats')
 
 	return (
 		<div className=':uno: container text-white mx-auto p-3'>
 			<h1 className=':uno: border-l-4 border-primary pl-2 mb-4'>
 				{t('profile_card_title').toUpperCase()}
 			</h1>
-			<div
-				className=':uno: flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gradient-to-r from-purple-900 to-cyan-900'>
+			<div className=':uno: flex flex-wrap rounded-lg p-3 hover:scale-[1.01] transition bg-gradient-to-r from-purple-900 to-cyan-900'>
 				<div className=':uno: w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
 					<div className=':uno: relative bg-cover'>
-						<LazyLoadImage
+						<Image
 							src={`/images/flags/${profileData?.country || 'ua'}.svg`}
-							alt={'country-image'}
+							alt='country-image'
+							width={40}
+							height={30}
 							className=':uno: rounded w-10 absolute bottom-0 left-0'
 						/>
-						<LazyLoadImage
+						<Image
 							src={profileData?.avatar || '/images/default-avatar.webp'}
-							alt={'avatar-image'}
+							alt='avatar-image'
+							width={128}
+							height={128}
 							className=':uno: object-cover rounded-full w-32 h-32'
 						/>
 					</div>
@@ -55,5 +57,3 @@ const ProfileCard: FC<IProfileCardProps> = ({
 		</div>
 	)
 }
-
-export default ProfileCard

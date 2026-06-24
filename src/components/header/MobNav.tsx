@@ -1,6 +1,7 @@
+'use client'
+
 import { Popover } from '@headlessui/react'
-import { Link } from 'react-router-dom'
-import { FC } from 'react'
+import Link from 'next/link'
 import { VscListFlat } from 'react-icons/vsc'
 
 interface Route {
@@ -8,30 +9,30 @@ interface Route {
 	href: string
 }
 
-const MobNav: FC<{ routes: Route[] }> = ({ routes }) => {
-	return (
-		<>
-			<Popover>
-				<Popover.Button className=':uno: py-2 md:hidden outline-none'>
-					<VscListFlat />
-				</Popover.Button>
-				<Popover.Panel className=':uno: fixed z-10 bg-gray-800 px-2 py-2 rounded-lg -mx-10'>
-					<ul className=':uno: text-xs text-gray-400'>
-						{routes.map((route, index) => (
-							<li key={index}>
-								<Link
-									to={route.href}
-									className=':uno: py-1 md:mx-1 hover:text-gray-300'
-								>
-									{route.name}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</Popover.Panel>
-			</Popover>
-		</>
-	)
+interface MobNavProps {
+	routes: Route[]
 }
 
-export default MobNav
+export function MobNav({ routes }: MobNavProps) {
+	return (
+		<Popover>
+			<Popover.Button className=':uno: py-2 md:hidden outline-none'>
+				<VscListFlat />
+			</Popover.Button>
+			<Popover.Panel className=':uno: fixed z-10 bg-gray-800 px-2 py-2 rounded-lg -mx-10'>
+				<ul className=':uno: text-xs text-gray-400'>
+					{routes.map((route, index) => (
+						<li key={index}>
+							<Link
+								href={route.href}
+								className=':uno: py-1 md:mx-1 hover:text-gray-300'
+							>
+								{route.name}
+							</Link>
+						</li>
+					))}
+				</ul>
+			</Popover.Panel>
+		</Popover>
+	)
+}

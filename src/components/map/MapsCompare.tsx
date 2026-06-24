@@ -1,31 +1,34 @@
-import { FC, useEffect, useState } from 'react'
-import useSWR from 'swr'
-import { MapsResponse } from '@/interfaces/map.interface.ts'
-import { fetcher } from '@/libs/apiFetcher'
-import { generatePathToMapImg } from '@/utils/api.utils'
-import { useTranslation } from 'react-i18next'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import {
 	ReactCompareSlider,
 	ReactCompareSliderImage
 } from 'react-compare-slider'
+import type { Map } from '@/interfaces'
+import { generatePathToMapImg } from '@/utils'
 import { logEvent } from '@/utils/gtag.utils'
 
-const MapsCompare: FC = () => {
-	const { data } = useSWR<MapsResponse>(
-		'https://fortniteapi.io/v1/maps/list',
-		fetcher
-	)
-	const { t } = useTranslation('compare-maps')
-	const [leftMapId, setLeftMapId] = useState<string>('23.00')
-	const [rightMapId, setRightMapId] = useState<string>('23.30')
-	const [enablePOI, setEnablePOI] = useState<boolean>(false)
+interface MapsCompareProps {
+	maps: Map[]
+}
 
-	const preloadMaps = async (ids: string[]) =>
-		ids.map(id => (new Image().src = generatePathToMapImg(id, !enablePOI)))
+export function MapsCompare({ maps }: MapsCompareProps) {
+	const t = useTranslations('compare-maps')
+	const locale = useLocale()
+	const [leftMapId, setLeftMapId] = useState('23.00')
+	const [rightMapId, setRightMapId] = useState('23.30')
+	const [enablePOI, setEnablePOI] = useState(false)
 
 	useEffect(() => {
-		;(async () => preloadMaps([leftMapId, rightMapId]))()
-	}, [leftMapId, rightMapId])
+		const preload = (id: string) => {
+			const img = new window.Image()
+			img.src = generatePathToMapImg(id, enablePOI, locale)
+		}
+		preload(leftMapId)
+		preload(rightMapId)
+	}, [leftMapId, rightMapId, enablePOI, locale])
 
 	return (
 		<section id='map-images'>
@@ -38,16 +41,14 @@ const MapsCompare: FC = () => {
 						className=':uno: rounded-xl w-full'
 						itemOne={
 							<ReactCompareSliderImage
-								src={generatePathToMapImg(leftMapId, enablePOI)}
+								src={generatePathToMapImg(leftMapId, enablePOI, locale)}
 								alt={`map-${leftMapId}`}
-								loading='eager'
 							/>
 						}
 						itemTwo={
 							<ReactCompareSliderImage
-								src={generatePathToMapImg(rightMapId, enablePOI)}
+								src={generatePathToMapImg(rightMapId, enablePOI, locale)}
 								alt={`map-${rightMapId}`}
-								loading='eager'
 							/>
 						}
 					/>
@@ -65,7 +66,7 @@ const MapsCompare: FC = () => {
 									)
 								}}
 							>
-								{data?.maps.map((item, index) => (
+								{maps.map((item, index) => (
 									<option key={index} value={item.patchVersion}>
 										{item.patchVersion}
 									</option>
@@ -98,7 +99,7 @@ const MapsCompare: FC = () => {
 									)
 								}}
 							>
-								{data?.maps.map((item, index) => (
+								{maps.map((item, index) => (
 									<option key={index} value={item.patchVersion}>
 										{item.patchVersion}
 									</option>
@@ -111,5 +112,3 @@ const MapsCompare: FC = () => {
 		</section>
 	)
 }
-
-export default MapsCompare

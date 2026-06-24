@@ -1,34 +1,37 @@
-import { FC, useState } from 'react'
-import { supportedLngs } from '@/i18n.ts'
-import i18next from 'i18next'
+'use client'
+
+import { useTransition } from 'react'
+import { useLocale } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { locales } from '@/i18n/routing'
 import { logEvent } from '@/utils/gtag.utils'
 
-const LangSwitcher: FC = () => {
-	const [locale, setLocale] = useState(i18next.language || 'en')
-	const languageHandler = async (e: any) => {
+export function LangSwitcher() {
+	const locale = useLocale()
+	const router = useRouter()
+	const [isPending, startTransition] = useTransition()
+
+	const languageHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const newLang = e.target.value
 		if (locale !== newLang) {
 			logEvent('Language', 'Change', `Change-To-${newLang}`)
-			setLocale(newLang)
-			await i18next.changeLanguage(newLang)
+			document.cookie = `fntracker-locale=${newLang}; path=/; max-age=${60 * 60 * 24 * 365}`
+			startTransition(() => router.refresh())
 		}
 	}
 
 	return (
-		<>
-			<select
-				className=':uno: bg-gray-800 rounded-lg text-xs'
-				onChange={languageHandler}
-				value={locale}
-			>
-				{supportedLngs?.map((item, index) => (
-					<option key={index} value={item}>
-						{item?.toUpperCase()}
-					</option>
-				))}
-			</select>
-		</>
+		<select
+			className=':uno: bg-gray-800 rounded-lg text-xs'
+			onChange={languageHandler}
+			value={locale}
+			disabled={isPending}
+		>
+			{locales.map((item, index) => (
+				<option key={index} value={item}>
+					{item.toUpperCase()}
+				</option>
+			))}
+		</select>
 	)
 }
-
-export default LangSwitcher

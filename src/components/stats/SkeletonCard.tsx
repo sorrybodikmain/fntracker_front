@@ -1,6 +1,4 @@
-import { FC } from 'react'
-
-const SkeletonCard: FC = () => {
+export function SkeletonCard() {
 	return (
 		<div className=':uno: container text-white mx-auto p-3 animate-pulse'>
 			<div className=':uno: mb-4 h-6 w-36 bg-gray-700 rounded' />
@@ -8,5 +6,3 @@ const SkeletonCard: FC = () => {
 		</div>
 	)
 }
-
-export default SkeletonCard

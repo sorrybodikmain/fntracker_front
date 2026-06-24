@@ -1,13 +1,13 @@
-import { FC, PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
-import { PrStats } from '@/interfaces/user-stats.interface.ts'
+import { getTranslations } from 'next-intl/server'
+import type { PrStats } from '@/interfaces'
 
-interface IEventStatsProps {
+interface EventsStatsProps {
 	data?: PrStats
 }
 
-const EventsStats: FC<PropsWithChildren<IEventStatsProps>> = ({ data }) => {
-	const { t } = useTranslation('stats')
+export async function EventsStats({ data }: EventsStatsProps) {
+	const t = await getTranslations('stats')
+
 	return (
 		<div className=':uno: container text-white mx-auto p-3'>
 			<h1 className=':uno: border-l-4 border-primary pl-2 mb-4'>
@@ -42,5 +42,3 @@ const EventsStats: FC<PropsWithChildren<IEventStatsProps>> = ({ data }) => {
 		</div>
 	)
 }
-
-export default EventsStats

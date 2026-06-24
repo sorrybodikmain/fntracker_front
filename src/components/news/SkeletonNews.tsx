@@ -1,12 +1,11 @@
-import { FC } from 'react'
-
-const SkeletonNews: FC = () => {
+export function SkeletonNews() {
 	const arr = Array(6).fill(0)
+
 	return (
 		<>
-			{arr.map((value, index) => (
+			{arr.map((_, index) => (
 				<div
-					key={value + index}
+					key={index}
 					className=':uno: flex flex-wrap bg-gray-600 rounded p-3 animate-pulse w-full md:w-[38rem]'
 				>
 					<div className=':uno: w-72 md:w-3/12 mb-3 md:mb-0 mx-auto'>
@@ -22,5 +21,3 @@ const SkeletonNews: FC = () => {
 		</>
 	)
 }
-
-export default SkeletonNews

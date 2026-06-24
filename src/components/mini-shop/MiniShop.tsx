@@ -1,48 +1,36 @@
-import { FC } from 'react'
-import useSWR from 'swr'
-import MiniItem from './MiniItem'
-import { fetcher } from '@/libs/apiFetcher'
-import i18next from 'i18next'
-import { useTranslation } from 'react-i18next'
-import SkeletonMiniShop from '@/components/mini-shop/SkeletonMiniShop'
-import { ShopTodayResponse } from '@/interfaces/shop.interface.ts'
-import { useNavigate } from 'react-router'
+import Link from 'next/link'
+import type { ItemShop } from '@/interfaces'
+import { MiniItem } from './MiniItem'
 
-const MiniShop: FC = () => {
-	const { t } = useTranslation('home')
-	const navigate = useNavigate()
-	const { data } = useSWR<ShopTodayResponse>(
-		`https://fortniteapi.io/v2/shop?lang=${i18next.language}`,
-		fetcher
-	)
-	const handleShop = () => navigate('/shop')
+interface MiniShopProps {
+	shop: ItemShop[]
+	title: string
+	shopLinkLabel: string
+}
+
+export function MiniShop({ shop, title, shopLinkLabel }: MiniShopProps) {
+	const dailyItems = shop.filter(item => item.section.id === 'Daily')
 
 	return (
 		<section id='mini-shop'>
 			<div className=':uno: p-6 text-white w-full lg:w-96'>
 				<h1 className=':uno: border-l-4 border-primary pl-2'>
-					{t('shop_title').toUpperCase()}
+					{title.toUpperCase()}
 				</h1>
 				<div className=':uno: mt-4 grid-cols-2 grid-rows-3 gap-3 sm:gap-5 grid lg:grid-cols-2 lg:grid-rows-3 md:grid-rows-2 sm:grid-rows-2 sm:grid-cols-3'>
-					{data ? (
-						data?.shop
-							.filter(item => item.section.id === 'Daily')
-							.map((item, index) => <MiniItem key={index} data={item} />)
-					) : (
-						<SkeletonMiniShop />
-					)}
+					{dailyItems.map((item, index) => (
+						<MiniItem key={index} data={item} />
+					))}
 				</div>
-				<div
-					className=':uno: text-center mt-4 rounded-lg p-1 bg-gray-600 hover:scale-[1.03]'
-					onClick={handleShop}
+				<Link
+					href='/shop'
+					className=':uno: block text-center mt-4 rounded-lg p-1 bg-gray-600 hover:scale-[1.03]'
 				>
 					<span className=':uno: text-md w-full cursor-pointer'>
-						{t('shop_link')}
+						{shopLinkLabel}
 					</span>
-				</div>
+				</Link>
 			</div>
 		</section>
 	)
 }
-
-export default MiniShop

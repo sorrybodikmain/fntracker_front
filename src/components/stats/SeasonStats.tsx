@@ -1,4 +1,5 @@
-import { FC, PropsWithChildren } from 'react'
+'use client'
+
 import {
 	CartesianGrid,
 	Legend,
@@ -9,13 +10,16 @@ import {
 	XAxis,
 	YAxis
 } from 'recharts'
-import { useTranslation } from 'react-i18next'
-import { AccountStatsResponse } from '@/interfaces/user-stats.interface.ts'
+import { useTranslations } from 'next-intl'
+import type { AccountStatsResponse } from '@/interfaces'
 
-const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({
-	data
-}) => {
-	const { t } = useTranslation('stats')
+interface SeasonStatsProps {
+	data: AccountStatsResponse
+}
+
+export function SeasonStats({ data }: SeasonStatsProps) {
+	const t = useTranslations('stats')
+
 	return (
 		<div className=':uno: container text-white mx-auto p-3'>
 			<h1 className=':uno: border-l-4 border-primary pl-2 mb-4'>
@@ -36,5 +40,3 @@ const SeasonStats: FC<PropsWithChildren<{ data: AccountStatsResponse }>> = ({
 		</div>
 	)
 }
-
-export default SeasonStats

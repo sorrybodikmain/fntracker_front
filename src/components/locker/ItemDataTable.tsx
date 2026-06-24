@@ -1,15 +1,14 @@
-import { FC, PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ShopItemResponse } from '@/interfaces/shop.interface.ts'
+import { getTranslations } from 'next-intl/server'
+import type { ShopItemResponse } from '@/interfaces'
 
-interface IItemDataTableProps {
+interface ItemDataTableProps {
 	data: ShopItemResponse
 }
 
-const ItemDataTable: FC<PropsWithChildren<IItemDataTableProps>> = ({
-	data
-}) => {
-	const { t } = useTranslation('locker')
+export async function ItemDataTable({ data }: ItemDataTableProps) {
+	const t = await getTranslations('locker')
+	const history = [...data.item.shopHistory].reverse()
+
 	return (
 		<div className=':uno: mb-4'>
 			<h1 className=':uno: border-l-4 border-primary pl-2 my-4'>
@@ -28,12 +27,12 @@ const ItemDataTable: FC<PropsWithChildren<IItemDataTableProps>> = ({
 						</tr>
 					</thead>
 					<tbody>
-						{data?.item.shopHistory.reverse().map((item, index) => (
+						{history.map((item, index) => (
 							<tr key={index} className=':uno: text-white'>
 								<td className=':uno: py-4 px-6'>
 									{new Date(item).toLocaleDateString()}
 								</td>
-								<td className=':uno: py-4 px-6'>{data?.item.price}</td>
+								<td className=':uno: py-4 px-6'>{data.item.price}</td>
 							</tr>
 						))}
 					</tbody>
@@ -42,5 +41,3 @@ const ItemDataTable: FC<PropsWithChildren<IItemDataTableProps>> = ({
 		</div>
 	)
 }
-
-export default ItemDataTable
