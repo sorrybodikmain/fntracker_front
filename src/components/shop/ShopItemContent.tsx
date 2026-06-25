@@ -46,7 +46,7 @@ export function ShopItemContent({
 					itemName={name}
 					likeLabel={likeLabel}
 					unlikeLabel={unlikeLabel}
-					className=':uno: absolute top-2 right-2 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-void/70 text-muted backdrop-blur-sm hover:border-red-500/40 transition-colors cursor-pointer'
+					className=':uno: flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-void/80 text-muted shadow-[0_2px_12px_rgba(0,0,0,0.45)] hover:border-red-500/50 hover:text-red-400 transition-colors cursor-pointer'
 				/>
 			}
 		/>

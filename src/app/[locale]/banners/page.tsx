@@ -4,6 +4,7 @@ import { BannerCard } from '@/components/banners/BannerCard'
 import { PageContainer } from '@/components/ui/PageContainer'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { getBannerColors, getBanners } from '@/lib/api/fortnite'
+import { parseBannerColor } from '@/utils/banner-color'
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getTranslations('banners')
@@ -26,13 +27,17 @@ export default async function BannersPage() {
 			</h2>
 			<div className=':uno: flex flex-wrap gap-2 mb-8'>
 				{colors
-					.filter(color => color?.color)
+					.map(color => ({
+						...color,
+						cssColor: parseBannerColor(color?.color)
+					}))
+					.filter(color => color.cssColor)
 					.map(color => (
 						<div
 							key={color.id}
 							className=':uno: w-10 h-10 rounded-full border-2 border-white/20 hover:scale-110 transition cursor-default shadow-glowSm'
-							style={{ backgroundColor: color.color }}
-							title={color.color}
+							style={{ backgroundColor: color.cssColor ?? undefined }}
+							title={color.id}
 						/>
 					))}
 			</div>
