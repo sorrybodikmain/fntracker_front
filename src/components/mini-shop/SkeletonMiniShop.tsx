@@ -1,16 +1,12 @@
+import { Skeleton } from '@/components/ui/Skeleton'
+
 export function SkeletonMiniShop() {
 	const arr = Array(6).fill(0)
 
 	return (
 		<>
 			{arr.map((_, index) => (
-				<div
-					key={index}
-					className=':uno: relative overflow-hidden rounded-lg transition animate-pulse'
-				>
-					<div className=':uno: w-full h-40 sm:h-44 md:h-52 lg:h-36 bg-gray-400' />
-					<div className=':uno: absolute bottom-0 w-full bg-gray-600 h-9' />
-				</div>
+				<Skeleton key={index} className=':uno: aspect-square' />
 			))}
 		</>
 	)

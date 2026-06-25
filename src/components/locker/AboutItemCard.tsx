@@ -2,6 +2,9 @@ import { getTranslations } from 'next-intl/server'
 import type { BRCosmetic } from '@/types/fnapi'
 import { LikeButton } from '@/components/like/LikeButton'
 import { ZoomableImage } from '@/components/shared/ZoomableImage'
+import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Card } from '@/components/ui/Card'
+import { Badge } from '@/components/ui/Badge'
 import { fixImageWidth } from '@/utils'
 import { cosmeticDisplayImage } from '@/utils/cosmetic'
 
@@ -14,53 +17,57 @@ export async function AboutItemCard({ cosmetic }: AboutItemCardProps) {
 
 	return (
 		<>
-			<h1 className=':uno: border-l-4 border-primary pl-2 mb-4'>
-				{t('card_title').toUpperCase()}
-			</h1>
-			<div className=':uno: flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
-				<div className=':uno: w-full md:w-3/12 mb-3 md:mb-0 mx-auto'>
-					<div className=':uno: relative bg-cover shadow-lg'>
+			<SectionHeading>{t('card_title')}</SectionHeading>
+			<Card className=':uno: p-5 md:p-6'>
+				<div className=':uno: flex flex-col lg:flex-row gap-6'>
+					<div className=':uno: w-full lg:w-5/12 mx-auto'>
 						<ZoomableImage
 							src={fixImageWidth(cosmeticDisplayImage(cosmetic), 500)}
 							alt={cosmetic.id}
 							width={500}
 							height={500}
-							className=':uno: object-cover w-full rounded-lg'
+							className=':uno: object-cover w-full rounded-xl border border-white/10'
 							priority
 						/>
 					</div>
-				</div>
-				<div className=':uno: relative w-full md:w-9/12 xl:w-7/12 px-3 mb-4 md:mb-0 mr-auto text-gray-500'>
-					<h5 className=':uno: text-2xl mb-1 text-white flex'>
-						{cosmetic.name}
-						<LikeButton
-							itemId={cosmetic.id}
-							itemName={cosmetic.name}
-							likeLabel={t('like_item', { name: cosmetic.name })}
-							unlikeLabel={t('unlike_item', { name: cosmetic.name })}
-							className=':uno: ml-auto'
-						/>
-					</h5>
-					<p className=':uno: text-md'>
-						{cosmetic.rarity?.displayValue ?? ''}
-						{cosmetic.type?.displayValue
-							? ` | ${cosmetic.type.displayValue}`
-							: ''}
-					</p>
-					<p className=':uno: text-md'>{cosmetic.description ?? ''}</p>
-					<div className=':uno: items-end bottom-0 relative lg:absolute mt-2'>
+					<div className=':uno: flex-1'>
+						<div className=':uno: flex items-start justify-between gap-4'>
+							<h2 className=':uno: font-display text-2xl md:text-3xl font-bold text-foreground'>
+								{cosmetic.name}
+							</h2>
+							<LikeButton
+								itemId={cosmetic.id}
+								itemName={cosmetic.name}
+								likeLabel={t('like_item', { name: cosmetic.name })}
+								unlikeLabel={t('unlike_item', { name: cosmetic.name })}
+								className=':uno: shrink-0 text-3xl'
+							/>
+						</div>
+						<div className=':uno: flex flex-wrap gap-2 mt-3'>
+							{cosmetic.rarity?.displayValue ? (
+								<Badge variant='primary'>{cosmetic.rarity.displayValue}</Badge>
+							) : null}
+							{cosmetic.type?.displayValue ? (
+								<Badge variant='muted'>{cosmetic.type.displayValue}</Badge>
+							) : null}
+						</div>
+						<p className=':uno: mt-4 text-muted leading-relaxed'>
+							{cosmetic.description ?? ''}
+						</p>
 						{cosmetic.introduction?.text ? (
-							<h4 className=':uno: text-white'>{cosmetic.introduction.text}</h4>
+							<p className=':uno: mt-4 text-sm text-foreground border-l-2 border-accent pl-3'>
+								{cosmetic.introduction.text}
+							</p>
 						) : null}
 						{cosmetic.added ? (
-							<p>
+							<p className=':uno: mt-4 text-xs text-muted'>
 								{t('card_appeared')}{' '}
 								{new Date(cosmetic.added).toLocaleDateString()}
 							</p>
 						) : null}
 					</div>
 				</div>
-			</div>
+			</Card>
 		</>
 	)
 }

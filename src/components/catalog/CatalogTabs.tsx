@@ -10,6 +10,8 @@ import type {
 	LegoCosmeticsList,
 	TrackCosmeticsList
 } from '@/types/fnapi'
+import { Tabs } from '@/components/ui/Tabs'
+import { Card } from '@/components/ui/Card'
 
 type CatalogTab = 'tracks' | 'cars' | 'lego' | 'instruments' | 'beans'
 
@@ -27,7 +29,7 @@ interface CatalogTabsProps {
 	beans: BeanCosmeticsList
 }
 
-const tabs: CatalogTab[] = ['tracks', 'cars', 'lego', 'instruments', 'beans']
+const tabIds: CatalogTab[] = ['tracks', 'cars', 'lego', 'instruments', 'beans']
 
 function mapTracks(tracks: TrackCosmeticsList): CatalogItem[] {
 	return (tracks ?? []).map(item => ({
@@ -78,31 +80,20 @@ export function CatalogTabs({
 	}
 
 	const items = itemsByTab[active].slice(0, 60)
+	const tabs = tabIds.map(tab => ({ id: tab, label: t(`tab_${tab}`) }))
 
 	return (
 		<div>
-			<div className=':uno: flex flex-wrap gap-2 mb-4'>
-				{tabs.map(tab => (
-					<button
-						key={tab}
-						type='button'
-						onClick={() => setActive(tab)}
-						className={`:uno: px-3 py-1.5 rounded-lg text-sm transition ${active === tab
-							? 'bg-primary text-white'
-							: 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-							}`}
-					>
-						{t(`tab_${tab}`)}
-					</button>
-				))}
-			</div>
-			<div className=':uno: grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-6'>
+			<Tabs
+				tabs={tabs}
+				activeId={active}
+				onChange={id => setActive(id as CatalogTab)}
+				className=':uno: mb-6'
+			/>
+			<div className=':uno: grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-5'>
 				{items.map(item => (
-					<div
-						key={item.id}
-						className=':uno: rounded-lg bg-gray-600 overflow-hidden hover:scale-[1.02] transition'
-					>
-						<div className=':uno: relative w-full h-32'>
+					<Card key={item.id} hover className=':uno: overflow-hidden'>
+						<div className=':uno: relative w-full aspect-square'>
 							{item.image ? (
 								<Image
 									src={item.image}
@@ -113,8 +104,10 @@ export function CatalogTabs({
 								/>
 							) : null}
 						</div>
-						<p className=':uno: text-white text-xs p-2 text-center'>{item.name}</p>
-					</div>
+						<p className=':uno: text-xs p-2 text-center text-foreground truncate'>
+							{item.name}
+						</p>
+					</Card>
 				))}
 			</div>
 		</div>

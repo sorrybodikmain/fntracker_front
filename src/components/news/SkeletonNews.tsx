@@ -1,20 +1,17 @@
+import { Skeleton } from '@/components/ui/Skeleton'
+
 export function SkeletonNews() {
 	const arr = Array(6).fill(0)
 
 	return (
 		<>
 			{arr.map((_, index) => (
-				<div
-					key={index}
-					className=':uno: flex flex-wrap bg-gray-600 rounded p-3 animate-pulse w-full md:w-[38rem]'
-				>
-					<div className=':uno: w-72 md:w-3/12 mb-3 md:mb-0 mx-auto'>
-						<div className=':uno: relative bg-cover shadow-lg h-32 w-full md:w-52 bg-gray-700 rounded' />
-					</div>
-					<div className=':uno: relative w-72 md:w-9/12 xl:w-7/12 md:pl-20 mb-4 mx-auto md:mr-auto'>
-						<div className=':uno: my-2 h-5 w-full bg-gray-700' />
-						<div className=':uno: my-2 h-3 w-full bg-gray-700' />
-						<div className=':uno: h-3 w-full bg-gray-700' />
+				<div key={index} className=':uno: flex flex-col md:flex-row gap-4 w-full'>
+					<Skeleton className=':uno: w-full md:w-48 h-32' />
+					<div className=':uno: flex-1 space-y-2'>
+						<Skeleton className=':uno: h-5 w-3/4' />
+						<Skeleton className=':uno: h-3 w-full' />
+						<Skeleton className=':uno: h-3 w-2/3' />
 					</div>
 				</div>
 			))}

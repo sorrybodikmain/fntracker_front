@@ -1,28 +1,23 @@
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import { Button } from '@/components/ui/Button'
 
 export default async function NotFoundPage() {
 	const t = await getTranslations('404')
 
 	return (
-		<section className=':uno: bg-gray-900 text-white min-h-screen flex items-center'>
-			<div className=':uno: px-4 mx-auto max-w-screen-xl lg:px-6'>
-				<div className=':uno: mx-auto max-w-screen-sm text-center'>
-					<h1 className=':uno: mb-4 text-7xl tracking-tight font-extra lg:text-9xl text-primary'>
-						404
-					</h1>
-					<p className=':uno: mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white'>
-						{t('went_wrong')}
-					</p>
-					<p className=':uno: mb-8 text-md font-light text-gray-400'>
-						{t('404_desc')}
-					</p>
-					<Link
-						href='/'
-						className=':uno: bg-primary hover:bg-blue-600 transition-all rounded-lg text-sm p-2'
-					>
+		<section className=':uno: min-h-[70vh] flex items-center justify-center px-4'>
+			<div className=':uno: text-center max-w-lg'>
+				<h1 className=':uno: font-display text-8xl md:text-9xl font-bold text-primary drop-shadow-[0_0_40px_rgba(0,229,255,0.5)]'>
+					404
+				</h1>
+				<p className=':uno: mt-4 font-display text-2xl md:text-3xl font-bold text-foreground'>
+					{t('went_wrong')}
+				</p>
+				<p className=':uno: mt-3 text-muted'>{t('404_desc')}</p>
+				<div className=':uno: mt-8'>
+					<Button href='/' size='lg'>
 						{t('404_butt')}
-					</Link>
+					</Button>
 				</div>
 			</div>
 		</section>

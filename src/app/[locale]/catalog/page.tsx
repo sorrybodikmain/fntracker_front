@@ -1,6 +1,8 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { CatalogTabs } from '@/components/catalog/CatalogTabs'
+import { PageContainer } from '@/components/ui/PageContainer'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import {
 	getBeanCosmetics,
 	getCarCosmetics,
@@ -26,10 +28,8 @@ export default async function CatalogPage() {
 	])
 
 	return (
-		<div className=':uno: container mx-auto text-white p-3 min-h-screen'>
-			<h1 className=':uno: border-l-4 border-primary text-md pl-2 my-4'>
-				{t('title')}
-			</h1>
+		<PageContainer>
+			<SectionHeading>{t('title')}</SectionHeading>
 			<CatalogTabs
 				tracks={tracks}
 				cars={cars}
@@ -37,6 +37,6 @@ export default async function CatalogPage() {
 				instruments={instruments}
 				beans={beans}
 			/>
-		</div>
+		</PageContainer>
 	)
 }

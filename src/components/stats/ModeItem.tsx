@@ -1,5 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import type { ModeStats } from '@/types/fnapi'
+import { Card } from '@/components/ui/Card'
+import { Badge } from '@/components/ui/Badge'
 
 interface ModeItemProps {
 	data: ModeStats
@@ -25,89 +27,60 @@ export async function ModeItem({ data, mode }: ModeItemProps) {
 					? data.top6
 					: 0
 
+	const stats = [
+		{ label: 'WINS', value: data.wins },
+		{ label: 'KILLS', value: data.kills },
+		{ label: 'WIN %', value: data.winRate },
+		{ label: 'K/D', value: data.kd },
+		{ label: 'TOP 10', value: topHigh },
+		{ label: 'TOP 25', value: topLow },
+		{ label: 'TIME PLAYED', value: data.minutesPlayed },
+		{
+			label: 'AVG. MATCH',
+			value: data.matches ? `${Math.floor(data.minutesPlayed / data.matches)} min.` : '0'
+		},
+		{
+			label: 'KILLS/MATCH',
+			value: data.matches ? Math.floor(data.kills / data.matches) : 0
+		},
+		{
+			label: 'KILLS/MIN',
+			value: data.minutesPlayed ? Math.floor(data.kills / data.minutesPlayed) : 0
+		},
+		{
+			label: 'SCORE/MATCH',
+			value: data.matches ? Math.floor(data.score / data.matches) : 0
+		},
+		{
+			label: 'SCORE/MIN',
+			value: data.minutesPlayed ? Math.floor(data.score / data.minutesPlayed) : 0
+		},
+		{ label: 'SCORE', value: data.score }
+	]
+
 	return (
-		<div className=':uno: relative mx-auto w-full ease-in-out hover:scale-[1.01] transition'>
-			<div className=':uno: relative inline-block w-full'>
-				<div className=':uno: absolute w-full rounded-t-xl flex justify-between px-2 py-1 bg-primary'>
-					<p className=':uno: font-bold'>{mode}</p>
-					<p className=':uno: right-0'>
-						{data.matches} {t('modes_matches_played')}
-					</p>
-				</div>
-				<div className=':uno: p-4 rounded-lg bg-gray-600'>
-					<div className=':uno: grid grid-cols-2 grid-rows-2 gap-4 mt-6'>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							WINS
-							<span className=':uno: mt-1 xl:mt-0'>{data.wins}</span>
+		<Card hover className=':uno: overflow-hidden'>
+			<div className=':uno: flex items-center justify-between px-4 py-2 bg-primary/15 border-b border-primary/30'>
+				<p className=':uno: font-display font-bold text-primary'>{mode}</p>
+				<Badge variant='muted'>
+					{data.matches} {t('modes_matches_played')}
+				</Badge>
+			</div>
+			<div className=':uno: p-4 grid grid-cols-2 gap-3'>
+				{stats.map(stat => (
+					<div
+						key={stat.label}
+						className=':uno: border-b border-white/8 pb-2'
+					>
+						<p className=':uno: text-xs text-muted uppercase tracking-wider'>
+							{stat.label}
 						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							KILLS
-							<span className=':uno: mt-1 xl:mt-0'>{data.kills}</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							WIN %
-							<span className=':uno: mt-1 xl:mt-0'>{data.winRate}</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							K/D
-							<span className=':uno: mt-1 xl:mt-0'>{data.kd}</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							TOP 10
-							<span className=':uno: mt-1 xl:mt-0'>{topHigh}</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							TOP 25
-							<span className=':uno: mt-1 xl:mt-0'>{topLow}</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							TIME PLAYED
-							<span className=':uno: mt-1 xl:mt-0'>{data.minutesPlayed}</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							AVG. MATCH TIME
-							<span className=':uno: mt-1 xl:mt-0'>
-								{data.matches
-									? Math.floor(data.minutesPlayed / data.matches)
-									: 0}{' '}
-								min.
-							</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							KILLS/MATCH
-							<span className=':uno: mt-1 xl:mt-0'>
-								{data.matches ? Math.floor(data.kills / data.matches) : 0}
-							</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							KILLS/MIN
-							<span className=':uno: mt-1 xl:mt-0'>
-								{data.minutesPlayed
-									? Math.floor(data.kills / data.minutesPlayed)
-									: 0}
-							</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							SCORE/MATCH
-							<span className=':uno: mt-1 xl:mt-0'>
-								{data.matches ? Math.floor(data.score / data.matches) : 0}
-							</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							SCORE/MIN
-							<span className=':uno: mt-1 xl:mt-0'>
-								{data.minutesPlayed
-									? Math.floor(data.score / data.minutesPlayed)
-									: 0}
-							</span>
-						</p>
-						<p className=':uno: inline-flex flex-col border-b-2 border-primary'>
-							SCORE
-							<span className=':uno: mt-1 xl:mt-0'>{data.score}</span>
+						<p className=':uno: text-lg font-semibold text-foreground mt-0.5'>
+							{stat.value}
 						</p>
 					</div>
-				</div>
+				))}
 			</div>
-		</div>
+		</Card>
 	)
 }

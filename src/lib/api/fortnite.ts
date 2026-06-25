@@ -4,6 +4,7 @@ import { ResponseFlags } from "fnapicom";
 import { unstable_cache } from "next/cache";
 import { createFnApiClient } from "./client";
 import { isVirtualShopEntry } from "@/utils/cosmetic";
+import { toApiLanguage } from "@/i18n/locale";
 import type { BRNews } from "@/types/fnapi";
 
 const emptyNews = (): BRNews => ({
@@ -13,6 +14,27 @@ const emptyNews = (): BRNews => ({
   motds: [],
   messages: [],
 });
+
+const langFallbackChain = (lang: string): string[] => {
+  const apiLang = toApiLanguage(lang);
+  if (apiLang === "ru") return ["ru", "en"];
+  return ["en"];
+};
+
+async function tryLangChain<T>(
+  chain: string[],
+  fetch: (language: string) => Promise<T>,
+  fallback: T,
+): Promise<T> {
+  for (const language of chain) {
+    try {
+      return await fetch(language);
+    } catch {
+      continue;
+    }
+  }
+  return fallback;
+}
 
 type NewsFetcher = (options: {
   language?: string;
@@ -24,18 +46,7 @@ async function getNewsWithFallback(fetcher: NewsFetcher, lang: string) {
     return data;
   };
 
-  try {
-    return await fetch(lang);
-  } catch {
-    if (lang !== "en") {
-      try {
-        return await fetch("en");
-      } catch {
-        return emptyNews();
-      }
-    }
-    return emptyNews();
-  }
+  return tryLangChain(langFallbackChain(lang), fetch, emptyNews());
 }
 
 async function fetchListWithLangFallback<T>(
@@ -47,18 +58,7 @@ async function fetchListWithLangFallback<T>(
     return data ?? [];
   };
 
-  try {
-    return await fetch(lang);
-  } catch {
-    if (lang !== "en") {
-      try {
-        return await fetch("en");
-      } catch {
-        return [];
-      }
-    }
-    return [];
-  }
+  return tryLangChain(langFallbackChain(lang), fetch, []);
 }
 
 async function fetchWithLangFallback<T>(
@@ -70,27 +70,32 @@ async function fetchWithLangFallback<T>(
     return data;
   };
 
-  try {
-    return await fetch(lang);
-  } catch {
-    if (lang !== "en") {
-      return await fetch("en");
+  const chain = langFallbackChain(lang);
+  for (const language of chain) {
+    try {
+      return await fetch(language);
+    } catch {
+      continue;
     }
-    throw new Error("Request failed");
   }
+  throw new Error("Request failed");
 }
 
 export function getShop(lang: string) {
+  const apiLang = toApiLanguage(lang);
   return unstable_cache(
     async () => {
-      const { data } = await createFnApiClient().shop({ language: lang });
+      const data = await fetchWithLangFallback(
+        (language) => createFnApiClient().shop({ language }),
+        apiLang,
+      );
       return {
         ...data,
         entries: data.entries.filter((entry) => !isVirtualShopEntry(entry)),
       };
     },
-    ["shop", lang],
-    { revalidate: 300, tags: [`shop-${lang}`] },
+    ["shop", apiLang],
+    { revalidate: 300, tags: [`shop-${apiLang}`] },
   )();
 }
 
@@ -132,13 +137,15 @@ export function getCreativeNews(lang: string) {
 
 export function getCosmetic(id: string, lang: string) {
   return unstable_cache(
-    async () => {
-      const { data } = await createFnApiClient().brCosmeticByID(id, {
-        language: lang,
-        responseFlags: ResponseFlags.IncludeShopHistory,
-      });
-      return data;
-    },
+    async () =>
+      fetchWithLangFallback(
+        (language) =>
+          createFnApiClient().brCosmeticByID(id, {
+            language,
+            responseFlags: ResponseFlags.IncludeShopHistory,
+          }),
+        lang,
+      ),
     ["cosmetic", id, lang],
     { revalidate: 3600, tags: [`cosmetic-${id}-${lang}`] },
   )();
@@ -146,12 +153,11 @@ export function getCosmetic(id: string, lang: string) {
 
 export function getCosmeticsList(lang: string) {
   return unstable_cache(
-    async () => {
-      const { data } = await createFnApiClient().brCosmeticsList({
-        language: lang,
-      });
-      return data;
-    },
+    async () =>
+      fetchWithLangFallback(
+        (language) => createFnApiClient().brCosmeticsList({ language }),
+        lang,
+      ),
     ["cosmetics-list", lang],
     { revalidate: 3600, tags: [`cosmetics-list-${lang}`] },
   )();
@@ -167,28 +173,16 @@ export async function searchCosmetics(query: string, lang: string) {
     return data ?? [];
   };
 
-  try {
-    return await search(lang);
-  } catch {
-    if (lang !== "en") {
-      try {
-        return await search("en");
-      } catch {
-        return [];
-      }
-    }
-    return [];
-  }
+  return tryLangChain(langFallbackChain(lang), search, []);
 }
 
 export function getNewCosmetics(lang: string) {
   return unstable_cache(
-    async () => {
-      const { data } = await createFnApiClient().newCosmetics({
-        language: lang,
-      });
-      return data;
-    },
+    async () =>
+      fetchWithLangFallback(
+        (language) => createFnApiClient().newCosmetics({ language }),
+        lang,
+      ),
     ["new-cosmetics", lang],
     { revalidate: 3600, tags: [`new-cosmetics-${lang}`] },
   )();
@@ -196,10 +190,11 @@ export function getNewCosmetics(lang: string) {
 
 export function getMap(lang: string) {
   return unstable_cache(
-    async () => {
-      const { data } = await createFnApiClient().brMap({ language: lang });
-      return data;
-    },
+    async () =>
+      fetchWithLangFallback(
+        (language) => createFnApiClient().brMap({ language }),
+        lang,
+      ),
     ["map", lang],
     { revalidate: 86400, tags: ["map"] },
   )();
@@ -228,7 +223,6 @@ export function getPlaylistById(id: string, lang: string) {
     { revalidate: 3600, tags: [`playlist-${id}`] },
   )();
 }
-
 
 export function getBanners(lang: string) {
   return unstable_cache(

@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import type { BRNews, CreativeNews, STWNews } from '@/types/fnapi'
 import { AllNews } from '@/components/news/AllNews'
+import { Tabs } from '@/components/ui/Tabs'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 
 interface NewsTabsProps {
 	brNews: BRNews
@@ -35,28 +37,27 @@ export function NewsTabs({ brNews, stwNews, creativeNews }: NewsTabsProps) {
 
 	if (availableTabs.length === 1) {
 		return (
-			<AllNews news={newsByTab[availableTabs[0]]} title={t('posts_title')} />
+			<div className=':uno: flex-1 p-4 md:p-6'>
+				<AllNews news={newsByTab[availableTabs[0]]} title={t('posts_title')} />
+			</div>
 		)
 	}
 
+	const tabs = availableTabs.map(tab => ({
+		id: tab,
+		label: t(`news_tab_${tab}`)
+	}))
+
 	return (
-		<div>
-			<div className=':uno: flex flex-wrap gap-2 mb-4 px-6 container mx-auto'>
-				{availableTabs.map(tab => (
-					<button
-						key={tab}
-						type='button'
-						onClick={() => setActive(tab)}
-						className={`:uno: px-3 py-1.5 rounded-lg text-sm transition ${active === tab
-							? 'bg-primary text-white'
-							: 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-							}`}
-					>
-						{t(`news_tab_${tab}`)}
-					</button>
-				))}
-			</div>
-			<AllNews news={newsByTab[active]} title={t('posts_title')} />
+		<div className=':uno: flex-1 p-4 md:p-6'>
+			<SectionHeading>{t('posts_title')}</SectionHeading>
+			<Tabs
+				tabs={tabs}
+				activeId={active}
+				onChange={id => setActive(id as NewsTab)}
+				className=':uno: mb-6'
+			/>
+			<AllNews news={newsByTab[active]} />
 		</div>
 	)
 }

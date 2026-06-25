@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { Input } from '@/components/ui/Input'
 import { logEvent } from '@/utils/gtag.utils'
 
 export function Search() {
@@ -19,17 +20,13 @@ export function Search() {
 	}
 
 	return (
-		<div className=':uno: flex items-center justify-center'>
-			<div className=':uno: relative text-sm'>
-				<form onSubmit={handleSubmit}>
-					<input
-						type='search'
-						name='nickname'
-						placeholder={t('seach_input')}
-						className=':uno: w-full sm:w-80 h-9 bg-gray-800 rounded-lg p-2 hover:scale-105 transition'
-					/>
-				</form>
-			</div>
-		</div>
+		<form onSubmit={handleSubmit} className=':uno: w-full max-w-md'>
+			<Input
+				type='search'
+				name='nickname'
+				placeholder={t('seach_input')}
+				className=':uno: text-center font-display tracking-wide'
+			/>
+		</form>
 	)
 }

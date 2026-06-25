@@ -15,4 +15,5 @@ export const namespaces = [
   "playlists",
   "banners",
   "catalog",
+  "cookie-banner",
 ] as const;

@@ -1,6 +1,8 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
 import { BannerCard } from '@/components/banners/BannerCard'
+import { PageContainer } from '@/components/ui/PageContainer'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import { getBannerColors, getBanners } from '@/lib/api/fortnite'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,30 +19,30 @@ export default async function BannersPage() {
 	])
 
 	return (
-		<div className=':uno: container mx-auto text-white p-3 min-h-screen'>
-			<h1 className=':uno: border-l-4 border-primary text-md pl-2 my-4'>
-				{t('title')}
-			</h1>
-			<h2 className=':uno: text-sm text-gray-400 mb-3'>{t('colors_title')}</h2>
+		<PageContainer>
+			<SectionHeading>{t('title')}</SectionHeading>
+			<h2 className=':uno: text-sm text-muted mb-3 uppercase tracking-wider'>
+				{t('colors_title')}
+			</h2>
 			<div className=':uno: flex flex-wrap gap-2 mb-8'>
 				{colors
 					.filter(color => color?.color)
 					.map(color => (
 						<div
 							key={color.id}
-							className=':uno: w-10 h-10 rounded-full border border-gray-500'
+							className=':uno: w-10 h-10 rounded-full border-2 border-white/20 hover:scale-110 transition cursor-default shadow-glowSm'
 							style={{ backgroundColor: color.color }}
 							title={color.color}
 						/>
 					))}
 			</div>
-			<div className=':uno: grid grid-cols-2 md:grid-cols-4 gap-4 lg:grid-cols-6 xl:grid-cols-8 lg:gap-6'>
+			<div className=':uno: grid grid-cols-2 md:grid-cols-4 gap-4 lg:grid-cols-6 xl:grid-cols-8 lg:gap-5'>
 				{banners
 					.filter(banner => banner?.id)
 					.map(banner => (
 						<BannerCard key={banner.id} banner={banner} />
 					))}
 			</div>
-		</div>
+		</PageContainer>
 	)
 }

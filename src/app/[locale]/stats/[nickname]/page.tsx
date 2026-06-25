@@ -8,6 +8,7 @@ import {
 import { StatsProfileCard } from '@/components/stats/StatsProfileCard'
 import { ModesStats } from '@/components/stats/ModesStats'
 import { NotFountError } from '@/components/stats/NotFountError'
+import { PageContainer } from '@/components/ui/PageContainer'
 
 interface StatsPageProps {
 	params: Promise<{ nickname: string }>
@@ -31,16 +32,20 @@ export default async function StatsPage({ params }: StatsPageProps) {
 			? await getBrStatsByAccountId(nickname)
 			: await getBrStats(nickname)
 	} catch {
-		return <NotFountError />
+		return (
+			<PageContainer>
+				<NotFountError />
+			</PageContainer>
+		)
 	}
 
 	return (
-		<>
+		<PageContainer>
 			<StatsProfileCard
 				stats={stats}
 				nickname={stats.account?.name ?? nickname}
 			/>
 			<ModesStats stats={stats} />
-		</>
+		</PageContainer>
 	)
 }

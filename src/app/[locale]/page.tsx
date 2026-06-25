@@ -29,7 +29,7 @@ export default async function HomePage() {
 	return (
 		<div>
 			<SearchBar />
-			<div className=':uno: container flex flex-col-reverse lg:flex-row mx-auto'>
+			<div className=':uno: container flex flex-col-reverse lg:flex-row mx-auto gap-4'>
 				<NewsTabs
 					brNews={brNews}
 					stwNews={stwNews}

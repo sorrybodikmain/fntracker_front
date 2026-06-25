@@ -1,6 +1,8 @@
 import type { BRCosmetic, ShopEntry } from "@/types/fnapi";
 import { cosmeticImage, shopEntryImage } from "./api.utils";
 
+export { cosmeticInstanceId, dedupeCosmeticsById } from "./cosmetic-unique";
+
 export function entryCosmeticId(entry: ShopEntry) {
   return entry.brItems?.[0]?.id ?? entry.offerId;
 }

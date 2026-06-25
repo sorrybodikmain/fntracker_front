@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import { ShopItem } from './ShopItem'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import type { ShopEntry } from '@/types/fnapi'
 import { entryCosmeticName, entryLayoutId, entryLayoutName } from '@/utils/cosmetic'
 
@@ -30,11 +31,11 @@ export async function ShopSection({
 		sectionName ?? (sectionEntry ? entryLayoutName(sectionEntry) : undefined)
 
 	return (
-		<>
-			<h1 className=':uno: border-l-4 border-primary text-md pl-2 my-4'>
-				{resolvedSectionName}
-			</h1>
-			<div className=':uno: grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-6'>
+		<section className=':uno: mb-10'>
+			{resolvedSectionName ? (
+				<SectionHeading>{resolvedSectionName}</SectionHeading>
+			) : null}
+			<div className=':uno: grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-5'>
 				{filtered.map((entry, index) => {
 					const name = entryCosmeticName(entry)
 					return (
@@ -47,6 +48,6 @@ export async function ShopSection({
 					)
 				})}
 			</div>
-		</>
+		</section>
 	)
 }

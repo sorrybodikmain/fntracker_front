@@ -2,6 +2,10 @@ import Link from 'next/link'
 import type { ShopEntry } from '@/types/fnapi'
 import { getMiniShopEntries } from '@/utils/cosmetic'
 import { MiniItem } from './MiniItem'
+import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Button } from '@/components/ui/Button'
+import { GlassPanel } from '@/components/ui/GlassPanel'
+
 interface MiniShopProps {
 	entries: ShopEntry[]
 	title: string
@@ -12,25 +16,20 @@ export function MiniShop({ entries, title, shopLinkLabel }: MiniShopProps) {
 	const miniEntries = getMiniShopEntries(entries)
 
 	return (
-		<section id='mini-shop'>
-			<div className=':uno: p-6 text-white w-full lg:w-96'>
-				<h1 className=':uno: border-l-4 border-primary pl-2'>
-					{title.toUpperCase()}
-				</h1>
-				<div className=':uno: mt-4 grid-cols-2 grid-rows-3 gap-3 sm:gap-5 grid lg:grid-cols-2 lg:grid-rows-3 md:grid-rows-2 sm:grid-rows-2 sm:grid-cols-3'>
+		<section id='mini-shop' className=':uno: w-full lg:w-96 p-4 md:p-6'>
+			<GlassPanel className=':uno: p-5'>
+				<SectionHeading className=':uno: mb-4'>{title}</SectionHeading>
+				<div className=':uno: grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-3'>
 					{miniEntries.map((entry, index) => (
 						<MiniItem key={`${entry.offerId}-${index}`} entry={entry} />
 					))}
 				</div>
-				<Link
-					href='/shop'
-					className=':uno: block text-center mt-4 rounded-lg p-1 bg-gray-600 hover:scale-[1.03]'
-				>
-					<span className=':uno: text-md w-full cursor-pointer'>
+				<div className=':uno: mt-5 text-center'>
+					<Button href='/shop' variant='secondary' className=':uno: w-full'>
 						{shopLinkLabel}
-					</span>
-				</Link>
-			</div>
+					</Button>
+				</div>
+			</GlassPanel>
 		</section>
 	)
 }

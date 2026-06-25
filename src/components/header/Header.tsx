@@ -8,79 +8,82 @@ import { LangSwitcher } from './LangSwitcher'
 import { MobNav } from './MobNav'
 
 export function Header() {
-	const t = useTranslations('header')
-	const pathname = usePathname()
+    const t = useTranslations('header')
+    const pathname = usePathname()
 
-	const shopRoutes = [
-		{ name: t('shop_link'), href: '/shop' },
-		{ name: t('upcoming_title'), href: '/upcoming-items/' },
-		{ name: t('allitems_title'), href: '/all-items/' },
-		{ name: t('catalog_title'), href: '/catalog' },
-		{ name: t('banners_title'), href: '/banners' }
-	]
+    const shopRoutes = [
+        { name: t('shop_link'), href: '/shop' },
+        { name: t('upcoming_title'), href: '/upcoming-items/' },
+        { name: t('allitems_title'), href: '/all-items/' },
+        { name: t('catalog_title'), href: '/catalog' },
+        { name: t('banners_title'), href: '/banners' }
+    ]
 
-	const baseRoutes = [
-		{ name: t('maps_link'), href: '/map' },
-		{ name: t('playlists_title'), href: '/playlists' }
-	]
+    const baseRoutes = [
+        { name: t('maps_link'), href: '/map' },
+        { name: t('playlists_title'), href: '/playlists' }
+    ]
 
-	return (
-		<section id='header'>
-			<div className=':uno: bg-gray-900 shadow-lg py-5 px-7 sticky top-0 z-50'>
-				<div className=':uno: container mx-auto'>
-					<nav className=':uno: flex justify-between'>
-						<div className=':uno: flex items-center space-x-3 lg:pr-16 pr-6'>
-							<Link href='/' className=':uno: text-white text-base'>
-								FNTracker
-							</Link>
-						</div>
+    const allRoutes = shopRoutes.concat(baseRoutes)
 
-						<ul className=':uno: hidden md:flex items-center space-x-2'>
-							<div className=':uno: group inline-block relative'>
-								<Link
-									href='/shop'
-									className=':uno: text-gray-500 py-2 inline-flex items-center'
-								>
-									<span className=':uno: mr-1'>{t('shop_link')}</span>
-									<AiFillCaretDown className=':uno: fill-current h-4 w-4' />
-								</Link>
-								<ul className=':uno: absolute hidden rounded bg-gray-700 text-gray-300 group-hover:block z-10'>
-									{shopRoutes.map((route, index) => (
-										<li key={index}>
-											<Link
-												className=':uno: hover:bg-gray-600 py-1.5 px-4 block whitespace-nowrap'
-												href={route.href}
-											>
-												{route.name}
-											</Link>
-										</li>
-									))}
-								</ul>
-							</div>
+    const isActive = (href: string) =>
+        pathname === href || pathname.startsWith(`${href}/`)
 
-							{baseRoutes.map((route, index) => (
-								<li key={index}>
-									<Link
-										href={route.href}
-										className={`block hover:text-gray-300 py-1 md:mx-1 whitespace-nowrap ${pathname === route.href ||
-												pathname.startsWith(`${route.href}/`)
-												? 'underline text-gray-200'
-												: 'text-gray-500'
-											}`}
-									>
-										{route.name}
-									</Link>
-								</li>
-							))}
-						</ul>
+    const navLinkClass = (href: string) =>
+        `:uno: rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 cursor-pointer ${isActive(href)
+            ? 'text-primary bg-primary/10 border border-primary/30 shadow-glowSm'
+            : 'text-muted hover:text-foreground hover:bg-white/5 border border-transparent'
+        }`
 
-						<div className=':uno: text-white flex space-x-2 justify-center items-center pl-2'>
-							<LangSwitcher />
-							<MobNav routes={shopRoutes.concat(baseRoutes)} />
-						</div>
-					</nav>
-				</div>
-			</div>
-		</section>
-	)
+    return (
+        <header id='header' className=':uno: sticky top-0 z-50'>
+            <div className=':uno: relative border-b border-white/8'>
+                <div className='glass-header-bar :uno: absolute inset-0 pointer-events-none' aria-hidden />
+                <div className=':uno: relative container mx-auto px-4 md:px-6'>
+                    <nav className=':uno: flex items-center justify-between h-16 md:h-18'>
+                        <Link
+                            href='/'
+                            className=':uno: font-display text-lg md:text-xl font-bold tracking-widest text-foreground hover:text-primary transition-colors duration-200 cursor-pointer'
+                        >
+                            <span className=':uno: text-primary'>FN</span>Tracker
+                        </Link>
+
+                        <ul className=':uno: hidden md:flex items-center gap-1'>
+                            <li className=':uno: group relative'>
+                                <Link href='/shop' className={navLinkClass('/shop')}>
+                                    <span className=':uno: inline-flex items-center gap-1'>
+                                        {t('shop_link')}
+                                        <AiFillCaretDown className=':uno: h-3 w-3 opacity-60' />
+                                    </span>
+                                </Link>
+                                <div className='glass-frosted :uno: absolute left-0 top-full mt-2 min-w-48 rounded-xl py-2 z-[60] invisible translate-y-1 group-hover:visible group-hover:translate-y-0 transition-[transform,visibility] duration-200'>
+                                    {shopRoutes.map(route => (
+                                        <Link
+                                            key={route.href}
+                                            href={route.href}
+                                            className=':uno: block px-4 py-2 text-sm text-muted hover:text-primary hover:bg-primary/10 transition-colors cursor-pointer'
+                                        >
+                                            {route.name}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
+                            {baseRoutes.map(route => (
+                                <li key={route.href}>
+                                    <Link href={route.href} className={navLinkClass(route.href)}>
+                                        {route.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div className=':uno: flex items-center gap-3'>
+                            <LangSwitcher />
+                            <MobNav routes={allRoutes} />
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    )
 }

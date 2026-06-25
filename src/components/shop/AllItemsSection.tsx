@@ -5,7 +5,11 @@ import { useLocale, useTranslations } from 'next-intl'
 import type { BRCosmetic } from '@/types/fnapi'
 import { useDebounce } from '@/hooks/useDebounce'
 import { logEvent } from '@/utils/gtag.utils'
+import { cosmeticInstanceId, dedupeCosmeticsById } from '@/utils/cosmetic'
 import { CosmeticItem } from './CosmeticItem'
+import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Input } from '@/components/ui/Input'
+import { PageContainer } from '@/components/ui/PageContainer'
 
 const PAGE_SIZE = 20
 
@@ -41,7 +45,7 @@ export function AllItemsSection({ cosmetics }: AllItemsSectionProps) {
 		)
 			.then(res => res.json())
 			.then((json: { data: BRCosmetic[] }) => {
-				setSearchResults(json.data ?? [])
+				setSearchResults(dedupeCosmeticsById(json.data ?? []))
 			})
 			.catch(() => setSearchResults([]))
 			.finally(() => setSearching(false))
@@ -76,25 +80,22 @@ export function AllItemsSection({ cosmetics }: AllItemsSectionProps) {
 	const hasMore = !isSearching && visibleCount < cosmetics.length
 
 	return (
-		<div className=':uno: container mx-auto text-white p-3 min-h-screen'>
-			<h1 className=':uno: border-l-4 border-primary text-lg pl-2 my-4'>
-				{t('items_title')}
-			</h1>
-			<div className=':uno: relative text-sm my-3'>
+		<PageContainer>
+			<SectionHeading>{t('items_title')}</SectionHeading>
+			<div className=':uno: my-4'>
 				<form onSubmit={e => e.preventDefault()}>
-					<input
+					<Input
 						type='text'
 						value={filter}
 						onChange={e => setFilter(e.target.value)}
 						placeholder={t('filter_placeholder')}
-						className=':uno: w-full h-9 bg-gray-700 rounded-lg p-2 hover:bg-gray-600 transition'
 					/>
 				</form>
 				{searching ? (
-					<p className=':uno: text-gray-400 text-xs mt-1'>{t('searching')}</p>
+					<p className=':uno: text-muted text-xs mt-2'>{t('searching')}</p>
 				) : null}
 				{!isSearching && cosmetics.length > 0 ? (
-					<p className=':uno: text-gray-500 text-xs mt-1'>
+					<p className=':uno: text-muted/70 text-xs mt-2'>
 						{t('showing_count', {
 							shown: showedItems.length,
 							total: cosmetics.length
@@ -102,10 +103,11 @@ export function AllItemsSection({ cosmetics }: AllItemsSectionProps) {
 					</p>
 				) : null}
 			</div>
-			<div className=':uno: grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-6'>
-				{showedItems.map(cosmetic => (
+			<div className=':uno: grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-5'>
+				{showedItems.map((cosmetic, index) => (
 					<CosmeticItem
-						key={cosmetic.id}
+						key={cosmeticInstanceId(cosmetic, index)}
+						instanceId={cosmeticInstanceId(cosmetic, index)}
 						cosmetic={cosmetic}
 						likeLabel={t('like_item', {
 							name: cosmetic.name ?? cosmetic.id
@@ -117,10 +119,13 @@ export function AllItemsSection({ cosmetics }: AllItemsSectionProps) {
 				))}
 			</div>
 			{hasMore ? (
-				<div ref={sentinelRef} className=':uno: py-8 text-center text-gray-500 text-sm'>
+				<div
+					ref={sentinelRef}
+					className=':uno: py-8 text-center text-muted text-sm'
+				>
 					{t('load_more')}
 				</div>
 			) : null}
-		</div>
+		</PageContainer>
 	)
 }

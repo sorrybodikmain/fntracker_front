@@ -3,6 +3,7 @@
 import { useLocale } from 'next-intl'
 import type { BRNewsMotd, BRNewsMessage } from '@/types/fnapi'
 import { ZoomableImage } from '@/components/shared/ZoomableImage'
+import { Card } from '@/components/ui/Card'
 import { fixNewsImage } from '@/utils'
 import { logEvent } from '@/utils/gtag.utils'
 
@@ -18,30 +19,34 @@ export function Novelty({ item, date }: NoveltyProps) {
 	const image = item.image
 
 	return (
-		<div className=':uno: flex flex-wrap bg-gray-600 rounded-lg p-3 hover:scale-[1.01] transition'>
-			{image ? (
-				<div
-					className=':uno: w-full md:w-4/12 mb-3 md:mb-0 shrink-0 overflow-hidden rounded-lg'
-					onClick={() => logEvent('News', 'View', title)}
-				>
-					<ZoomableImage
-						src={fixNewsImage(image, 480)}
-						alt={title}
-						width={480}
-						height={240}
-						className=':uno: w-full h-auto object-cover rounded-lg'
-					/>
+		<Card className=':uno: p-4'>
+			<div className=':uno: flex flex-col md:flex-row gap-4'>
+				{image ? (
+					<div
+						className=':uno: w-full md:w-4/12 shrink-0 overflow-hidden rounded-lg cursor-pointer'
+						onClick={() => logEvent('News', 'View', title)}
+					>
+						<ZoomableImage
+							src={fixNewsImage(image, 480)}
+							alt={title}
+							width={480}
+							height={240}
+							className=':uno: w-full h-auto object-cover rounded-lg'
+						/>
+					</div>
+				) : null}
+				<div className=':uno: flex-1'>
+					<h5 className=':uno: font-display text-lg mb-2 text-foreground'>
+						{title}
+					</h5>
+					<p className=':uno: text-sm text-muted leading-relaxed'>{body}</p>
+					{date ? (
+						<p className=':uno: mt-3 text-xs text-muted/70'>
+							{new Date(date).toLocaleDateString(locale)}
+						</p>
+					) : null}
 				</div>
-			) : null}
-			<div className=':uno: w-full md:w-8/12 xl:w-6/12 px-3 mb-4 md:mb-0 mr-auto'>
-				<h5 className=':uno: text-lg mb-2'>{title}</h5>
-				<p className=':uno: text-gray-300'>{body}</p>
-				{date && (
-					<p className=':uno: text-gray-500'>
-						{new Date(date).toLocaleDateString(locale)}
-					</p>
-				)}
 			</div>
-		</div>
+		</Card>
 	)
 }
