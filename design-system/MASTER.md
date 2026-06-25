@@ -1,4 +1,4 @@
-# FNTracker Design System
+# FortniteTracker Design System
 
 ## Pattern
 

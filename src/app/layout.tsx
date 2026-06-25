@@ -17,12 +17,12 @@ const dmSans = DM_Sans({
 	display: 'swap'
 })
 
+import { siteConfig } from '@/config/site'
+
 export const metadata: Metadata = {
-	title: 'FNTracker — Fortnite Stats, Shop & Map',
-	description:
-		'Track Fortnite player stats, browse the item shop, explore the BR map, and discover cosmetics — all in one sleek tracker.',
-	keywords:
-		'fortnite tracker, fortnite stats, fortnite item shop, fortnite map, fortnite cosmetics',
+	title: siteConfig.title,
+	description: siteConfig.description,
+	keywords: siteConfig.keywords,
 	robots: 'index, follow',
 	manifest: '/manifest.json',
 	icons: {
@@ -31,10 +31,9 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		type: 'website',
-		siteName: 'FNTracker',
-		title: 'FNTracker — Fortnite Stats, Shop & Map',
-		description:
-			'Track Fortnite player stats, browse the item shop, explore the BR map, and discover cosmetics.'
+		siteName: siteConfig.name,
+		title: siteConfig.title,
+		description: siteConfig.description
 	}
 }
 

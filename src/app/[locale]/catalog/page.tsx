@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { pageTitle } from '@/config/site'
 import { CatalogTabs } from '@/components/catalog/CatalogTabs'
 import { PageContainer } from '@/components/ui/PageContainer'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -13,7 +14,7 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getTranslations('catalog')
-	return { title: `${t('title')} | FNTracker` }
+	return { title: pageTitle(t('title')) }
 }
 
 export default async function CatalogPage() {

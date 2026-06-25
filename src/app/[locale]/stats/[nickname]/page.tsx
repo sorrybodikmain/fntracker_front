@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { pageTitle } from '@/config/site'
 import {
 	getBrStats,
 	getBrStatsByAccountId,
@@ -19,7 +20,7 @@ export async function generateMetadata({
 }: StatsPageProps): Promise<Metadata> {
 	const { nickname } = await params
 	const t = await getTranslations('stats')
-	return { title: `${t('title', { nickname })} | FNTracker` }
+	return { title: pageTitle(t('title', { nickname })) }
 }
 
 export default async function StatsPage({ params }: StatsPageProps) {

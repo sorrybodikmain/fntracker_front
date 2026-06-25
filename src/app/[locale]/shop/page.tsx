@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { pageTitle } from '@/config/site'
 import { ShopBanner } from '@/components/shop/ShopBanner'
 import { ShopSection } from '@/components/shop/ShopSection'
 import { PageContainer } from '@/components/ui/PageContainer'
@@ -8,7 +9,7 @@ import { getShop } from '@/lib/api/fortnite'
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('shop')
     return {
-        title: `${t('title')} | FNTracker`,
+        title: pageTitle(t('title')),
         description: t('banner_title')
     }
 }

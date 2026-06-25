@@ -1,4 +1,4 @@
-# FNTracker
+# FortniteTracker
 
 Fortnite companion web app — player stats, daily item shop, BR map, cosmetics catalog, and in-game news.
 

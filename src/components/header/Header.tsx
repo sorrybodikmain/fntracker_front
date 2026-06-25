@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { AiFillCaretDown } from 'react-icons/ai'
 import { LangSwitcher } from './LangSwitcher'
 import { MobNav } from './MobNav'
+import { SiteLogo } from '@/components/brand/SiteLogo'
 
 export function Header() {
     const t = useTranslations('header')
@@ -45,7 +46,7 @@ export function Header() {
                             href='/'
                             className=':uno: font-display text-lg md:text-xl font-bold tracking-widest text-foreground hover:text-primary transition-colors duration-200 cursor-pointer'
                         >
-                            <span className=':uno: text-primary'>FN</span>Tracker
+                            <SiteLogo />
                         </Link>
 
                         <ul className=':uno: hidden md:flex items-center gap-1'>

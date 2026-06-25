@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
+import { SiteLogo } from '@/components/brand/SiteLogo'
+import { siteConfig } from '@/config/site'
 
 export async function Footer() {
 	const t = await getTranslations('footer')
@@ -18,7 +20,7 @@ export async function Footer() {
 				<div className=':uno: grid grid-cols-1 md:grid-cols-3 gap-8 items-start'>
 					<div>
 						<p className=':uno: font-display text-xl font-bold tracking-widest'>
-							<span className=':uno: text-primary'>FN</span>Tracker
+							<SiteLogo />
 						</p>
 						<p className=':uno: mt-2 text-sm text-muted max-w-xs'>
 							{t('footer_body')}
@@ -48,7 +50,7 @@ export async function Footer() {
 						</p>
 						<p>
 							<a
-								href='mailto:contact@fntracker.pp.ua'
+								href={`mailto:${siteConfig.contactEmail}`}
 								className=':uno: hover:text-primary transition-colors cursor-pointer'
 							>
 								{t('contact_link')}

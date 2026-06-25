@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/Button'
 import { GlassPanel } from '@/components/ui/GlassPanel'
+import { siteConfig } from '@/config/site'
 
-const CONSENT_KEY = 'fntracker-cookie-consent'
+const CONSENT_KEY = siteConfig.cookieConsent
 
 export function CookieBanner() {
 	const t = useTranslations('cookie-banner')

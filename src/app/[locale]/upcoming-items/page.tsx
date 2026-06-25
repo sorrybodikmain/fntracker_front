@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { pageTitle } from '@/config/site'
 import { CosmeticItem } from '@/components/shop/CosmeticItem'
 import { PageContainer } from '@/components/ui/PageContainer'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -9,7 +10,7 @@ import { cosmeticInstanceId, dedupeCosmeticsById } from '@/utils/cosmetic'
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getTranslations('shop')
 	return {
-		title: `${t('upcoming_title')} | FNTracker`,
+		title: pageTitle(t('upcoming_title')),
 		description: t('upcoming_title')
 	}
 }

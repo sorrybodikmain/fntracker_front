@@ -4,6 +4,7 @@ import { useTransition } from 'react'
 import { useLocale } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { locales } from '@/i18n/routing'
+import { siteConfig } from '@/config/site'
 import { logEvent } from '@/utils/gtag.utils'
 
 const localeLabels: Record<string, string> = {
@@ -19,7 +20,7 @@ export function LangSwitcher() {
 	const handleChange = (newLang: string) => {
 		if (locale !== newLang) {
 			logEvent('Language', 'Change', `Change-To-${newLang}`)
-			document.cookie = `fntracker-locale=${newLang}; path=/; max-age=${60 * 60 * 24 * 365}`
+			document.cookie = `${siteConfig.localeCookie}=${newLang}; path=/; max-age=${60 * 60 * 24 * 365}`
 			startTransition(() => router.refresh())
 		}
 	}

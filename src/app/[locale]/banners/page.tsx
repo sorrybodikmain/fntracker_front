@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { pageTitle } from '@/config/site'
 import { BannerCard } from '@/components/banners/BannerCard'
 import { PageContainer } from '@/components/ui/PageContainer'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -8,7 +9,7 @@ import { parseBannerColor } from '@/utils/banner-color'
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getTranslations('banners')
-	return { title: `${t('title')} | FNTracker` }
+	return { title: pageTitle(t('title')) }
 }
 
 export default async function BannersPage() {

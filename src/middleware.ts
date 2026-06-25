@@ -1,8 +1,8 @@
 import createMiddleware from "next-intl/middleware";
 import { type NextRequest, NextResponse } from "next/server";
+import { siteConfig } from "@/config/site";
 import { locales, routing } from "./i18n/routing";
-
-const LOCALE_COOKIE = "fntracker-locale";
+const LOCALE_COOKIE = siteConfig.localeCookie;
 const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {

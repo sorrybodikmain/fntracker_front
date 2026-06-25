@@ -1,5 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Metadata } from 'next'
+import { pageTitle } from '@/config/site'
 import { SearchBar } from '@/components/search-bar/SearchBar'
 import { NewsTabs } from '@/components/news/NewsTabs'
 import { MiniShop } from '@/components/mini-shop/MiniShop'
@@ -12,7 +13,7 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
 	const t = await getTranslations('header')
-	return { title: `${t('home_link')} | FNTracker` }
+	return { title: pageTitle(t('home_link')) }
 }
 
 export default async function HomePage() {
